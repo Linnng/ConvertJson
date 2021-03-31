@@ -19,10 +19,8 @@ $(function(){
 
             $('.index_cover_container').addClass('hidden');
 
-// load the datas - - - - - - -
-//  - - - - - - - - - - - - - -
-// Get the values of <th> in the DOM, then compare with the KEY of the object
-// Then fill into the <td> <input> tag of the lower layer one by one
+// load datas - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // Remove single-line comments
             while(resultText.match(/\s*\/\/.*$/mg)){
@@ -38,43 +36,35 @@ $(function(){
                 let sensorlistsJsonObj        = jsonObj.sensorlists[0].common;
                 let fancontrollerlistsJsonObj = jsonObj.fancontrollerlists[0].common[0].fanlist[0];
 
-// sensorlists  - - - - - - - - - - - - - - - - - - - -
-//  - - - - - - - - - - - - - - - - - - - - - - - - - -
+// sensorlists  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Catch <th> title to search object key value.
                 if(sensorlistsJsonObj != undefined || sensorlistsJsonObj != null){
-                    // 陣列長度
+                    // the array length
                     let arrLength = sensorlistsJsonObj.length;
-                    // let objLength = Object.keys(sensorlistsJsonObj[0]).length;
 
-                    // table 直行欄位的計數
+                    // count of columns in table
                     let objLengthCnt = 0;
 
-                    // 從<th>開始
                     $(".sensor_tr th").each(function(){
-
-                        // Get title name 當 key 使用
                         let key = $(this).text().replaceAll(' ','');
 
-                        // 略過 Polling Rate 這欄的填值 因為是 <option> tag, 再研究要怎麼動作
+                        // Skip Polling Rate datas, cause it's <option> struct
                         if(key != 'pollingrate'){
-                            // 掃個別4個物件內的key value, 再用陣列一行一行填進格子內.
 
+                            // Scan the key values of each objects (arrLength), then fill-in the table line by line.
                             for(let i=0; i<arrLength; i++){
-                                console.log(sensorlistsJsonObj[i][key]);
-                                $(this).parents('.sensor_tab').find('tr:eq('+ i+1 + ') td:eq(' + objLengthCnt + ')input').addClass('test');
-                                // $(this).parents('.sensor_tab').find('tr:eq('+ i+1 + ') td:eq(' + objLengthCnt + ')input').val(sensorlistsJsonObj[i][key]);
-                                // alert('i = ' + i + sensorlistsJsonObj[i].key);
-                            }
-                        }
+                                $(this).parents('.sensor_tab').find('tr:eq('+ (i+1) + ') td:eq(' + objLengthCnt + ') input').val(sensorlistsJsonObj[i][key]);
+                        }}
                         else{
-                            // console.log('option tag');
                             alert('option tag');
                         }
                         objLengthCnt++;
                     });
-
                 }
 
-// fancontrollerlists - - - - - - -
+// fancontrollerlists - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Get the values of <th> in the DOM, then compare with the KEY of the object
+// Then fill into the <td> <input> tag of the lower layer one by one
                 if(fancontrollerlistsJsonObj != undefined || fancontrollerlistsJsonObj != null){
                     $(".fan_des_tab tr td :input").each(function(){
                         // the <input> index
@@ -102,12 +92,12 @@ $(function(){
 
                     });
                 }
-// fancontrollerlists END - - - - -
+
+// Sensor nodes - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             } catch (error){
                 console.error(error);
                 alert('error');
             }
-// END - - - - - - - - - - - - -
         }
     });
 });
