@@ -56,7 +56,21 @@ $(function(){
                                 $(this).parents('.sensor_tab').find('tr:eq('+ (i+1) + ') td:eq(' + objLengthCnt + ') input').val(sensorlistsJsonObj[i][key]);
                         }}
                         else{
-                            alert('option tag');
+                            // get all <select> tag
+                            let sel = document.getElementsByClassName('selects');
+                            for( let i=0; i<arrLength; i++){
+                                // get all <option> values in each <select>
+                                let opts = sel[i].options;
+
+                                for(let opt, j=0; opt = opts[j]; j++){
+                                    if(opt.value == sensorlistsJsonObj[i][key]){
+                                        sel[i].selectedIndex = j;
+                                        break;
+                                    }
+                                }
+                            }
+// ------------------------------------------------
+                            // alert('option tag');
                         }
                         objLengthCnt++;
                     });
