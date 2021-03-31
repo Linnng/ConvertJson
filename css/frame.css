@@ -1,0 +1,89 @@
+*{
+    /* outline: red 1px solid; */
+}
+
+.box{
+    margin:40px auto;
+}
+th, tr, td{
+    border: 1px solid #999;
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
+
+
+
+/* font size */
+.fontsize_14{ font-size: 14px;}
+.fontsize_15{ font-size: 15px;}
+.fontsize_16{ font-size: 16px;}
+.fontsize_17{ font-size: 17px;}
+.fontsize_18{ font-size: 18px;}
+.fontsize_19{ font-size: 19px;}
+.fontsize_20{ font-size: 20px;}
+.fontsize_21{ font-size: 21px;}
+.fontsize_22{ font-size: 22px;}
+.fontsize_23{ font-size: 23px;}
+.fontsize_24{ font-size: 24px;}
+.fontsize_25{ font-size: 25px;}
+.fontsize_26{ font-size: 26px;}
+.fontsize_27{ font-size: 27px;}
+.fontsize_28{ font-size: 28px;}
+.fontsize_29{ font-size: 29px;}
+.fontsize_30{ font-size: 30px;}
+
+/* width */
+.w_100p{ width: 100%;}
+.w_80p { width:  80%;}
+.w_7pes { width: 14.28%;}
+.w_8pes { width: 12.5%;}
+.w_4pex { width: 25%;}
+
+/* font */
+.font_text{
+    font-family: sans-serif, Arial;
+}
+h2{
+    width: 360px;
+    background-color: rgba(31, 73, 125, 1);
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+h3{
+    width: 400px;
+    background-color: rgba(250, 191, 143, 1);
+    font-size: 22px;
+    text-align: center;
+    padding: 8px;
+    display: inline-block;
+}
+.fan_id{
+    background-color: rgba(255, 255, 0, 1);
+    font-size: 22px;
+    text-align: center;
+    padding: 8px 15px;
+    display: inline-block;
+}
+
+input{
+    border-color: rgba(1, 1, 1, 0);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.selects{
+    border-color: rgba(1, 1, 1, 0);
+    width: 100%;
+    text-align-last: center;
+    box-sizing: border-box;
+}
+
+/* margin */
+.margin_top_8{ margin-top: 8px;}

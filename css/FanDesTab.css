@@ -1,0 +1,16 @@
+/* table background colour */
+.fan_des_tr>th{
+    background-color: rgba(197, 217, 241, 1);;
+}
+
+/* flex */
+.fan_des_tab{
+
+
+}
+.fan_des_tr>.bcc_deep_blue{
+    background-color: rgba(0, 176, 240, 1);
+}
+.fan_des_tr>.bcc_oliva_green{
+    background-color: rgba(235, 241, 222, 1);
+}

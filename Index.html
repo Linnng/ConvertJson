@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Linear Thermal table</title>
+    <link rel="shortcut icon" href="./img/logo.png">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/frame.css">
+    <link rel="stylesheet" href="css/SensorTab.css">
+    <link rel="stylesheet" href="css/NodesTab.css">
+    <link rel="stylesheet" href="css/FanDesTab.css">
+    <link rel="stylesheet" href="css/cover.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+
+    <!-- cover -->
+    <div class="container font_text w_100p index_cover_container">
+        <div class="index_cover_btn_box">
+            <div>
+                <input type="file" id="importJSON" class="hidden"/>
+            </div>
+            <div>
+                <input type="button" id="fakeImportBtn" class="cover_button" value="Import JSON file">
+            </div>
+            <div>
+                <input type="button" id="submit" class="cover_button" value="Save to json file" onclick="myFunction()">
+            </div>
+            <div>
+                <input type="button" id="SaveBtn" class="cover_button" value="Save" onclick="WrDataToJson()">
+            </div>
+        </div>
+    </div>
+
+    <p id="outputJSON" class="hidden"></p>
+
+    <!-- Sensor description -->
+    <section>
+        <div class="container font_text w_100p">
+            <div class="box w_80p">
+                <h2 class="h2_tag">SENSOR DESCRIPTION</h2>
+                <table class="sensor_tab w_100p">
+                    <!-- sensor_tab -->
+                    <tr class="sensor_tr">
+                        <th>                name            </th>
+                        <th class="hidden"> type            </th>
+                        <th>                address         </th>
+                        <th class="hidden"> diagclass       </th>
+                        <th>                polling rate    </th>
+                        <th class="hidden"> ReadFn          </th>
+                        <th>                MaxErrors       </th>
+                        <th class="hidden"> SmoothingFn     </th>
+                        <th class="hidden"> SmoothingData   </th>
+                        <th>                CriticalTemp    </th>
+                        <th class="hidden"> crittime        </th>
+                    </tr>
+                    <tr class="sensor_tr">
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>
+                            <select name="pollingrate" id="" class="selects">
+                                <option value="EXEC_POLLING">1/8 sec</option>
+                                <option value="QSEC_POLLING">1/4 sec</option>
+                                <option value="HSEC_POLLING">1/2 sec</option>
+                                <option value="ONESEC_POLLING" selected>1 sec</option>
+                                <option value="TWOSEC_POLLING">2 sec</option>
+                            </select>
+                        </td>
+                        <td class="hidden"><input type="text">/td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                    </tr>
+                    <tr class="sensor_tr">
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>
+                            <select name="pollingrate" id="" class="selects">
+                                <option value="EXEC_POLLING">1/8 sec</option>
+                                <option value="QSEC_POLLING">1/4 sec</option>
+                                <option value="HSEC_POLLING">1/2 sec</option>
+                                <option value="ONESEC_POLLING" selected>1 sec</option>
+                                <option value="TWOSEC_POLLING">2 sec</option>
+                            </select>
+                        </td>
+                        <td class="hidden"><input type="text">/td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                    </tr>
+                    <tr class="sensor_tr">
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>
+                            <select name="pollingrate" id="" class="selects">
+                                <option value="EXEC_POLLING">1/8 sec</option>
+                                <option value="QSEC_POLLING">1/4 sec</option>
+                                <option value="HSEC_POLLING">1/2 sec</option>
+                                <option value="ONESEC_POLLING" selected>1 sec</option>
+                                <option value="TWOSEC_POLLING">2 sec</option>
+                            </select>
+                        </td>
+                        <td class="hidden"><input type="text">/td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                    </tr>
+                    <tr class="sensor_tr">
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>
+                            <select name="pollingrate" id="" class="selects">
+                                <option value="EXEC_POLLING">1/8 sec</option>
+                                <option value="QSEC_POLLING">1/4 sec</option>
+                                <option value="HSEC_POLLING">1/2 sec</option>
+                                <option value="ONESEC_POLLING" selected>1 sec</option>
+                                <option value="TWOSEC_POLLING">2 sec</option>
+                            </select>
+                        </td>
+                        <td class="hidden"><input type="text">/td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                        <td>               <input type="text"></td>
+                        <td class="hidden"><input type="text"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- <p class="sensor_desc_json"></p> -->
+
+    <!-- Fan description -->
+    <section>
+        <div class="container font_text w_100p">
+            <div class="box w_80p">
+                <h2 class="h2_tag">FAN DESCRIPTION</h2>
+
+                <table class="fan_des_tab w_100p hidden">
+                    <tr class="fan_des_tr">
+                        <th class="w_7pes">name</th>
+                        <th class="w_7pes">address</th>
+                        <th class="w_7pes">initfn</th>
+                        <th class="w_7pes">minfanfn</th>
+                        <th class="w_7pes">rpmreadfn</th>
+                        <th class="w_7pes">setcpfn</th>
+                        <th class="w_7pes">optionalfan</th>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <td class="w_7pes">GFAN1CTRL</td>
+                        <td class="w_7pes">GFAN1ADDR</td>
+                        <td class="w_7pes">MecGuardianInit</td>
+                        <td class="w_7pes">MecGuardianGetMinRpm</td>
+                        <td class="w_7pes">MecGuardianRpmRead</td>
+                        <td class="w_7pes">MecGuardianSetFanPwm</td>
+                        <td class="w_7pes">NULL</td>
+                    </tr>
+                </table>
+
+                <table class="fan_des_tab w_100p margin_top_8">
+                    <tr class="fan_des_tr">
+                        <th class="w_8pes">Fan Description</th>
+                        <th class="w_8pes">Address</th>
+                        <th class="w_8pes">KSStart</th>
+                        <th class="w_8pes">KSWait</th>
+                        <th class="w_8pes">KSPass</th>
+                        <th class="w_8pes">KSFail</th>
+                        <th class="w_8pes">KSBump</th>
+                        <th class="w_8pes">Mincont0time</th>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                        <td class="w_8pes"><input type="text"></td>
+                    </tr>
+                </table>
+
+                <table class="fan_des_tab w_100p margin_top_8">
+                    <tr class="fan_des_tr">
+                        <th class="w_4pes bcc_deep_blue" colspan="2">125ms</th>
+                        <th class="w_4pes bcc_oliva_green" colspan="2">250ms</th>
+                        <th class="w_4pes bcc_deep_blue" colspan="2">500ms</th>
+                        <th class="w_4pes bcc_oliva_green" colspan="2">1s</th>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th class="w_8pes bcc_deep_blue">Esec Up</th>
+                        <th class="w_8pes bcc_deep_blue">Esec Down</th>
+                        <th class="w_8pes bcc_oliva_green">Qsec Up</th>
+                        <th class="w_8pes bcc_oliva_green">Qsec Down</th>
+                        <th class="w_8pes bcc_deep_blue">Hsec Up</th>
+                        <th class="w_8pes bcc_deep_blue">Hsec Down</th>
+                        <th class="w_8pes bcc_oliva_green">Sec up</th>
+                        <th class="w_8pes bcc_oliva_green">Sec Down</th>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+
+                <table class="fan_des_tab margin_top_8">
+                    <tr class="fan_des_tr">
+                        <th>minrpm</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>maxrpm</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>diagfanlowspec</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>diagfanhighspec</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>diagfanmaxspec</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>mfgmoderpm</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>fanfailuretime</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>fanfailurecode</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>diagfanerrorpercent</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>diagsfanvalidsamples</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_des_tr">
+                        <th>diagsfansampleinterval</th>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sensor nodes -->
+    <section>
+        <div class="container font_text w_100p">
+            <div class="box w_80p">
+                <h2 class="h2_tag">SENSOR NODES <span class="fontsize_14">(Fan table)</span></h2>
+
+                <div class="node_type_box bal_box">
+                    <h3>"Balance" MODE [Defalut Mode]</h3>
+                    <span class="fan_id">FAN1</span>
+
+                    <table class="nodes_tab w_100p">
+                        <tr class="nodes_tr">
+                            <th>Sensor</th>
+                            <th>No</th>
+                            <th>Low Temp</th>
+                            <th>Low Rpm</th>
+                            <th>High Temp</th>
+                            <th>High Rpm</th>
+                            <th class="hidden">ttrip</th>
+                            <th class="hidden">ttriphys</th>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>CPU</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>SKIN</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>MEM</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>NGFF</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="node_type_box cool_box">
+                    <h3>"Cool" MODE</h3>
+                    <span class="fan_id">FAN1</span>
+
+                    <table class="nodes_tab w_100p">
+                        <tr class="nodes_tr">
+                            <th>Sensor</th>
+                            <th>No</th>
+                            <th>Low Temp</th>
+                            <th>Low Rpm</th>
+                            <th>High Temp</th>
+                            <th>High Rpm</th>
+                            <th class="hidden">ttrip</th>
+                            <th class="hidden">ttriphys</th>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>CPU</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>SKIN</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>MEM</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>NGFF</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="node_type_box quiet_box">
+                    <h3>"Quiet" MODE</h3>
+                    <span class="fan_id">FAN1</span>
+
+                    <table class="nodes_tab w_100p">
+                        <tr class="nodes_tr">
+                            <th>Sensor</th>
+                            <th>No</th>
+                            <th>Low Temp</th>
+                            <th>Low Rpm</th>
+                            <th>High Temp</th>
+                            <th>High Rpm</th>
+                            <th class="hidden">ttrip</th>
+                            <th class="hidden">ttriphys</th>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>CPU</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>SKIN</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>MEM</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>NGFF</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="node_type_box performance_box">
+                    <h3>"Performance" MODE</h3>
+                    <span class="fan_id">FAN1</span>
+
+                    <table class="nodes_tab w_100p">
+                        <tr class="nodes_tr">
+                            <th>Sensor</th>
+                            <th>No</th>
+                            <th>Low Temp</th>
+                            <th>Low Rpm</th>
+                            <th>High Temp</th>
+                            <th>High Rpm</th>
+                            <th class="hidden">ttrip</th>
+                            <th class="hidden">ttriphys</th>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>CPU</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>SKIN</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>MEM</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                        <tr class="nodes_tr">
+                            <td>NGFF</td>
+                            <td>Slop 1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td class="hidden"> 255</td>
+                            <td class="hidden">   0</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- convert Json file testing -->
+    <script src="js/FileReader.js"></script>
+
+</body>
+</html>

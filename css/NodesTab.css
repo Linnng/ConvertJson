@@ -1,0 +1,30 @@
+/* background colour setting */
+.nodes_tr>th{
+    background-color: rgba(197, 217, 241, 1);
+}
+.nodes_tr>th:nth-child(2){
+    background-color: #fff;
+}
+.nodes_tr>td:nth-child(4)>input{
+    background-color: rgba(216, 228, 188, 1);
+}
+.nodes_tr>td:nth-child(6)>input{
+    background-color: rgba(216, 228, 188, 1);
+}
+
+/* table width */
+.nodes_tr>th{
+    width: 10%;
+}
+.nodes_tr>th:nth-child(n+3){
+    width: 20%;
+}
+.nodes_tr>td{
+    width: 10%;
+}
+.nodes_tr>td:nth-child(n+3){
+    width: 20%;
+}
+.node_type_box{
+    margin-top: 16px;
+}
