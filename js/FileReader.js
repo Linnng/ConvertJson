@@ -117,22 +117,27 @@ $(function(){
 
                     // The loop for the HTML <table>
                     $(".node_type_box").each(function(){
-                        let tabRowCnt      = 0;
+                        let domTabTrCnt = $(this).find('tr').length;             // Get table <tr>
+
                         // The loop for the Obj
                         for(let i=0; i<objArrLength; i++){
-                            let domNodeTypeTag = $('.node_type_tag')[tabCnt].innerHTML;
-                            let objSkuName     = thermaltablesJsonObj[i].name;
+                            let domNodeTypeTag = $('.node_type_tag')[tabCnt].innerHTML; // Get <tag> name
+                            let objSkuName     = thermaltablesJsonObj[i].name;          // Get JSON name
+                            let objNodesLength = thermaltablesJsonObj[i].fans[0].nodes.length; // Get nodes arr length in JSON
 
                             // compare the Obj name with the <p> element, and fill in
                             if(objSkuName.substring(objSkuName.indexOf('_')+1) == domNodeTypeTag){
                                 // fill into tables
-                                // bug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                let test = $(this).find('tr:eq(0) th:eq(' + tabRowCnt + ')').text();
-                                if(test != null && test != undefined){
-                                    alert(test);
-                                    tabRowCnt++;
+
+                                for(let j = 0; j < $(this).find('tr:eq(0) th').length; j++){                // Get table <td>
+                                    let nodesTabTitle = $(this).find('tr:eq(0) th:eq(' + j + ')').text();   // Get <th> name
+                                // here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    if(nodesTabTitle != null /* && nodesTabTitle == thermaltablesJsonObj[0].fans[0].nodes[0][nodesTabTitle] */){
+                                        for(let k = 0; k<domTabTrCnt; k++){
+                                            $(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ') input').val('2');
+                                    }}
                                 }
-                                // bug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                // here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                             }
                         }
                         tabCnt++;
