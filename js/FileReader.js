@@ -113,15 +113,14 @@ $(function(){
 
                 if(thermaltablesJsonObj != undefined || thermaltablesJsonObj != null){
                     let objArrLength = thermaltablesJsonObj.length;
-                    let tabCnt       = 0;
 
                     // The loop for the HTML <table>
-                    $(".node_type_box").each(function(){
+                    $(".node_type_box").each(function(index){
                         let domTabTrCnt = $(this).find('tr').length;             // Get table <tr>
 
                         // The loop for the Obj
                         for(let i=0; i<objArrLength; i++){
-                            let domNodeTypeTag = $('.node_type_tag')[tabCnt].innerHTML; // Get <tag> name
+                            let domNodeTypeTag = $('.node_type_tag')[index].innerHTML; // Get <tag> name
                             let objSkuName     = thermaltablesJsonObj[i].name;          // Get JSON name
                             let objNodesLength = thermaltablesJsonObj[i].fans[0].nodes.length; // Get nodes arr length in JSON
 
@@ -130,17 +129,25 @@ $(function(){
                                 // fill into tables
 
                                 for(let j = 0; j < $(this).find('tr:eq(0) th').length; j++){                // Get table <td>
-                                    let nodesTabTitle = $(this).find('tr:eq(0) th:eq(' + j + ')').text();   // Get <th> name
-                                // here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                    if(nodesTabTitle != null /* && nodesTabTitle == thermaltablesJsonObj[0].fans[0].nodes[0][nodesTabTitle] */){
-                                        for(let k = 0; k<domTabTrCnt; k++){
-                                            $(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ') input').val('2');
+                                    let nodesTabTitle = $(this).find('tr:eq(0) th:eq(' + j + ')').text().replaceAll(' ','').toLowerCase();   // Get <th> name
+
+                                    if(nodesTabTitle != null && thermaltablesJsonObj[0].fans[0].nodes[0][nodesTabTitle] != undefined){
+                                       for(let k = 0; k<domTabTrCnt-1 ; k++){
+                                           try{
+                                               // <td> <input>
+                                               if($(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ') input').length > 0){
+                                                   $(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ') input').val(thermaltablesJsonObj[index].fans[0].nodes[k][nodesTabTitle]);
+                                               }
+                                               // pure <td>
+                                               else{
+                                                   $(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ')').text(thermaltablesJsonObj[index].fans[0].nodes[k][nodesTabTitle]);
+                                               }
+                                           }catch{
+                                               console.log('thermaltablesJSON index='+index+',row='+k+' null!!!  此json位置資料與dom無法對上')
+                                           }
                                     }}
-                                }
-                                // here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                            }
+                            }}
                         }
-                        tabCnt++;
                     });
                 }
 
