@@ -36,6 +36,7 @@ $(function(){
                 let sensorlistsJsonObj        = jsonObj.sensorlists[0].common;
                 let fancontrollerlistsJsonObj = jsonObj.fancontrollerlists[0].common[0].fanlist[0];
                 let thermaltablesJsonObj      = jsonObj.thermaltables;
+                let throttleJsonObj           = jsonObj.plxthrottletables[0].common
 
 
 // sensorlists  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -109,7 +110,6 @@ $(function(){
 
 // Sensor nodes - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Using nested loops
-// let thermaltablesJsonObj = jsonObj.thermaltables;
 
                 if(thermaltablesJsonObj != undefined || thermaltablesJsonObj != null){
                     let objArrLength = thermaltablesJsonObj.length;
@@ -151,6 +151,22 @@ $(function(){
                     });
                 }
 
+
+// Sensor nodes - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Using nested loops
+
+                if(throttleJsonObj != undefined || throttleJsonObj != null){
+                    let domTabTrCnt       = $(".throttle_tab tr").length;   // Get table <tr> : 5
+
+                    $(".throttle_tab th").each(function(index){
+                        let throttleTabTitle = $(this).text().replaceAll(' ','').toLowerCase();
+
+                        if(throttleTabTitle != null && throttleJsonObj[index][throttleTabTitle] != undefined){
+                            for(let i=0; i<domTabTrCnt-1; i++){
+                                    $(this).parents('.throttle_tab').find('tr:eq(' + (i+1) + ') td:eq( ' + index + ') input').val(throttleJsonObj[i][throttleTabTitle]);
+                        }}
+                    })
+                }
 
             } catch (error){
                 console.error(error);

@@ -41,7 +41,7 @@
           "fanname":"FAN1",
           "nodes":
           [
-            {"sensorname":"Ling", "lowtemp":90, "lowrpm":0,     "hightemp":95,  "highrpm":3800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":95,  "highrpm":3800, "ttrip":255, "ttriphys":0},
             {"sensorname":"SKIN",     "lowtemp":49, "lowrpm":0,     "hightemp":55,  "highrpm":2700, "ttrip":255, "ttriphys":0},
             {"sensorname":"MEM",      "lowtemp":45, "lowrpm":0,     "hightemp":50,  "highrpm":3800, "ttrip":255, "ttriphys":0},
             {"sensorname":"NGFF",     "lowtemp":42, "lowrpm":0,     "hightemp":46,  "highrpm":2700, "ttrip":255, "ttriphys":0},
