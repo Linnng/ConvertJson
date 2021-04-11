@@ -35,13 +35,14 @@ $(function(){
             try {
                 let sensorlistsJsonObj        = jsonObj.sensorlists[0].common;
                 let fancontrollerlistsJsonObj = jsonObj.fancontrollerlists[0].common[0].fanlist[0];
+                let thermaltablesJsonObj      = jsonObj.thermaltables;
+
 
 // sensorlists  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Catch <th> title to search object key value.
                 if(sensorlistsJsonObj != undefined || sensorlistsJsonObj != null){
                     // the array length
                     let arrLength = sensorlistsJsonObj.length;
-
                     // count of columns in table
                     let objLengthCnt = 0;
 
@@ -66,15 +67,13 @@ $(function(){
                                     if(opt.value == sensorlistsJsonObj[i][key]){
                                         sel[i].selectedIndex = j;
                                         break;
-                                    }
-                                }
+                                }}
                             }
-// ------------------------------------------------
-                            // alert('option tag');
                         }
                         objLengthCnt++;
                     });
                 }
+
 
 // fancontrollerlists - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Get the values of <th> in the DOM, then compare with the KEY of the object
@@ -100,17 +99,62 @@ $(function(){
                             $(this).val(fancontrollerlistsJsonObj[key]);
                         }
                         else{
-                            // 例外Fan Description 手動插值
+                            // Exception Fan Description Manual interpolation
                             $(this).val(fancontrollerlistsJsonObj['name']);
                         }
 
                     });
                 }
 
+
 // Sensor nodes - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Using nested loops
+// let thermaltablesJsonObj = jsonObj.thermaltables;
+
+                if(thermaltablesJsonObj != undefined || thermaltablesJsonObj != null){
+                    let objArrLength = thermaltablesJsonObj.length;
+
+                    // The loop for the HTML <table>
+                    $(".node_type_box").each(function(index){
+                        let domTabTrCnt = $(this).find('tr').length;             // Get table <tr>
+
+                        // The loop for the Obj
+                        for(let i=0; i<objArrLength; i++){
+                            let domNodeTypeTag = $('.node_type_tag')[index].innerHTML; // Get <tag> name
+                            let objSkuName     = thermaltablesJsonObj[i].name;          // Get JSON name
+                            let objNodesLength = thermaltablesJsonObj[i].fans[0].nodes.length; // Get nodes arr length in JSON
+
+                            // compare the Obj name with the <p> element, and fill in
+                            if(objSkuName.substring(objSkuName.indexOf('_')+1) == domNodeTypeTag){
+                                // fill into tables
+
+                                for(let j = 0; j < $(this).find('tr:eq(0) th').length; j++){                // Get table <td>
+                                    let nodesTabTitle = $(this).find('tr:eq(0) th:eq(' + j + ')').text().replaceAll(' ','').toLowerCase();   // Get <th> name
+
+                                    if(nodesTabTitle != null && thermaltablesJsonObj[0].fans[0].nodes[0][nodesTabTitle] != undefined){
+                                       for(let k = 0; k<domTabTrCnt-1 ; k++){
+                                           try{
+                                               // <td> <input>
+                                               if($(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ') input').length > 0){
+                                                   $(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ') input').val(thermaltablesJsonObj[index].fans[0].nodes[k][nodesTabTitle]);
+                                               }
+                                               // pure <td>
+                                               else{
+                                                   $(this).find('tr:eq(' + (k+1) + ') td:eq( ' + j + ')').text(thermaltablesJsonObj[index].fans[0].nodes[k][nodesTabTitle]);
+                                               }
+                                           }catch{
+                                               console.log('thermaltablesJSON index='+index+',row='+k+' null!!!  此json位置資料與dom無法對上')
+                                           }
+                                    }}
+                            }}
+                        }
+                    });
+                }
+
+
             } catch (error){
                 console.error(error);
-                alert('error');
+                alert('Q Q....');
             }
         }
     });

@@ -15,6 +15,8 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
+    <input type="button" onclick="jsonProduce();" value="xxx">
+    <div id="jsonResult" style="text-align: center;"></div>
 
     <!-- cover -->
     <div class="container font_text w_100p index_cover_container">
@@ -283,12 +285,13 @@
                 <h2 class="h2_tag">SENSOR NODES <span class="fontsize_14">(Fan table)</span></h2>
 
                 <div class="node_type_box bal_box">
+                    <p class="hidden node_type_tag">BAL</p>
                     <h3>"Balance" MODE [Defalut Mode]</h3>
                     <span class="fan_id">FAN1</span>
 
                     <table class="nodes_tab w_100p">
                         <tr class="nodes_tr">
-                            <th>Sensor</th>
+                            <th>Sensor Name</th>
                             <th>No</th>
                             <th>Low Temp</th>
                             <th>Low Rpm</th>
@@ -342,12 +345,13 @@
                 </div>
 
                 <div class="node_type_box cool_box">
+                    <p class="hidden node_type_tag">COOL</p>
                     <h3>"Cool" MODE</h3>
                     <span class="fan_id">FAN1</span>
 
                     <table class="nodes_tab w_100p">
                         <tr class="nodes_tr">
-                            <th>Sensor</th>
+                            <th>Sensor Name</th>
                             <th>No</th>
                             <th>Low Temp</th>
                             <th>Low Rpm</th>
@@ -401,12 +405,13 @@
                 </div>
 
                 <div class="node_type_box quiet_box">
+                    <p class="hidden node_type_tag">QUIET</p>
                     <h3>"Quiet" MODE</h3>
                     <span class="fan_id">FAN1</span>
 
                     <table class="nodes_tab w_100p">
                         <tr class="nodes_tr">
-                            <th>Sensor</th>
+                            <th>Sensor Name</th>
                             <th>No</th>
                             <th>Low Temp</th>
                             <th>Low Rpm</th>
@@ -460,12 +465,13 @@
                 </div>
 
                 <div class="node_type_box performance_box">
+                    <p class="hidden node_type_tag">PERF</p>
                     <h3>"Performance" MODE</h3>
                     <span class="fan_id">FAN1</span>
 
                     <table class="nodes_tab w_100p">
                         <tr class="nodes_tr">
-                            <th>Sensor</th>
+                            <th>Sensor Name</th>
                             <th>No</th>
                             <th>Low Temp</th>
                             <th>Low Rpm</th>
@@ -525,6 +531,8 @@
 
     <!-- convert Json file testing -->
     <script src="js/FileReader.js"></script>
+    <!-- jsonResult Produce -->
+    <script src="js/resultProducer.js"></script>
 
 </body>
 </html>
