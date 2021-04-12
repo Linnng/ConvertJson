@@ -1,8 +1,8 @@
 var result = {};
+
 function jsonProduce(){
 
     let jsonResultDiv = $('#jsonResult');
-
 
     // ================1.SENSOR DESCRIPTION=========================
     result['sensorlists'] = [{'common':[]}];

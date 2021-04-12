@@ -1,7 +1,3 @@
-*{
-    /* outline: red 1px solid; */
-}
-
 .box{
     margin:40px auto;
 }
@@ -13,8 +9,6 @@ th, tr, td{
 .hidden{
     display: none;
 }
-
-
 
 /* font size */
 .fontsize_14{ font-size: 14px;}
@@ -46,7 +40,15 @@ th, tr, td{
 .font_text{
     font-family: sans-serif, Arial;
 }
-h2{
+
+.h1_tag{
+    font-size: 60px;
+    font-weight: 800;
+    color: rgba(112, 172, 40, 1);
+    text-align: center;
+    margin-bottom: 16px;
+}
+.h2_tag{
     width: 360px;
     background-color: rgba(31, 73, 125, 1);
     color: #fff;
@@ -64,6 +66,7 @@ h3{
     padding: 8px;
     display: inline-block;
 }
+
 .fan_id{
     background-color: rgba(255, 255, 0, 1);
     font-size: 22px;

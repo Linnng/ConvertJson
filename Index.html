@@ -15,28 +15,28 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
-    <input type="button" onclick="jsonProduce();" value="saveJsonFile">
-    <div id="jsonResult" class="hidden"></div>
 
     <!-- cover -->
     <div class="container font_text w_100p index_cover_container">
         <div class="index_cover_btn_box">
+            <div class="index_cover_title">
+                <h1 class="h1_tag">Thermal table Converter</h1>
+                <span>Easily convert Thermal table to JSON file and download.</span>
+            </div>
             <div>
                 <input type="file" id="importJSON" class="hidden"/>
             </div>
             <div>
+                <input type="button" id="createNew" class="cover_button" value="Create new table">
+            </div>
+            <div>
                 <input type="button" id="fakeImportBtn" class="cover_button" value="Import JSON file">
-            </div>
-            <div>
-                <input type="button" id="submit" class="cover_button" value="Save to json file" onclick="myFunction()">
-            </div>
-            <div>
-                <input type="button" id="SaveBtn" class="cover_button" value="Save" onclick="WrDataToJson()">
             </div>
         </div>
     </div>
 
     <p id="outputJSON" class="hidden"></p>
+    <p id="jsonResult" class="hidden"></p>
 
     <!-- Sensor description -->
     <section>
@@ -571,12 +571,17 @@
     </section>
 
 
+    <div>
+        <input id="exportJSON" class="cover_button" type="button" onclick="jsonProduce();" value="save Json File">
+    </div>
+
+
 
     <!-- convert Json file testing -->
     <script src="js/FileReader.js"></script>
     <!-- jsonResult Produce -->
     <script src="js/resultProducer.js"></script>
-	<!-- File Saver -->
+    <!-- File Saver -->
     <script src="js/FileSaver.js"></script>
 
 </body>
