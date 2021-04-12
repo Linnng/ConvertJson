@@ -15,8 +15,8 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
-    <input type="button" onclick="jsonProduce();" value="xxx">
-    <div id="jsonResult" style="text-align: center;"></div>
+    <input type="button" onclick="jsonProduce();" value="saveJsonFile">
+    <div id="jsonResult" class="hidden"></div>
 
     <!-- cover -->
     <div class="container font_text w_100p index_cover_container">
@@ -271,6 +271,14 @@
                     </tr>
                     <tr class="fan_des_tr">
                         <th>diagsfansampleinterval</th>
+                        <td><input type="text"></td>
+                    </tr>
+					<tr class="fan_des_tr hidden">
+                        <th>diagclass</th>
+                        <td><input type="text"></td>
+                    </tr>
+					<tr class="fan_des_tr hidden">
+                        <th>powerfn</th>
                         <td><input type="text"></td>
                     </tr>
                 </table>
@@ -568,6 +576,8 @@
     <script src="js/FileReader.js"></script>
     <!-- jsonResult Produce -->
     <script src="js/resultProducer.js"></script>
+	<!-- File Saver -->
+    <script src="js/FileSaver.js"></script>
 
 </body>
 </html>
