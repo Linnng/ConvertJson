@@ -1,5 +1,10 @@
 /* cover setting */
-.index_cover_container::selection{
+body
+::selection{
+    background: rgba(255, 255, 255, 0);
+}
+.index_cover_container
+::selection{
     background: #335712;
     color: #fff;
 }
