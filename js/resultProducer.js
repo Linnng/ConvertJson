@@ -4,7 +4,7 @@ function jsonProduce(){
 
     let jsonResultDiv = $('#jsonResult');
 
-    // ================1.SENSOR DESCRIPTION=========================
+// ========================= 1.SENSOR DESCRIPTION =========================
     result['sensorlists'] = [{'common':[]}];
     $('.sensor_tab tr').not(':eq(0)').each(function(){
         let area = {};
@@ -15,9 +15,9 @@ function jsonProduce(){
 
             // value
             let valTd = $(this).find('td:eq(' + i + ')');
-            let value = valTd.find('input').val();
+            let value = valTd.find('input').val();      // for input data
             if(value == undefined){
-                value = valTd.find('select').val();
+                value = valTd.find('select').val();     // for select data
             }
 
             area[key] = cusParseInt(value);
@@ -25,9 +25,9 @@ function jsonProduce(){
         }
         result.sensorlists[0].common.push(area);
     });
-    // ================1.SENSOR DESCRIPTION=========================
 
-    // ================2.FAN DESCRIPTION=========================
+
+// ========================= 2.FAN DESCRIPTION ============================
     result['fancontrollerlists'] = [{'common':[]}];
     let fanConArea = {'fanlist':[{}]};
     $('.fan_des_tab').each(function(){
@@ -59,9 +59,9 @@ function jsonProduce(){
         }
     });
     result.fancontrollerlists[0].common.push(fanConArea);
-    // ================2.FAN DESCRIPTION=========================
 
-    // ================3.SENSOR NODES=========================
+
+// ========================= 3.SENSOR NODES ===============================
     result['thermaltables'] = [];
     $('.node_type_box').each(function(){
         let area = {};
@@ -69,8 +69,7 @@ function jsonProduce(){
         area['fans'] = [{"fanname": $(this).find('span').text() ,"nodes":[]}];
 
         for(var i = 1; i < $(this).find('.nodes_tr').length; i++){
-
-            // node_type_box第一個tr內有幾個th
+            // check how many <th> in the first <tr> in node_type_box DOM
             let thQuan = $(this).find('.nodes_tr:eq(0) th').length;
 
             let node = {};
@@ -93,9 +92,9 @@ function jsonProduce(){
         }
         result.thermaltables.push(area);
     });
-    // ================3.SENSOR NODES=========================
 
-    // ================4.Throttle=========================
+
+// ========================= 4.Throttle ===================================
     result['plxthrottletables'] = [{'common':[]}];
     $('.throttle_tab tr').not(':eq(0)').each(function(){
         let throttleArea = {};
@@ -109,36 +108,36 @@ function jsonProduce(){
         });
         result.plxthrottletables[0].common.push(throttleArea);
     });
-    // ================4.Throttle=========================
 
-    // ================5.gfxthrottletables=========================
+
+// ========================= 5.gfxthrottletables ==========================
     result['gfxthrottletables'] = [];
-    console.log('產出jsonObj:');
+
+    console.log('Export jsonObj:');
     console.log(result);
     jsonResultDiv.html(JSON.stringify(result));
-    // ================5.gfxthrottletables=========================
 
-    // 產出.json
+
+    // Export .json
     save();
 }
 
-// value轉Int
+// value convert to Int
 function cusParseInt(str){
     try{
         let result = parseInt(str, 10);
-        if(Number.isNaN(result)){
+        if(Number.isNaN(result))
             return str;
-        }else{
+        else
             return result;
-        }
-    }catch(error){
+    }
+    catch(error){
         console.log(error);
     }
 }
 
-// 產出jsonFile
+// Export JSON File
 function save(){
-    var today = new Date();
     var blob = new Blob([JSON.stringify(result)], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, '../' + today.toLocaleDateString() + '_LinearThermalsSys.json');
+    saveAs(blob, '../LinearThermalsSys.json');
 }
