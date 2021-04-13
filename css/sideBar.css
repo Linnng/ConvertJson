@@ -1,0 +1,37 @@
+/* flex side bar buttons */
+.side_bar_container{
+    display: inline-block;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+}
+
+.side_bar_button{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(189, 168, 145);
+    color: white;
+    border-radius: 50%;
+    border: 0px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition-duration: .3s;
+    text-align: center;
+}
+.side_bar_button:hover{
+    background-color: rgb(129, 114, 90);
+    transition-duration: .3s;
+}
+
+/* text centre */
+.side_bar_button::before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+}
+.side_bar_button span{
+    display: inline-block;
+    vertical-align: middle;
+}

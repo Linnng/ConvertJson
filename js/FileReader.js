@@ -5,8 +5,9 @@ var resultText;
 $(function(){
 
     document.getElementById('createNew').addEventListener("click", function(e){
-        // alert('hello');
         $('.index_cover_container').addClass('hidden');
+        $('#exportJSON').removeClass('hidden');
+        $('#backBtn').removeClass('hidden');
     }, false);
 
     document.getElementById('fakeImportBtn').addEventListener("click", function(e){
@@ -24,6 +25,8 @@ $(function(){
             resultText = reader.result;
 
             $('.index_cover_container').addClass('hidden');
+            $('#exportJSON').removeClass('hidden');
+            $('#backBtn').removeClass('hidden');
 
 // load datas - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

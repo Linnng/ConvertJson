@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="css/NodesTab.css">
     <link rel="stylesheet" href="css/FanDesTab.css">
     <link rel="stylesheet" href="css/cover.css">
+    <link rel="stylesheet" href="css/sideBar.css">
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
-<body>
+<body class="font_text">
 
     <!-- cover -->
-    <div class="container font_text w_100p index_cover_container">
+    <div class="container w_100p index_cover_container">
         <div class="index_cover_btn_box">
             <div class="index_cover_title">
                 <h1 class="h1_tag">Thermal table Converter</h1>
@@ -38,9 +39,17 @@
     <p id="outputJSON" class="hidden"></p>
     <p id="jsonResult" class="hidden"></p>
 
+    <!-- Flex side bar buttons -->
+    <div class="side_bar_container">
+        <div id="backBtn" class="side_bar_button hidden"><span>Back</span></div>
+        <div id="exportJSON" class="side_bar_button hidden" onclick="jsonProduce();"><span>Save</span></div>
+        <div class="side_bar_button"><span>Help</span></div>
+    </div>
+
+
     <!-- Sensor description -->
     <section>
-        <div class="container font_text w_100p">
+        <div class="container w_100p">
             <div class="box w_80p">
                 <h2 class="h2_tag">SENSOR DESCRIPTION</h2>
                 <table class="sensor_tab w_100p">
@@ -147,11 +156,10 @@
         </div>
     </section>
 
-    <!-- <p class="sensor_desc_json"></p> -->
 
     <!-- Fan description -->
     <section>
-        <div class="container font_text w_100p">
+        <div class="container w_100p">
             <div class="box w_80p">
                 <h2 class="h2_tag">FAN DESCRIPTION</h2>
 
@@ -288,7 +296,7 @@
 
     <!-- Sensor nodes -->
     <section>
-        <div class="container font_text w_100p">
+        <div class="container w_100p">
             <div class="box w_80p">
                 <h2 class="h2_tag">SENSOR NODES <span class="fontsize_14">(Fan table)</span></h2>
 
@@ -537,7 +545,7 @@
 
     <!-- Throttle -->
     <section>
-        <div class="container font_text w_100p">
+        <div class="container w_100p">
             <div class="box w_80p">
                 <h2 class="h2_tag">Throttle</h2>
 
@@ -571,9 +579,7 @@
     </section>
 
 
-    <div>
-        <input id="exportJSON" class="cover_button" type="button" onclick="jsonProduce();" value="save Json File">
-    </div>
+
 
 
 
@@ -583,6 +589,8 @@
     <script src="js/resultProducer.js"></script>
     <!-- File Saver -->
     <script src="js/FileSaver.js"></script>
+    <!-- Side Bar Buttons -->
+    <script src="js/SideBarBtn.js"></script>
 
 </body>
 </html>
