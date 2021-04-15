@@ -1,6 +1,3 @@
-.box{
-    margin:40px auto;
-}
 th, tr, td{
     border: 1px solid #999;
     text-align: center;
@@ -30,6 +27,18 @@ th, tr, td{
 .fontsize_30{ font-size: 30px;}
 
 /* width */
+@media screen and (max-width: 1050px){
+    body{
+        padding: 30px;
+        width: 1050px;
+    }
+}
+
+.container{
+    width: 990px;
+    margin: 60px auto;
+}
+
 .w_100p{ width: 100%;}
 .w_80p { width:  80%;}
 .w_7pes { width: 14.28%;}

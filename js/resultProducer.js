@@ -138,6 +138,11 @@ function cusParseInt(str){
 
 // Export JSON File
 function save(){
-    var blob = new Blob([JSON.stringify(result)], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, '../LinearThermalsSys.json');
+    var blob = new Blob([getJsonString()], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, 'LinearThermalsSys.json');
+}
+
+function getJsonString(){
+    let jsonString = JSON.stringify(result, null, 2);
+    return jsonString;
 }
