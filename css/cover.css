@@ -1,7 +1,7 @@
 /* cover setting */
 body
 ::selection{
-    background: rgba(255, 255, 255, 0);
+    background: rgba(189, 168, 145, .8);
 }
 .index_cover_container
 ::selection{
@@ -68,6 +68,5 @@ body
 .sensor_desc_json{
     width: 80%;
     height: 200px;
-    outline: brown 1px solid;
     margin: auto;
 }
