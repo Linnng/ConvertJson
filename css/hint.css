@@ -1,9 +1,10 @@
 .hint_container{
-    height: 650px;
+    /* height: 650px; */
+    /* height: 100vh; */
     background-color: rgb(255, 255, 255);
     z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
-    padding: 350px 0;
+    padding: 200px 0;
 }

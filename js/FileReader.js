@@ -18,6 +18,14 @@ $(function(){
     var outputJSON = $('#outputJSON');
     importJSON.change(function(e){
         var file = e.target.files[0];
+        // check file extension client's selected.
+        var fileName = file.name;
+        var fileExtension = fileName.substring(fileName.indexOf('.')+1).toLowerCase();
+        if(fileExtension != "json"){
+            alert(" please select json file! ");
+            location.reload();
+        }
+
         reader = new FileReader();
         reader.readAsText(file);
         reader.onload = function(){
@@ -179,7 +187,8 @@ $(function(){
 
             } catch (error){
                 console.error(error);
-                alert('Q Q....');
+                alert("the JSON file you selected, it's not fit with our page");
+                location.reload();
             }
         }
     });
