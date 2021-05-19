@@ -21,7 +21,7 @@
     <div id="mainDiv">
 
     <!-- cover -->
-    <div class="w_100p index_cover_container">
+    <div class="w_100p index_cover_container hidden">
         <div class="index_cover_btn_box">
             <div class="index_cover_title">
                 <h1 class="h1_tag">Thermal table Converter</h1>
@@ -52,28 +52,43 @@
     <!-- Sensor description -->
     <section>
         <div class="container">
-            <div class="box">
-                <h2 class="h2_tag">SENSOR DESCRIPTION</h2>
+            <h2 class="h2_tag float_L">SENSOR DESCRIPTION</h2>
+
+            <div id="discreteBtn" class="float_L discreteBtn_Box">
+                <input class="checkbox_input hidden" id="discrete_switch" type="checkbox">
+                <label for="discrete_switch" class="switch_label">
+                    <span class="discreteBtn_txt float_L">Discrete</span>
+                    <div class="switchbox_container float_L">
+                            <span class="switch_txt" turnOn="ON" turnOff="OFF"></span>
+                            <span class="switch_round_btn"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="clear"></div>
+
+            <!-- <div id="" class="side_bar_button"><span style="outline: 1px red solid;">+</span></div>
+            <div id="" class="side_bar_button"><span style="outline: 1px red solid;">-</span></div> -->
+            <div class="horizon_scroll_box">
                 <table class="sensor_tab w_100p">
                     <!-- sensor_tab -->
                     <tr class="sensor_tr">
-                        <th>                name            </th>
-                        <th class="hidden"> type            </th>
-                        <th>                address         </th>
-                        <th class="hidden"> diagclass       </th>
-                        <th>                polling rate    </th>
-                        <th class="hidden"> ReadFn          </th>
-                        <th>                MaxErrors       </th>
-                        <th class="hidden"> SmoothingFn     </th>
-                        <th class="hidden"> SmoothingData   </th>
-                        <th>                CriticalTemp    </th>
-                        <th class="hidden"> crittime        </th>
+                        <th> name            </th>
+                        <th> type            </th>
+                        <th> address         </th>
+                        <th> diagclass       </th>
+                        <th> polling rate    </th>
+                        <th> ReadFn          </th>
+                        <th> MaxErrors       </th>
+                        <th> SmoothingFn     </th>
+                        <th> SmoothingData   </th>
+                        <th> CriticalTemp    </th>
+                        <th> crittime        </th>
                     </tr>
                     <tr class="sensor_tr">
-                        <td>               <input type="text" placeholder="CPU_PECI"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text" placeholder="CPU_PECI"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                         <td>
                             <select name="pollingrate" id="" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
@@ -83,18 +98,18 @@
                                 <option value="TWOSEC_POLLING">2 sec</option>
                             </select>
                         </td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                     </tr>
                     <tr class="sensor_tr">
-                        <td>               <input type="text" placeholder="SKIN"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text" placeholder="SKIN"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                         <td>
                             <select name="pollingrate" id="" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
@@ -104,18 +119,18 @@
                                 <option value="TWOSEC_POLLING">2 sec</option>
                             </select>
                         </td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                     </tr>
                     <tr class="sensor_tr">
-                        <td>               <input type="text" placeholder="MEM"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text" placeholder="MEM"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                         <td>
                             <select name="pollingrate" id="" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
@@ -125,18 +140,18 @@
                                 <option value="TWOSEC_POLLING">2 sec</option>
                             </select>
                         </td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                     </tr>
                     <tr class="sensor_tr">
-                        <td>               <input type="text" placeholder="NGFF"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text" placeholder="NGFF"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                         <td>
                             <select name="pollingrate" id="" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
@@ -146,14 +161,58 @@
                                 <option value="TWOSEC_POLLING">2 sec</option>
                             </select>
                         </td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
-                        <td>               <input type="text"></td>
-                        <td class="hidden"><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                     </tr>
                 </table>
+            </div>
+
+            <!-- sensor discrete table -->
+            <div class="discrete_container hidden">
+                <h4 class="h4_tag">Discrete</h4>
+                <div class="horizon_scroll_box">
+                    <table class="sensor_tab w_100p">
+                        <!-- sensor_tab -->
+                        <tr class="sensor_dis_tr">
+                            <th> name            </th>
+                            <th> type            </th>
+                            <th> address         </th>
+                            <th> diagclass       </th>
+                            <th> polling rate    </th>
+                            <th> ReadFn          </th>
+                            <th> MaxErrors       </th>
+                            <th> SmoothingFn     </th>
+                            <th> SmoothingData   </th>
+                            <th> CriticalTemp    </th>
+                            <th> crittime        </th>
+                        </tr>
+                        <tr class="sensor_dis_tr">
+                            <td><input type="text" placeholder="GPU"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
+                                <select name="pollingrate" id="" class="selects">
+                                    <option value="EXEC_POLLING">1/8 sec</option>
+                                    <option value="QSEC_POLLING">1/4 sec</option>
+                                    <option value="HSEC_POLLING">1/2 sec</option>
+                                    <option value="ONESEC_POLLING">1 sec</option>
+                                    <option value="TWOSEC_POLLING">2 sec</option>
+                                </select>
+                            </td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -162,8 +221,8 @@
     <!-- Fan description -->
     <section>
         <div class="container">
-            <div class="box">
-                <h2 class="h2_tag">FAN DESCRIPTION</h2>
+            <h2 class="h2_tag">FAN DESCRIPTION</h2>
+            <div class="horizon_scroll_box">
 
                 <table class="fan_des_tab w_100p hidden">
                     <tr class="fan_des_tr">
@@ -299,7 +358,7 @@
     <!-- Sensor nodes -->
     <section>
         <div class="container">
-            <div class="box">
+            <div class="horizon_scroll_box">
                 <h2 class="h2_tag">SENSOR NODES <span class="fontsize_14">(Fan table)</span></h2>
 
                 <div class="node_type_box bal_box">
@@ -545,11 +604,11 @@
         </div>
     </section>
 
-    <!-- Throttle -->
+    <!-- Plx Throttle -->
     <section>
         <div class="container">
-            <div class="box">
-                <h2 class="h2_tag">Throttle</h2>
+            <h2 class="h2_tag">Plx Throttle</h2>
+            <div class="horizon_scroll_box">
 
                 <table class="throttle_tab">
                     <tr>
@@ -580,7 +639,58 @@
         </div>
     </section>
 
-    </div>
+    <!-- Gfx Throttle -->
+    <section>
+        <div class="container">
+            <h2 class="h2_tag">Gfx Throttle</h2>
+            <div class="horizon_scroll_box">
+
+                <table class="throttle_tab">
+                    <tr>
+                        <th>Sensor Name</th>
+                        <th>Throttle Point</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+                <div class="throttle_box bal_box">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charger throttle -->
+    <section>
+        <div class="container">
+            <h2 class="h2_tag">Charger throttle</h2>
+            <div class="horizon_scroll_box"></div>
+        </div>
+    </section>
+
+    <!-- Msthermals -->
+    <section>
+        <div class="container">
+            <h2 class="h2_tag">Msthermals</h2>
+            <div class="horizon_scroll_box"></div>
+        </div>
+    </section>
+
+    </div>  <!-- end of mainDiv -->
 
 
     <!-- Cover Hint -->
@@ -601,13 +711,16 @@
 
 
 
-
+    <!-- window setting -->
+    <script src="js/winSetting.js"></script>
     <!-- convert Json file testing -->
     <script src="js/FileReader.js"></script>
     <!-- jsonResult Produce -->
     <script src="js/resultProducer.js"></script>
     <!-- File Saver -->
     <script src="js/FileSaver.js"></script>
+    <!-- button control -->
+    <script src="js/btnControl.js"></script>
     <!-- Side Bar Buttons -->
     <script src="js/SideBarBtn.js"></script>
 

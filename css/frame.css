@@ -7,6 +7,10 @@ th, tr, td{
     display: none;
 }
 
+.float_L{   float: left; }
+.float_R{   float: right;}
+.clear{     clear: both; }
+
 /* font size */
 .fontsize_14{ font-size: 14px;}
 .fontsize_15{ font-size: 15px;}
@@ -37,6 +41,11 @@ th, tr, td{
 .container{
     width: 990px;
     margin: 60px auto;
+}
+
+.horizon_scroll_box{
+    width: 100%;
+    overflow-x: auto;
 }
 
 .w_100p{ width: 100%;}
