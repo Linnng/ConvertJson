@@ -30,8 +30,18 @@ $(document).ready(function(){
         }
     });
 
+
+
+    // fan description table width setting.
+    var fandescTabWid = 0;
+    $('.fan_desc_tab').find('tr:eq(1) th').each(function(index){
+        $(this).width('125px');
+        fandescTabWid += 125;
+    });
+
     $('.sensor_tab').width( sensorTabWid + 'px' );
     $('.sensor_dis_tr').width( sensorDisTabWid + 'px' );
+    $('.fan_desc_tab').width( fandescTabWid + 'px' );
 });
 
 

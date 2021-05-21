@@ -54,20 +54,24 @@
         <div class="container">
             <h2 class="h2_tag float_L">SENSOR DESCRIPTION</h2>
 
-            <div id="discreteBtn" class="float_L discreteBtn_Box">
-                <input class="checkbox_input hidden" id="discrete_switch" type="checkbox">
+            <!-- discrete switch button -->
+            <div class="switch_container float_L">
+                <input class="hidden" id="discrete_switch" type="checkbox">
                 <label for="discrete_switch" class="switch_label">
-                    <span class="discreteBtn_txt float_L">Discrete</span>
-                    <div class="switchbox_container float_L">
-                            <span class="switch_txt" turnOn="ON" turnOff="OFF"></span>
+                    <span class="switch_txt float_L">Discrete</span>
+                    <div class="switch_box float_L">
+                            <span class="switch_txt switch_bcc" turnOn="ON" turnOff="OFF"></span>
                             <span class="switch_round_btn"></span>
                     </div>
                 </label>
             </div>
             <div class="clear"></div>
 
-            <!-- <div id="" class="side_bar_button"><span style="outline: 1px red solid;">+</span></div>
-            <div id="" class="side_bar_button"><span style="outline: 1px red solid;">-</span></div> -->
+            <h4 class="h4_tag float_L">Common</h4>
+            <div id="SensorAdd" class="sensor_btn float_L"><span style="outline: 1px red solid;">Add sensor</span></div>
+            <div id="SensorDelete" class="sensor_btn float_L"><span style="outline: 1px red solid;">Delete sensor</span></div>
+            <div class="clear"></div>
+
             <div class="horizon_scroll_box">
                 <table class="sensor_tab w_100p">
                     <!-- sensor_tab -->
@@ -218,11 +222,95 @@
     </section>
 
 
+
+
+
+
     <!-- Fan description -->
     <section>
         <div class="container">
-            <h2 class="h2_tag">FAN DESCRIPTION</h2>
+            <h2 class="h2_tag float_L">FAN DESCRIPTION</h2>
+
+            <div class="switch_container float_L">
+                <input class="hidden" id="twofans_switch" type="checkbox">
+                <label for="twofans_switch" class="switch_label">
+                    <span class="switch_txt float_L">Two fans</span>
+                    <div class="switch_box float_L">
+                            <span class="switch_bcc" turnOn="ON" turnOff="OFF"></span>
+                            <span class="switch_round_btn"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="clear"></div>
+
             <div class="horizon_scroll_box">
+                <table class="fan_desc_tab">
+                    <tr class="fan_desc_tr">
+                        <th class="w_4pes " colspan="8"></th>
+                        <th class="w_4pes bcc_deep_blue" colspan="2">125ms</th>
+                        <th class="w_4pes bcc_oliva_green" colspan="2">250ms</th>
+                        <th class="w_4pes bcc_deep_blue" colspan="2">500ms</th>
+                        <th class="w_4pes bcc_oliva_green" colspan="2">1s</th>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th class="bcc_blue">Fan Description</th>
+                        <th class="bcc_blue">Address</th>
+                        <th class="bcc_blue">KSStart</th>
+                        <th class="bcc_blue">KSWait</th>
+                        <th class="bcc_blue">KSPass</th>
+                        <th class="bcc_blue">KSFail</th>
+                        <th class="bcc_blue">KSBump</th>
+                        <th class="bcc_blue">Mincont0time</th>
+                        <th class=" bcc_deep_blue">Esec Up</th>
+                        <th class=" bcc_deep_blue">Esec Down</th>
+                        <th class=" bcc_oliva_green">Qsec Up</th>
+                        <th class=" bcc_oliva_green">Qsec Down</th>
+                        <th class=" bcc_deep_blue">Hsec Up</th>
+                        <th class=" bcc_deep_blue">Hsec Down</th>
+                        <th class=" bcc_oliva_green">Sec up</th>
+                        <th class=" bcc_oliva_green">Sec Down</th>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <td><input type="text" placeholder="Fan1"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr hidden">
+                        <td><input type="text" placeholder="Fan2"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="horizon_scroll_box hidden">
 
                 <table class="fan_des_tab w_100p hidden">
                     <tr class="fan_des_tr">
@@ -359,7 +447,7 @@
     <section>
         <div class="container">
             <div class="horizon_scroll_box">
-                <h2 class="h2_tag">SENSOR NODES <span class="fontsize_14">(Fan table)</span></h2>
+                <h2 class="h2_tag">SENSOR NODES <span>(Fan table)</span></h2>
 
                 <div class="node_type_box bal_box">
                     <p class="hidden node_type_tag">BAL</p>
