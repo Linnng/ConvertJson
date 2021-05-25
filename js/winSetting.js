@@ -5,13 +5,15 @@ $(document).ready(function(){
     var sensorTabWid = 0;
     $('.sensor_tr th').each(function(index){
         if(index == 0){
+            $('.sensor_tr').find('th:eq(' + index + ')').width('80px');
+            sensorTabWid += 80;
+        }
+        else if(index == 1){
             $('.sensor_tr').find('th:eq(' + index + ')').width('100px');
-            $('.sensor_tr').find('td:eq(' + index + ')').width('100px');
             sensorTabWid += 100;
         }
         else{
             $('.sensor_tr').find('th:eq(' + index + ')').width('200px');
-            $('.sensor_tr').find('td:eq(' + index + ')').width('200px');
             sensorTabWid += 200;
         }
     });
@@ -20,12 +22,10 @@ $(document).ready(function(){
     $('.sensor_dis_tr th').each(function(index){
         if(index == 0){
             $('.sensor_dis_tr').find('th:eq(' + index + ')').width('100px');
-            $('.sensor_dis_tr').find('td:eq(' + index + ')').width('100px');
             sensorDisTabWid += 100;
         }
         else{
             $('.sensor_dis_tr').find('th:eq(' + index + ')').width('200px');
-            $('.sensor_dis_tr').find('td:eq(' + index + ')').width('200px');
             sensorDisTabWid += 200;
         }
     });

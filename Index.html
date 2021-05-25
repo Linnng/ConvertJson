@@ -67,15 +67,17 @@
             </div>
             <div class="clear"></div>
 
-            <h4 class="h4_tag float_L">Common</h4>
-            <div id="SensorAdd" class="sensor_btn float_L"><span style="outline: 1px red solid;">Add sensor</span></div>
-            <div id="SensorDelete" class="sensor_btn float_L"><span style="outline: 1px red solid;">Delete sensor</span></div>
+            <h4 class="sensor_sort_title float_L">Common</h4>
+            <div class="sonsor_btn_box">
+                <div id="SensorAdd" class="sensor_btn float_L"><span>Add sensor</span></div>
+            </div>
             <div class="clear"></div>
 
             <div class="horizon_scroll_box">
-                <table class="sensor_tab w_100p">
+                <table id="sensorCommonTab" class="sensor_tab">
                     <!-- sensor_tab -->
                     <tr class="sensor_tr">
+                        <th><span class="hidden">btn</span></th>
                         <th> name            </th>
                         <th> type            </th>
                         <th> address         </th>
@@ -89,6 +91,9 @@
                         <th> crittime        </th>
                     </tr>
                     <tr class="sensor_tr">
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
                         <td><input type="text" placeholder="CPU_PECI"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
@@ -110,6 +115,9 @@
                         <td><input type="text"></td>
                     </tr>
                     <tr class="sensor_tr">
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
                         <td><input type="text" placeholder="SKIN"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
@@ -131,6 +139,9 @@
                         <td><input type="text"></td>
                     </tr>
                     <tr class="sensor_tr">
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
                         <td><input type="text" placeholder="MEM"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
@@ -152,7 +163,34 @@
                         <td><input type="text"></td>
                     </tr>
                     <tr class="sensor_tr">
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
                         <td><input type="text" placeholder="NGFF"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td>
+                            <select name="pollingrate" id="" class="selects">
+                                <option value="EXEC_POLLING">1/8 sec</option>
+                                <option value="QSEC_POLLING">1/4 sec</option>
+                                <option value="HSEC_POLLING">1/2 sec</option>
+                                <option value="ONESEC_POLLING">1 sec</option>
+                                <option value="TWOSEC_POLLING">2 sec</option>
+                            </select>
+                        </td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="sensor_tr">
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
+                        <td><input type="text" placeholder="BATTERY"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
@@ -177,7 +215,9 @@
 
             <!-- sensor discrete table -->
             <div class="discrete_container hidden">
-                <h4 class="h4_tag">Discrete</h4>
+                <h4 class="sensor_sort_title float_L">Discrete</h4>
+                <div class="clear"></div>
+
                 <div class="horizon_scroll_box">
                     <table class="sensor_tab w_100p">
                         <!-- sensor_tab -->
