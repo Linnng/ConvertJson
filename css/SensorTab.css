@@ -13,7 +13,6 @@
 }
 /* sensor buttons */
 .sonsor_btn_box{
-    display: inline-block;
     margin-left: 8px;
 }
 .sensor_btn{

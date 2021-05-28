@@ -56,7 +56,7 @@
 
             <!-- discrete switch button -->
             <div class="switch_container float_L">
-                <input class="hidden" id="discrete_switch" type="checkbox">
+                <input class="hidden switch_checkbox" id="discrete_switch" type="checkbox">
                 <label for="discrete_switch" class="switch_label">
                     <span class="switch_txt float_L">Discrete</span>
                     <div class="switch_box float_L">
@@ -68,8 +68,8 @@
             <div class="clear"></div>
 
             <h4 class="sensor_sort_title float_L">Common</h4>
-            <div class="sonsor_btn_box">
-                <div id="SensorAdd" class="sensor_btn float_L"><span>Add sensor</span></div>
+            <div class="sonsor_btn_box float_L">
+                <div id="SensorDescAddBtn" class="sensor_btn float_L"><span>Add sensor</span></div>
             </div>
             <div class="clear"></div>
 
@@ -219,7 +219,7 @@
                 <div class="clear"></div>
 
                 <div class="horizon_scroll_box">
-                    <table class="sensor_tab w_100p">
+                    <table id="sensorDiscreteTab" class="sensor_tab">
                         <!-- sensor_tab -->
                         <tr class="sensor_dis_tr">
                             <th> name            </th>
@@ -272,7 +272,7 @@
             <h2 class="h2_tag float_L">FAN DESCRIPTION</h2>
 
             <div class="switch_container float_L">
-                <input class="hidden" id="twofans_switch" type="checkbox">
+                <input class="hidden switch_checkbox" id="twofans_switch" type="checkbox">
                 <label for="twofans_switch" class="switch_label">
                     <span class="switch_txt float_L">Two fans</span>
                     <div class="switch_box float_L">
@@ -283,14 +283,39 @@
             </div>
             <div class="clear"></div>
 
-            <div class="horizon_scroll_box">
+            <!-- fan init -->
+            <div class="horizon_scroll_box margin_top_8">
+                <table class="fan_init_tab">
+                    <tr class="fan_init_tr">
+                        <th>name</th>
+                        <th>address</th>
+                        <th>initfn</th>
+                        <th>minfanfn</th>
+                        <th>rpmreadfn</th>
+                        <th>setcpfn</th>
+                        <th>optionalfan</th>
+                    </tr>
+                    <tr class="fan_init_tr">
+                        <td><input type="text" placeholder="GFAN1CTRL"></td>
+                        <td><input type="text" placeholder="GFAN1ADDR"></td>
+                        <td><input type="text" placeholder="MecGuardianInit"></td>
+                        <td><input type="text" placeholder="MecGuardianGetMinRpm"></td>
+                        <td><input type="text" placeholder="MecGuardianRpmRead"></td>
+                        <td><input type="text" placeholder="MecGuardianSetFanPwm"></td>
+                        <td><input type="text" placeholder="NULL"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- fan list -->
+            <div class="horizon_scroll_box margin_top_8">
                 <table class="fan_desc_tab">
                     <tr class="fan_desc_tr">
-                        <th class="w_4pes " colspan="8"></th>
-                        <th class="w_4pes bcc_deep_blue" colspan="2">125ms</th>
-                        <th class="w_4pes bcc_oliva_green" colspan="2">250ms</th>
-                        <th class="w_4pes bcc_deep_blue" colspan="2">500ms</th>
-                        <th class="w_4pes bcc_oliva_green" colspan="2">1s</th>
+                        <th class="" colspan="8"></th>
+                        <th class="bcc_deep_blue"   colspan="2">125ms</th>
+                        <th class="bcc_oliva_green" colspan="2">250ms</th>
+                        <th class="bcc_deep_blue"   colspan="2">500ms</th>
+                        <th class="bcc_oliva_green" colspan="2">1s</th>
                     </tr>
                     <tr class="fan_desc_tr">
                         <th class="bcc_blue">Fan Description</th>
@@ -301,12 +326,12 @@
                         <th class="bcc_blue">KSFail</th>
                         <th class="bcc_blue">KSBump</th>
                         <th class="bcc_blue">Mincont0time</th>
-                        <th class=" bcc_deep_blue">Esec Up</th>
-                        <th class=" bcc_deep_blue">Esec Down</th>
+                        <th class=" bcc_deep_blue"  >Esec Up</th>
+                        <th class=" bcc_deep_blue"  >Esec Down</th>
                         <th class=" bcc_oliva_green">Qsec Up</th>
                         <th class=" bcc_oliva_green">Qsec Down</th>
-                        <th class=" bcc_deep_blue">Hsec Up</th>
-                        <th class=" bcc_deep_blue">Hsec Down</th>
+                        <th class=" bcc_deep_blue"  >Hsec Up</th>
+                        <th class=" bcc_deep_blue"  >Hsec Down</th>
                         <th class=" bcc_oliva_green">Sec up</th>
                         <th class=" bcc_oliva_green">Sec Down</th>
                     </tr>
@@ -349,7 +374,66 @@
                 </table>
             </div>
 
+            <!-- fan list (more into) -->
+            <div class="horizon_scroll_box margin_top_8">
+                <table class="fan_desc_tab_rpm">
+                    <tr class="fan_desc_tr">
+                        <th>minrpm</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>maxrpm</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagfanlowspec</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagfanhighspec</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagfanmaxspec</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>mfgmoderpm</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>fanfailuretime</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>fanfailurecode</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagfanerrorpercent</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagsfanvalidsamples</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagsfansampleinterval</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>diagclass</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr class="fan_desc_tr">
+                        <th>powerfn</th>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+            </div>
 
+
+            <!-- previous -->
             <div class="horizon_scroll_box hidden">
 
                 <table class="fan_des_tab w_100p hidden">
@@ -482,6 +566,11 @@
             </div>
         </div>
     </section>
+
+
+
+
+
 
     <!-- Sensor nodes -->
     <section>
@@ -732,13 +821,80 @@
         </div>
     </section>
 
+
+
+
+
+
     <!-- Plx Throttle -->
     <section>
         <div class="container">
-            <h2 class="h2_tag">Plx Throttle</h2>
-            <div class="horizon_scroll_box">
+            <h2 class="h2_tag float_L">Plx Throttle Table</h2>
 
-                <table class="throttle_tab">
+            <!-- discrete switch button -->
+            <div class="switch_container float_L">
+                <input class="hidden switch_checkbox" id="PlxThrottle_discrete_switch" type="checkbox">
+                <label for="PlxThrottle_discrete_switch" class="switch_label">
+                    <span class="switch_txt float_L">Discrete</span>
+                    <div class="switch_box float_L">
+                            <span class="switch_txt switch_bcc" turnOn="ON" turnOff="OFF"></span>
+                            <span class="switch_round_btn"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="clear"></div>
+
+            <div class="horizon_scroll_box">
+                <h4 class="sensor_sort_title float_L">Common</h4>
+                <div class="sonsor_btn_box float_L">
+                    <div id="PlxThrottleAddBtn" class="sensor_btn float_L"><span>Add sensor</span></div>
+                </div>
+                <div class="clear"></div>
+
+                <table class="plx_throttle_tab">
+                    <tr>
+                        <th><span class="hidden">btn</span></th>
+                        <th>Sensor Name</th>
+                        <th>Throttle Point</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                        </td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+                <div class="throttle_box bal_box">
+
+                </div>
+            </div>
+            <div class="horizon_scroll_box">
+                <h4 class="sensor_sort_title float_L">Discrete</h4>
+                <div class="clear"></div>
+
+                <table class="plx_throttle_dis_tab">
                     <tr>
                         <th>Sensor Name</th>
                         <th>Throttle Point</th>
@@ -747,58 +903,104 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                     </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
                 </table>
-                <div class="throttle_box bal_box">
-
-                </div>
             </div>
         </div>
     </section>
 
+
+
+
+
+
     <!-- Gfx Throttle -->
     <section>
         <div class="container">
-            <h2 class="h2_tag">Gfx Throttle</h2>
-            <div class="horizon_scroll_box">
+            <h2 class="h2_tag float_L">Gfx Throttle Table</h2>
 
-                <table class="throttle_tab">
-                    <tr>
-                        <th>Sensor Name</th>
-                        <th>Throttle Point</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
-                <div class="throttle_box bal_box">
+            <!-- discrete switch button -->
+            <div class="switch_container float_L">
+                <input class="hidden switch_checkbox" id="GfxThrottle_discrete_switch" type="checkbox">
+                <label for="GfxThrottle_discrete_switch" class="switch_label">
+                    <span class="switch_txt float_L">Discrete</span>
+                    <div class="switch_box float_L">
+                            <span class="switch_txt switch_bcc" turnOn="ON" turnOff="OFF"></span>
+                            <span class="switch_round_btn"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="clear"></div>
 
+            <div class="Gfx_common_box">
+                <h4 class="sensor_sort_title float_L">Common</h4>
+                <div class="sonsor_btn_box float_L">
+                    <div id="GfxThrottleAddBtn" class="sensor_btn float_L"><span>Add sensor</span></div>
+                </div>
+                <div class="clear"></div>
+
+                <div class="horizon_scroll_box">
+                    <table class="gfx_throttle_tab">
+                        <tr>
+                            <th><span class="hidden">btn</span></th>
+                            <th>Sensor Name</th>
+                            <th>z0min</th>
+                            <th>z0max</th>
+                            <th>z0dec</th>
+                            <th>z0inc</th>
+                            <th>z1min</th>
+                            <th>z1max</th>
+                            <th>z1dec</th>
+                            <th>z1inc</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <div class="Gfx_discrete_box">
+                <h4 class="sensor_sort_title float_L">Discrete</h4>
+                <div class="clear"></div>
+
+                <div class="horizon_scroll_box">
+                    <table class="gfx_discrete_throttle_tab">
+                        <tr>
+                            <th>Sensor Name</th>
+                            <th>z0min</th>
+                            <th>z0max</th>
+                            <th>z0dec</th>
+                            <th>z0inc</th>
+                            <th>z1min</th>
+                            <th>z1max</th>
+                            <th>z1dec</th>
+                            <th>z1inc</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -838,7 +1040,6 @@
     </div>
 
 
-
     <!-- window setting -->
     <script src="js/winSetting.js"></script>
     <!-- convert Json file testing -->
@@ -851,6 +1052,8 @@
     <script src="js/btnControl.js"></script>
     <!-- Side Bar Buttons -->
     <script src="js/SideBarBtn.js"></script>
+    <!-- main -->
+    <script src="js/main.js"></script>
 
 </body>
 </html>

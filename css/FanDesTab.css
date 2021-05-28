@@ -9,7 +9,7 @@
     background-color: rgba(235, 241, 222, 1);
 }
 
-.bcc_blue{
+.bcc_blue, .fan_desc_tab_rpm .fan_desc_tr th, .fan_init_tr th{
     background-color: rgba(197, 217, 241, 1);;
 }
 .bcc_deep_blue{
@@ -17,4 +17,7 @@
 }
 .bcc_oliva_green{
     background-color: rgba(235, 241, 222, 1);
+}
+.fan_desc_tab_rpm .fan_desc_tr th{
+    width: 200px;
 }

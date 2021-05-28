@@ -1,21 +1,41 @@
 
 $(function(){
 
-    // discrete switch button
-    $('#discrete_switch').click(function(){
-        if($(this).prop("checked")){
+    // Switch button status
+    $('.switch_checkbox').click(function(){
+        if($(this).prop("checked"))
+        {
             $(this).siblings('label').find('.switch_bcc').css('margin-left', '0');
             $(this).siblings('label').find('.switch_round_btn').css('left', '17px');
+        }
+        else
+        {
+            $(this).siblings('label').find('.switch_bcc').css('margin-left', '-100%');
+            $(this).siblings('label').find('.switch_round_btn').css('left', '0');
+        }
+    });
+
+    // sensor discrete switch
+    $('#discrete_switch').click(function(event){
+        if($(this).prop("checked")){
             $('.discrete_container').removeClass('hidden');
         }
         else{
-            $(this).siblings('label').find('.switch_bcc').css('margin-left', '-100%');
-            $(this).siblings('label').find('.switch_round_btn').css('left', '0');
             $('.discrete_container').addClass('hidden');
         }
     });
+    // two fans switch
+    $('#twofans_switch').click(function(){
+        if($(this).prop("checked")){
+            $('.fan_desc_tab').find('tr:eq(3)').removeClass('hidden');
+        }
+        else{
+            $('.fan_desc_tab').find('tr:eq(3)').addClass('hidden');
+        }
+    });
+
     // sensor add button
-    $('#SensorAdd').click(function(){
+    $('#SensorDescAddBtn').click(function(){
         var cusTr = $('<tr/>');
         for(var i=0; i<sensorCommonTab.rows[0].cells.length; i++){
 
@@ -54,20 +74,6 @@ $(function(){
             }
         }
         $('#sensorCommonTab').append(cusTr);
-    });
-
-
-    $('#twofans_switch').click(function(){
-        if($(this).prop("checked")){
-            $(this).siblings('label').find('.switch_bcc').css('margin-left', '0');
-            $(this).siblings('label').find('.switch_round_btn').css('left', '17px');
-            $('.fan_desc_tab').find('tr:eq(3)').removeClass('hidden');
-        }
-        else{
-            $(this).siblings('label').find('.switch_bcc').css('margin-left', '-100%');
-            $(this).siblings('label').find('.switch_round_btn').css('left', '0');
-            $('.fan_desc_tab').find('tr:eq(3)').addClass('hidden');
-        }
     });
 
 });

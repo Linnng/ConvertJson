@@ -1,47 +1,83 @@
 
-$(document).ready(function(){
+// Sensor description table width setting.
+function SetSensorComTabWid()
+{
+    var tableWid = 0;
 
-    // Sensor description table width setting.
-    var sensorTabWid = 0;
-    $('.sensor_tr th').each(function(index){
-        if(index == 0){
-            $('.sensor_tr').find('th:eq(' + index + ')').width('80px');
-            sensorTabWid += 80;
+    $('#sensorCommonTab .sensor_tr th').each(function(index){
+        if(index == 0)
+        {
+            $(this).width('80px');
+            tableWid += 80;
         }
-        else if(index == 1){
-            $('.sensor_tr').find('th:eq(' + index + ')').width('100px');
-            sensorTabWid += 100;
+        else if(index == 1)
+        {
+            $(this).width('100px');
+            tableWid += 100;
         }
-        else{
-            $('.sensor_tr').find('th:eq(' + index + ')').width('200px');
-            sensorTabWid += 200;
+        else
+        {
+            $(this).width('200px');
+            tableWid += 200;
         }
     });
 
-    var sensorDisTabWid = 0;
+    $('#sensorCommonTab').width( tableWid + 'px' );
+}
+
+function SetSensorDisTabWid()
+{
+    var tableWid = 0;
+
     $('.sensor_dis_tr th').each(function(index){
-        if(index == 0){
-            $('.sensor_dis_tr').find('th:eq(' + index + ')').width('100px');
-            sensorDisTabWid += 100;
+        if(index == 0)
+        {
+            $(this).width('100px');
+            tableWid += 100;
         }
-        else{
-            $('.sensor_dis_tr').find('th:eq(' + index + ')').width('200px');
-            sensorDisTabWid += 200;
+        else
+        {
+            $(this).width('200px');
+            tableWid += 200;
         }
     });
 
+    $('#sensorDiscreteTab').width( tableWid + 'px' );
+}
 
+// fan description table width setting.
+function SetFanInitTabWid()
+{
+    var tableWid = 0;
 
-    // fan description table width setting.
-    var fandescTabWid = 0;
-    $('.fan_desc_tab').find('tr:eq(1) th').each(function(index){
+    $('.fan_init_tr th').each(function(){
+        $(this).width('200px');
+        tableWid += 200;
+    });
+
+    $('.fan_init_tab').width( tableWid + 'px' );
+}
+
+function SetFanDesTabWid()
+{
+    var tableWid = 0;
+
+    $('.fan_desc_tab').find('tr:eq(1) th').each(function(){
         $(this).width('125px');
-        fandescTabWid += 125;
+        tableWid += 125;
     });
 
-    $('.sensor_tab').width( sensorTabWid + 'px' );
-    $('.sensor_dis_tr').width( sensorDisTabWid + 'px' );
-    $('.fan_desc_tab').width( fandescTabWid + 'px' );
-});
+    $('.fan_desc_tab').width( tableWid + 'px' );
+}
 
 
+function HandleTableWid()
+{
+
+    SetSensorComTabWid();
+    SetSensorDisTabWid();
+
+    SetFanInitTabWid();
+    SetFanDesTabWid();
+
+}
