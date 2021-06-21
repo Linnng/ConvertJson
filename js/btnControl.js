@@ -16,12 +16,13 @@ $(function(){
     });
 
     // sensor discrete switch
-    $('#discrete_switch').click(function(event){
+    $('#discrete_switch').click(function(){
         if($(this).prop("checked")){
-            $('.discrete_container').removeClass('hidden');
+            // $('')
+            $('.sensor_discrete_container').removeClass('hidden');
         }
         else{
-            $('.discrete_container').addClass('hidden');
+            $('.sensor_discrete_container').addClass('hidden');
         }
     });
     // two fans switch
@@ -33,6 +34,31 @@ $(function(){
             $('.fan_desc_tab').find('tr:eq(3)').addClass('hidden');
         }
     });
+
+    // Plx throttle discrete switch
+    $('#PlxThrottle_discrete_switch').click(function(){
+        if($(this).prop("checked")){
+            $('.plx_throttle_dis_container').removeClass('hidden');
+        }
+        else{
+            $('.plx_throttle_dis_container').addClass('hidden');
+        }
+    });
+
+    // Gfx throttle discrete switch
+    $('#GfxThrottle_discrete_switch').click(function(){
+        if($(this).prop('checked')){
+            $('.Gfx_discrete_container').removeClass('hidden');
+        }
+        else{
+            $('.Gfx_discrete_container').addClass('hidden');S
+        }
+    });
+
+
+
+
+
 
     // sensor add button
     $('#SensorDescAddBtn').click(function(){
@@ -80,5 +106,10 @@ $(function(){
 
 // sensor delete button
 function removeRow(e){
-    document.getElementById('sensorCommonTab').deleteRow(e.parentNode.parentNode.rowIndex);
+    var test = document.getElementsByClassName('e.parentNode.parentNode.parentNode.className()');
+    console.log(test);
+    document.getElementById('sensorCommonTab').deleteRow(e.parentNode.parentNode.rowIndex);             // worked
+    // document.querySelector('table').deleteRow(e.parentNode.parentNode.rowIndex);                     // failed
+    // document.getElementsByClassName('deleted_table').deleteRow(e.parentNode.parentNode.rowIndex);    // failed
 }
+

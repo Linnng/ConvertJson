@@ -2,7 +2,7 @@
 .sensor_tr>th{     background-color: rgba(197, 217, 241, 1);}
 .sensor_dis_tr>th{ background-color: rgba(197, 217, 241, 1);}
 
-.discrete_container{ margin-top: 16px;}
+.sensor_discrete_container{ margin-top: 16px;}
 
 /* sensor sort */
 .sensor_sort_title{
