@@ -1,4 +1,8 @@
 /* table background colour */
+.fan_des_tab{
+    width: 100%;
+}
+
 .fan_des_tr>th{
     background-color: rgba(197, 217, 241, 1);;
 }

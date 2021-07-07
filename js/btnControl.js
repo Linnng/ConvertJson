@@ -51,7 +51,7 @@ $(function(){
             $('.Gfx_discrete_container').removeClass('hidden');
         }
         else{
-            $('.Gfx_discrete_container').addClass('hidden');S
+            $('.Gfx_discrete_container').addClass('hidden');
         }
     });
 
