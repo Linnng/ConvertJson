@@ -1,7 +1,5 @@
 /* table width */
-.sensor_tr>th{     background-color: rgba(197, 217, 241, 1);}
-.sensor_dis_tr>th{ background-color: rgba(197, 217, 241, 1);}
-
+.sensor_tr > th, .sensor_tr > th > input, .sensor_dis_tr > th, .sensor_dis_tr > th > input{ background-color: rgba(197, 217, 241, 1);}
 .sensor_discrete_container{ margin-top: 16px;}
 
 /* sensor sort */
@@ -36,10 +34,12 @@
     width: 100%;
     cursor: pointer;
     font-size: 16px;
-    color: #666;
+    font-weight: 600;
+    color: rgb(37, 146, 132);
     transition: 0.3s;
 }
 .sensorDelete:hover{
-    color: #000;
+    font-weight: 600;
+    color: rgb(100, 192, 180);
     transition: 0.3s;
 }

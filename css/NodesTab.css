@@ -20,6 +20,25 @@
     font-size: 22px;
 }
 
+/* add module button setting */
+.add_module_btn{
+    width: 120px;
+    margin: 9px 0 9px 16px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 3px 0;
+    background-color: rgb(160, 229, 220);
+    color: black;
+    transition: .3s;
+}
+.add_module_btn:hover{
+    background-color: rgb(100, 192, 180);
+    color: white;
+    transition: .3s;
+}
+
 /* delete module button setting */
 .moduleDelete{
     width: 100%;

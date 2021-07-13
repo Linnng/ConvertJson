@@ -51,7 +51,7 @@
 
     <!-- Sensor description -->
     <section>
-        <div class="container">
+        <div id="sensorContainer" class="container">
             <h2 class="h2_tag float_L">SENSOR DESCRIPTION</h2>
 
             <!-- discrete switch button -->
@@ -69,7 +69,10 @@
 
             <h4 class="sensor_sort_title float_L">Common</h4>
             <div class="sonsor_btn_box float_L">
-                <div id="SensorDescAddBtn" class="sensor_btn float_L"><span>Add sensor</span></div>
+                <div id="SensorDescAddBtn_row" class="sensor_btn float_L"><span>Add sensor</span></div>
+            </div>
+            <div class="sonsor_btn_box float_L">
+                <div id="SensorDescAddBtn_column" class="sensor_btn float_L"><span>Add type</span></div>
             </div>
             <div class="clear"></div>
 
@@ -77,18 +80,32 @@
                 <table id="sensorCommonTab" class="sensor_tab">
                     <!-- sensor_tab -->
                     <tr class="sensor_tr">
-                        <th><span class="hidden">btn</span></th>
+                        <td><span class="transparet">btn</span></td>
+                        <td><span class="transparet">btn</span></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                    </tr>
+                    <tr class="sensor_tr">
+                        <th><span class="transparet">btn</span></th>
                         <th> name            </th>
-                        <th> type            </th>
-                        <th> address         </th>
-                        <th> diagclass       </th>
-                        <th> polling rate    </th>
-                        <th> ReadFn          </th>
-                        <th> MaxErrors       </th>
-                        <th> SmoothingFn     </th>
-                        <th> SmoothingData   </th>
-                        <th> CriticalTemp    </th>
-                        <th> crittime        </th>
+                        <th><input type="text" placeholder="type">             </th>
+                        <th><input type="text" placeholder="address">          </th>
+                        <th><input type="text" placeholder="diagclass">        </th>
+                        <th><input type="text" placeholder="polling rate">     </th>
+                        <th><input type="text" placeholder="ReadFn">           </th>
+                        <th><input type="text" placeholder="MaxErrors">        </th>
+                        <th><input type="text" placeholder="SmoothingFn">      </th>
+                        <th><input type="text" placeholder="SmoothingData">    </th>
+                        <th><input type="text" placeholder="CriticalTemp">     </th>
+                        <th><input type="text" placeholder="crittime">         </th>
                     </tr>
                     <tr class="sensor_tr">
                         <td>
@@ -214,25 +231,42 @@
             </div>
 
             <!-- sensor discrete table -->
-            <div class="sensor_discrete_container hidden">
+
+            <!--
+            <div class="sensor_discrete_container ">
                 <h4 class="sensor_sort_title float_L">Discrete</h4>
+                <div class="sonsor_btn_box float_L">
+                    <div id="SensorDescAddBtn_column_dis" class="sensor_btn float_L" onclick="addSensorDisType();"><span>Add type</span></div>
+                </div>
                 <div class="clear"></div>
 
                 <div class="horizon_scroll_box">
                     <table id="sensorDiscreteTab" class="sensor_tab">
-                        <!-- sensor_tab -->
                         <tr class="sensor_dis_tr">
-                            <th> name            </th>
-                            <th> type            </th>
-                            <th> address         </th>
-                            <th> diagclass       </th>
-                            <th> polling rate    </th>
-                            <th> ReadFn          </th>
-                            <th> MaxErrors       </th>
-                            <th> SmoothingFn     </th>
-                            <th> SmoothingData   </th>
-                            <th> CriticalTemp    </th>
-                            <th> crittime        </th>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        </tr>
+                        <tr class="sensor_dis_tr">
+                            <th><input type="text" placeholder="name">          </th>
+                            <th><input type="text" placeholder="type">          </th>
+                            <th><input type="text" placeholder="address">       </th>
+                            <th><input type="text" placeholder="diagclass">     </th>
+                            <th><input type="text" placeholder="polling rate">  </th>
+                            <th><input type="text" placeholder="ReadFn">        </th>
+                            <th><input type="text" placeholder="MaxErrors">     </th>
+                            <th><input type="text" placeholder="SmoothingFn">   </th>
+                            <th><input type="text" placeholder="SmoothingData"> </th>
+                            <th><input type="text" placeholder="CriticalTemp">  </th>
+                            <th><input type="text" placeholder="crittime">      </th>
                         </tr>
                         <tr class="sensor_dis_tr">
                             <td><input type="text" placeholder="GPU"></td>
@@ -258,6 +292,9 @@
                     </table>
                 </div>
             </div>
+            -->
+
+
         </div>
     </section>
 
@@ -574,9 +611,13 @@
 
     <!-- Sensor nodes -->
     <section>
-        <div class="container">
+        <div id="fanTableContainer" class="container">
             <h2 class="h2_tag float_L">SENSOR NODES <span>(Fan table)</span></h2>
 
+            <!-- add modules button -->
+            <div class="sonsor_btn_box float_L">
+                <div id="addModuleBtn" class="add_module_btn float_L"><span>Add module</span></div>
+            </div>
             <!-- twofans switch button -->
             <div class="switch_container float_L">
                 <input class="hidden switch_checkbox" id="twofans_tab_switch" type="checkbox">
@@ -597,12 +638,12 @@
                 <table class="sku_name_tab">
                     <tr class="sku_name_tr">
                         <th>
-                            <div class="moduleDelete" onclick="">
+                            <div class="moduleDelete" onclick="removeModule(this);">
                                 <span>Delete This Module</span>
                             </div>
                         </th>
                         <th>Sku name</th>
-                        <th> <h3 class="sku_name"><input type="text" placeholder="SouthPeak14"></h3></th>
+                        <th> <h3 class="sku_name"><input type="text" placeholder="(Please input sku name)"></h3></th>
                     </tr>
                 </table>
 
@@ -1178,6 +1219,8 @@
     <script src="js/FileSaver.js"></script>
     <!-- button control -->
     <script src="js/btnControl.js"></script>
+    <script src="js/btnControl_SensorNode.js"></script>
+    <script src="js/btnControl_FanTable.js"></script>
     <!-- Side Bar Buttons -->
     <script src="js/SideBarBtn.js"></script>
     <!-- main -->

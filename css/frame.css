@@ -15,6 +15,7 @@
 
 /* shortcut setting */
 .hidden{  display: none;}
+.transparet{ opacity: 0;}
 
 .float_L{ float: left; }
 .float_R{ float: right;}
