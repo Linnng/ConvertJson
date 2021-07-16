@@ -1,21 +1,29 @@
 /* table width */
-.sensor_tr > th, .sensor_tr > th > input, .sensor_dis_tr > th, .sensor_dis_tr > th > input{ background-color: rgba(197, 217, 241, 1);}
-.sensor_discrete_container{ margin-top: 16px;}
+.sensor_tab{ background-color: #fff;}
+.sensor_tr > th, .sensor_tr > th > input{ background-color: rgba(197, 217, 241, 1);}
+.sensor_sku_container{
+    margin-bottom: 24px;
+}
 
 /* sensor sort */
-.sensor_sort_title{
+.sku_title{
     color: rgb(37, 146, 132);
     font-weight: 900;
     font-size: 20px;
-    padding: 6px 0;
+    padding: 0;
+
+    /* border: none; */
+    /* border-bottom: 2px solid rgb(37, 146, 132); */
 }
+
+
 /* sensor buttons */
-.sonsor_btn_box{
+.function_btn_box{
     margin-left: 8px;
 }
-.sensor_btn{
+.add_sensor_btn{
     width: 120px;
-    margin: 5px 0 0 8px;
+    margin: 5px 0;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
@@ -25,11 +33,51 @@
     color: black;
     transition: .3s;
 }
-.sensor_btn:hover{
+.add_sensor_btn:hover{
     background-color: rgb(100, 192, 180);
     color: white;
     transition: .3s;
 }
+.delete_module_btn{
+    width: 120px;
+    margin: 2px 0;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 6px 0;
+    /* border: 1.5px solid rgb(199, 37, 35); */
+    border: 2px solid rgb(198, 113, 39);
+    color: rgb(198, 113, 39);
+    transition: .3s;
+    font-weight: 700;
+
+}
+.delete_module_btn:hover{
+    background-color: rgb(198, 113, 39);
+    color: white;
+    transition: .3s;
+}
+/* add module button setting */
+.add_module_btn{
+    width: 120px;
+    margin: 4px 16px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 6px 0;
+    background-color: rgb(252, 193, 141);
+    color: black;
+    transition: .3s;
+}
+.add_module_btn:hover{
+    background-color: rgb(198, 113, 39);
+    color: white;
+    transition: .3s;
+}
+
+
 .sensorDelete{
     width: 100%;
     cursor: pointer;

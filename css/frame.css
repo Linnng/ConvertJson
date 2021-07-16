@@ -22,8 +22,9 @@
 .clear{   clear: both; }
 
 .horizon_scroll_box{
+    background-color: rgb(235, 235, 235);
     width: 100%;
-    overflow-x: auto;
+    overflow-x: scroll;
 }
 
 

@@ -54,26 +54,28 @@
         <div id="sensorContainer" class="container">
             <h2 class="h2_tag float_L">SENSOR DESCRIPTION</h2>
 
-            <!-- discrete switch button -->
-            <div class="switch_container float_L">
-                <input class="hidden switch_checkbox" id="discrete_switch" type="checkbox">
-                <label for="discrete_switch" class="switch_label">
-                    <span class="switch_txt float_L">Discrete</span>
-                    <div class="switch_box float_L">
-                            <span class="switch_txt switch_bcc" turnOn="ON" turnOff="OFF"></span>
-                            <span class="switch_round_btn"></span>
-                    </div>
-                </label>
+            <!-- add sku button -->
+            <div class="function_btn_box float_L">
+                <div id="SensorDesc_AddSku_Btn" class="add_module_btn float_L"><span>Add sku</span></div>
             </div>
             <div class="clear"></div>
 
-            <h4 class="sensor_sort_title float_L">Common</h4>
-            <div class="sonsor_btn_box float_L">
-                <div id="SensorDescAddBtn_row" class="sensor_btn float_L"><span>Add sensor</span></div>
+
+        <div class="sensor_sku_container">
+
+            <h4 class="float_L"><input class="sku_title" type="text" placeholder="(please type sku name)" value="Common"></h4>
+
+            <div class="function_btn_box float_L">
+                <div class="add_sensor_btn" onclick="AddSensorRow(this);"><span>Add sensor</span></div>
             </div>
-            <div class="sonsor_btn_box float_L">
-                <div id="SensorDescAddBtn_column" class="sensor_btn float_L"><span>Add type</span></div>
+            <div class="function_btn_box float_L">
+                <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
             </div>
+
+            <div class="function_btn_box float_R">
+                <div class="delete_module_btn" onclick="removeSku(this);"><span>delete sku</span></div>
+            </div>
+
             <div class="clear"></div>
 
             <div class="horizon_scroll_box">
@@ -116,7 +118,7 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td>
-                            <select name="pollingrate" id="" class="selects">
+                            <select name="pollingrate" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
                                 <option value="QSEC_POLLING">1/4 sec</option>
                                 <option value="HSEC_POLLING">1/2 sec</option>
@@ -140,7 +142,7 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td>
-                            <select name="pollingrate" id="" class="selects">
+                            <select name="pollingrate" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
                                 <option value="QSEC_POLLING">1/4 sec</option>
                                 <option value="HSEC_POLLING">1/2 sec</option>
@@ -164,7 +166,7 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td>
-                            <select name="pollingrate" id="" class="selects">
+                            <select name="pollingrate" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
                                 <option value="QSEC_POLLING">1/4 sec</option>
                                 <option value="HSEC_POLLING">1/2 sec</option>
@@ -188,7 +190,7 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td>
-                            <select name="pollingrate" id="" class="selects">
+                            <select name="pollingrate" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
                                 <option value="QSEC_POLLING">1/4 sec</option>
                                 <option value="HSEC_POLLING">1/2 sec</option>
@@ -212,7 +214,7 @@
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td>
-                            <select name="pollingrate" id="" class="selects">
+                            <select name="pollingrate" class="selects">
                                 <option value="EXEC_POLLING">1/8 sec</option>
                                 <option value="QSEC_POLLING">1/4 sec</option>
                                 <option value="HSEC_POLLING">1/2 sec</option>
@@ -228,71 +230,8 @@
                         <td><input type="text"></td>
                     </tr>
                 </table>
-            </div>
-
-            <!-- sensor discrete table -->
-
-            <!--
-            <div class="sensor_discrete_container ">
-                <h4 class="sensor_sort_title float_L">Discrete</h4>
-                <div class="sonsor_btn_box float_L">
-                    <div id="SensorDescAddBtn_column_dis" class="sensor_btn float_L" onclick="addSensorDisType();"><span>Add type</span></div>
-                </div>
-                <div class="clear"></div>
-
-                <div class="horizon_scroll_box">
-                    <table id="sensorDiscreteTab" class="sensor_tab">
-                        <tr class="sensor_dis_tr">
-                            <td><span class="transparet">btn</span></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
-                        </tr>
-                        <tr class="sensor_dis_tr">
-                            <th><input type="text" placeholder="name">          </th>
-                            <th><input type="text" placeholder="type">          </th>
-                            <th><input type="text" placeholder="address">       </th>
-                            <th><input type="text" placeholder="diagclass">     </th>
-                            <th><input type="text" placeholder="polling rate">  </th>
-                            <th><input type="text" placeholder="ReadFn">        </th>
-                            <th><input type="text" placeholder="MaxErrors">     </th>
-                            <th><input type="text" placeholder="SmoothingFn">   </th>
-                            <th><input type="text" placeholder="SmoothingData"> </th>
-                            <th><input type="text" placeholder="CriticalTemp">  </th>
-                            <th><input type="text" placeholder="crittime">      </th>
-                        </tr>
-                        <tr class="sensor_dis_tr">
-                            <td><input type="text" placeholder="GPU"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td>
-                                <select name="pollingrate" id="" class="selects">
-                                    <option value="EXEC_POLLING">1/8 sec</option>
-                                    <option value="QSEC_POLLING">1/4 sec</option>
-                                    <option value="HSEC_POLLING">1/2 sec</option>
-                                    <option value="ONESEC_POLLING">1 sec</option>
-                                    <option value="TWOSEC_POLLING">2 sec</option>
-                                </select>
-                            </td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            -->
+            </div>  <!-- END .horizon_scroll_box -->
+        </div>  <!-- END .sensor_sku_container -->
 
 
         </div>
@@ -615,7 +554,7 @@
             <h2 class="h2_tag float_L">SENSOR NODES <span>(Fan table)</span></h2>
 
             <!-- add modules button -->
-            <div class="sonsor_btn_box float_L">
+            <div class="function_btn_box float_L">
                 <div id="addModuleBtn" class="add_module_btn float_L"><span>Add module</span></div>
             </div>
             <!-- twofans switch button -->
@@ -985,85 +924,88 @@
 
     <!-- Plx Throttle -->
     <section>
-        <div class="container">
+        <div id="plxContainer" class="container">
             <h2 class="h2_tag float_L">Plx Throttle Table</h2>
 
-            <!-- discrete switch button -->
-            <div class="switch_container float_L">
-                <input class="hidden switch_checkbox" id="PlxThrottle_discrete_switch" type="checkbox">
-                <label for="PlxThrottle_discrete_switch" class="switch_label">
-                    <span class="switch_txt float_L">Discrete</span>
-                    <div class="switch_box float_L">
-                            <span class="switch_txt switch_bcc" turnOn="ON" turnOff="OFF"></span>
-                            <span class="switch_round_btn"></span>
-                    </div>
-                </label>
+            <!-- add sku button -->
+            <div class="function_btn_box float_L">
+                <div id="PlxThrottle_AddSku_Btn" class="add_module_btn float_L"><span>Add sku</span></div>
             </div>
             <div class="clear"></div>
 
-            <div class="horizon_scroll_box">
-                <h4 class="sensor_sort_title float_L">Common</h4>
-                <div class="sonsor_btn_box float_L">
-                    <div id="PlxThrottleAddBtn" class="sensor_btn float_L"><span>Add sensor</span></div>
+
+            <div class="sensor_sku_container">
+
+                <h4 class="float_L"><input class="sku_title" type="text" placeholder="(please type sku name)" value="Common"></h4>
+
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorRow(this);"><span>Add sensor</span></div>
                 </div>
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
+                </div>
+
+                <div class="function_btn_box float_R">
+                    <div class="delete_module_btn" onclick="removeSku(this);"><span>delete sku</span></div>
+                </div>
+
                 <div class="clear"></div>
 
-                <table class="plx_throttle_tab">
-                    <tr>
-                        <th><span class="hidden">btn</span></th>
-                        <th>Sensor Name</th>
-                        <th>Throttle Point</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
-                        </td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
-                        </td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
-                        </td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
-                        </td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
-                <div class="throttle_box bal_box">
 
-                </div>
-            </div>
-            <div class="plx_throttle_dis_container hidden">
-                <h4 class="sensor_sort_title float_L">Discrete</h4>
-                <div class="clear"></div>
                 <div class="horizon_scroll_box">
-
-                    <table class="plx_throttle_dis_tab">
-                        <tr>
-                            <th>Sensor Name</th>
-                            <th>Throttle Point</th>
+                    <table class="sensor_tab">
+                        <tr class="sensor_tr">
+                            <td><span class="transparet">btn</span></td>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
                         </tr>
-                        <tr>
-                            <td><input type="text" placeholder="GPU"></td>
+                        <tr class="sensor_tr">
+                            <th><span class="transparet">btn</span></th>
+                            <th> name            </th>
+                            <th><input type="text" placeholder="Throttle Point"></th>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text" placeholder="CPU_PECI"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text" placeholder="SKIN"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text" placeholder="MEM"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text" placeholder="NGFF"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text" placeholder="BATTERY"></td>
                             <td><input type="text"></td>
                         </tr>
                     </table>
+
                 </div>
+
             </div>
+
+
         </div>
     </section>
 
@@ -1074,80 +1016,65 @@
 
     <!-- Gfx Throttle -->
     <section>
-        <div class="container">
+        <div id="gfxContainer" class="container">
             <h2 class="h2_tag float_L">Gfx Throttle Table</h2>
 
-            <!-- discrete switch button -->
-            <div class="switch_container float_L">
-                <input class="hidden switch_checkbox" id="GfxThrottle_discrete_switch" type="checkbox">
-                <label for="GfxThrottle_discrete_switch" class="switch_label">
-                    <span class="switch_txt float_L">Discrete</span>
-                    <div class="switch_box float_L">
-                            <span class="switch_txt switch_bcc" turnOn="ON" turnOff="OFF"></span>
-                            <span class="switch_round_btn"></span>
-                    </div>
-                </label>
+            <!-- add sku button -->
+            <div class="function_btn_box float_L">
+                <div id="GfxThrottle_AddSku_Btn" class="add_module_btn float_L"><span>Add sku</span></div>
             </div>
             <div class="clear"></div>
 
-            <div class="Gfx_common_box">
-                <h4 class="sensor_sort_title float_L">Common</h4>
-                <div class="sonsor_btn_box float_L">
-                    <div id="GfxThrottleAddBtn" class="sensor_btn float_L"><span>Add sensor</span></div>
+
+            <div class="sensor_sku_container">
+
+                <h4 class="float_L"><input class="sku_title" type="text" placeholder="(please type sku name)" value="Common"></h4>
+
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorRow(this);"><span>Add sensor</span></div>
                 </div>
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
+                </div>
+
+                <div class="function_btn_box float_R">
+                    <div class="delete_module_btn" onclick="removeSku(this);"><span>delete sku</span></div>
+                </div>
+
                 <div class="clear"></div>
 
+
                 <div class="horizon_scroll_box">
-                    <table class="gfx_throttle_tab">
-                        <tr>
-                            <th><span class="hidden">btn</span></th>
-                            <th>Sensor Name</th>
-                            <th>z0min</th>
-                            <th>z0max</th>
-                            <th>z0dec</th>
-                            <th>z0inc</th>
-                            <th>z1min</th>
-                            <th>z1max</th>
-                            <th>z1dec</th>
-                            <th>z1inc</th>
+                    <table class="sensor_tab">
+                        <tr class="sensor_tr">
+                            <td><span class="transparet">btn</span></td>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
                         </tr>
-                        <tr>
+                        <tr class="sensor_tr">
+                            <th><span class="transparet">btn</span></th>
+                            <th>Sensor Name</th>
+                            <th><input type="text" placeholder="z0min"></th>
+                            <th><input type="text" placeholder="z0max"></th>
+                            <th><input type="text" placeholder="z0dec"></th>
+                            <th><input type="text" placeholder="z0inc"></th>
+                            <th><input type="text" placeholder="z1min"></th>
+                            <th><input type="text" placeholder="z1max"></th>
+                            <th><input type="text" placeholder="z1dec"></th>
+                            <th><input type="text" placeholder="z1inc"></th>
+                        </tr>
+                        <tr class="sensor_tr">
                             <td>
                                 <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
                             </td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="Gfx_discrete_container hidden">
-                <h4 class="sensor_sort_title float_L">Discrete</h4>
-                <div class="clear"></div>
-
-                <div class="horizon_scroll_box">
-                    <table class="gfx_discrete_throttle_tab">
-                        <tr>
-                            <th>Sensor Name</th>
-                            <th>z0min</th>
-                            <th>z0max</th>
-                            <th>z0dec</th>
-                            <th>z0inc</th>
-                            <th>z1min</th>
-                            <th>z1max</th>
-                            <th>z1dec</th>
-                            <th>z1inc</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
+                            <td><input type="text" placeholder="SSD"></td>
                             <td><input type="text"></td>
                             <td><input type="text"></td>
                             <td><input type="text"></td>
@@ -1157,8 +1084,8 @@
                             <td><input type="text"></td>
                         </tr>
                     </table>
-                </div>
-            </div>
+                </div>  <!-- end of horizon_scroll_box -->
+            </div>  <!-- end of module_container -->
 
         </div>
     </section>
@@ -1221,6 +1148,8 @@
     <script src="js/btnControl.js"></script>
     <script src="js/btnControl_SensorNode.js"></script>
     <script src="js/btnControl_FanTable.js"></script>
+    <script src="js/btnControl_PlxThrottle.js"></script>
+    <script src="js/btnControl_GfxThrottle.js"></script>
     <!-- Side Bar Buttons -->
     <script src="js/SideBarBtn.js"></script>
     <!-- main -->
