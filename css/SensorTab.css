@@ -78,6 +78,13 @@
 }
 
 
+.sensorDelete > STRIKE{
+    width: 100%;
+    cursor: context-menu;
+    font-size: 16px;
+    color: #aaa;
+    font-weight: 300;
+}
 .sensorDelete{
     width: 100%;
     cursor: pointer;

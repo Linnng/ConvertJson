@@ -1,4 +1,6 @@
 
+var TwoFanCheck = 0;
+
 $(function(){
 
     // Switch button status
@@ -18,30 +20,19 @@ $(function(){
     // two fans switch
     $('#twofans_switch').click(function(){
         if($(this).prop("checked")){
+            TwoFanCheck = 1;
             $('.fan_desc_tab').find('tr:eq(3)').removeClass('hidden');
+
+            // MsThermals
+            showFan2_MsThermals();
         }
         else{
+            TwoFanCheck = 0;
             $('.fan_desc_tab').find('tr:eq(3)').addClass('hidden');
+
+            // MsThermals
+            removeFan2_MsThermals();
         }
     });
 
-    // Plx throttle discrete switch
-    $('#PlxThrottle_discrete_switch').click(function(){
-        if($(this).prop("checked")){
-            $('.plx_throttle_dis_container').removeClass('hidden');
-        }
-        else{
-            $('.plx_throttle_dis_container').addClass('hidden');
-        }
-    });
-
-    // Gfx throttle discrete switch
-    $('#GfxThrottle_discrete_switch').click(function(){
-        if($(this).prop('checked')){
-            $('.Gfx_discrete_container').removeClass('hidden');
-        }
-        else{
-            $('.Gfx_discrete_container').addClass('hidden');
-        }
-    });
 });

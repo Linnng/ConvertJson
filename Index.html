@@ -351,6 +351,8 @@
             </div>
 
             <!-- fan list (more into) -->
+
+            <!--
             <div class="horizon_scroll_box margin_top_8">
                 <table class="fan_desc_tab_rpm">
                     <tr class="fan_desc_tr">
@@ -407,7 +409,7 @@
                     </tr>
                 </table>
             </div>
-
+        -->
 
             <!-- previous -->
             <div class="horizon_scroll_box hidden">
@@ -556,17 +558,6 @@
             <!-- add modules button -->
             <div class="function_btn_box float_L">
                 <div id="addModuleBtn" class="add_module_btn float_L"><span>Add module</span></div>
-            </div>
-            <!-- twofans switch button -->
-            <div class="switch_container float_L">
-                <input class="hidden switch_checkbox" id="twofans_tab_switch" type="checkbox">
-                <label for="twofans_tab_switch" class="switch_label">
-                    <span class="switch_txt float_L">Two fans</span>
-                    <div class="switch_box float_L">
-                            <span class="switch_bcc" turnOn="ON" turnOff="OFF"></span>
-                            <span class="switch_round_btn"></span>
-                    </div>
-                </label>
             </div>
             <div class="clear"></div>
 
@@ -1097,9 +1088,60 @@
 
     <!-- Charger throttle -->
     <section>
-        <div class="container">
-            <h2 class="h2_tag">Charger throttle</h2>
-            <div class="horizon_scroll_box"></div>
+        <div id="chgContainer" class="container">
+            <h2 class="h2_tag float_L">Charger throttle</h2>
+
+            <div class="switch_container float_L">
+                <input class="hidden switch_checkbox" id="chgThrottle_switch" type="checkbox">
+                <label for="chgThrottle_switch" class="switch_label">
+                    <span class="switch_txt float_L">Enable Charger throttle</span>
+                    <div class="switch_box float_L">
+                            <span class="switch_bcc" turnOn="ON" turnOff="OFF"></span>
+                            <span class="switch_round_btn"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="clear"></div>
+
+<!--
+            <div class="sensor_sku_container">
+                <h4 class="float_L"><input class="sku_title" type="text" placeholder="(Sensor Name)"></h4>
+
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorRow(this);"><span>Add sensor</span></div>
+                </div>
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="horizon_scroll_box">
+                    <table class="sensor_tab">
+                        <tr class="sensor_tr">
+                            <td><span class="transparet">btn</span></td>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <th><span class="transparet">btn</span></th>
+                            <th>Name</th>
+                            <th><input type="text" placeholder="overtemp"       value="overtemp"></th>
+                            <th><input type="text" placeholder="hysteresistemp" value="hysteresistemp"></th>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div>
+                            </td>
+                            <td><input type="text" placeholder="zone1"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+-->
         </div>
     </section>
 
@@ -1110,9 +1152,71 @@
 
     <!-- Msthermals -->
     <section>
-        <div class="container">
-            <h2 class="h2_tag">Msthermals</h2>
-            <div class="horizon_scroll_box"></div>
+        <div id="MsContainer" class="container">
+            <h2 class="h2_tag float_L">Msthermals</h2>
+
+            <!-- add sku button -->
+            <div class="function_btn_box float_L">
+                <div id="MsThermal_AddSku_Btn" class="add_module_btn float_L"><span>Add config</span></div>
+            </div>
+            <div class="clear"></div>
+
+
+            <div class="sensor_sku_container">
+                <h4><input class="sku_title" type="text" placeholder="(Config)" value="Common"></h4>
+                <h4 class="float_L"><input class="sku_title" type="text" placeholder="(Sensor Name)"></h4>
+
+                <div class="function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
+                </div>
+                <div class="function_btn_box float_R">
+                    <div class="delete_module_btn" onclick="removeSku(this);"><span>delete Config</span></div>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="horizon_scroll_box">
+                    <table class="sensor_tab">
+                        <tr class="sensor_tr">
+                            <td><span class="transparet">btn</span></td>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <th><span class="transparet">btn</span></th>
+                            <th>Fan</th>
+                            <th><input type="text" placeholder="ontemp"       value="ontemp"></th>
+                            <th><input type="text" placeholder="crittemp"     value="crittemp"></th>
+                            <th><input type="text" placeholder="onhys"        value="onhys"></th>
+                            <th><input type="text" placeholder="crithys"      value="crithys"></th>
+                            <th><input type="text" placeholder="onrpm"        value="onrpm"></th>
+                            <th><input type="text" placeholder="rampdownrate" value="rampdownrate"></th>
+                            <th><input type="text" placeholder="crittime"     value="crittime"></th>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete"><STRIKE><span>Delete</span></STRIKE></div>
+                            </td>
+                            <td><input type="text" placeholder="FAN1" value="FAN1"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
     </section>
 
@@ -1150,6 +1254,8 @@
     <script src="js/btnControl_FanTable.js"></script>
     <script src="js/btnControl_PlxThrottle.js"></script>
     <script src="js/btnControl_GfxThrottle.js"></script>
+    <script src="js/btnControl_ChgThrottle.js"></script>
+    <script src="js/btnControl_MsThermal.js"></script>
     <!-- Side Bar Buttons -->
     <script src="js/SideBarBtn.js"></script>
     <!-- main -->
