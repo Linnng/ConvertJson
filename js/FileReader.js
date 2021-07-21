@@ -190,6 +190,10 @@ $(function(){
                 alert("the JSON file you selected, it's not fit with our page");
                 location.reload();
             }
+			
+			// test
+            testFunc(jsonObj);
+			
         }
     });
 });
