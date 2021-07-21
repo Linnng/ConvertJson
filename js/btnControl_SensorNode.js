@@ -41,7 +41,7 @@ $(function(){
 
         // new sensor description
         var scrollBoxDiv = $("<div/>", {"class": "horizon_scroll_box"});
-        var sensorTab    = $("<table/>", {"id": "sensorCommonTab", "class": "sensor_tab"});
+        var sensorTab    = $("<table/>", {"class": "sensor_tab"});
 
         var sensorTitPlaceholder =
             [
@@ -126,7 +126,7 @@ $(function(){
         $('#sensorContainer').append(sensorSkuContainer);
 
         // reset table width
-        var sensorTabCnt = $(e.target).parents('.container').find('.sensor_sku_container:last').index('.sensor_sku_container');
+        var sensorTabCnt = $(e.target).parents('.container').find('.sensor_sku_container:last .horizon_scroll_box:last').index('.horizon_scroll_box');
         SetSensorComTabWid(sensorTabCnt);
 
     });
@@ -220,12 +220,12 @@ function  AddSensorColumn(e){
         }
         else if(index == 1)
         {
-            var sensorInput = $('<input/>', {"type": "test"});
+            var sensorInput = $('<input/>', {"type": "text"});
             var sensorTd = $('<th/>').append(sensorInput);  // <th>
         }
         else
         {
-            var sensorInput = $('<input/>', {"type": "test"});
+            var sensorInput = $('<input/>', {"type": "text"});
             var sensorTd = $('<td/>').append(sensorInput);
         }
         sensorTr.append(sensorTd);

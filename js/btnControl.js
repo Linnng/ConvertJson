@@ -3,7 +3,7 @@ var TwoFanCheck = 0;
 
 $(function(){
 
-    // Switch button status
+    // Switch button status - CSS3
     $('.switch_checkbox').click(function(){
         if($(this).prop("checked"))
         {
@@ -19,19 +19,17 @@ $(function(){
 
     // two fans switch
     $('#twofans_switch').click(function(){
-        if($(this).prop("checked")){
+        if($(this).prop("checked"))
+        {
             TwoFanCheck = 1;
-            $('.fan_desc_tab').find('tr:eq(3)').removeClass('hidden');
-
-            // MsThermals
-            showFan2_MsThermals();
+            showFan2_FanList();
+            showFan2_MsThermals();  // MsThermals
         }
-        else{
+        else
+        {
             TwoFanCheck = 0;
-            $('.fan_desc_tab').find('tr:eq(3)').addClass('hidden');
-
-            // MsThermals
-            removeFan2_MsThermals();
+            removeFan2_FanList();
+            removeFan2_MsThermals();  // MsThermals
         }
     });
 

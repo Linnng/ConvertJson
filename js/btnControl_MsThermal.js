@@ -128,7 +128,7 @@ $(function(){
         $('#MsContainer').append(sensorSkuContainer);
 
         // reset table width
-        var sensorTabCnt = $(e).parents('.container').find('.sensor_sku_container:last').index();
+        var sensorTabCnt = $(e.target).parents('.container').find('.sensor_sku_container:last .horizon_scroll_box:last').index('.horizon_scroll_box');
         SetSensorComTabWid(sensorTabCnt);
 
 

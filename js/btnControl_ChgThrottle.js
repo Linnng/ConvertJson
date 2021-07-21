@@ -18,7 +18,6 @@ $(function(){
 
 function showChgThrottleTable(e){
 
-    // console.log('Chg checked');
     var sensorSkuContainer = $("<div/>", {"class": "sensor_sku_container"});
 
     // <input> title
@@ -125,6 +124,6 @@ function showChgThrottleTable(e){
         $('#chgContainer').append(sensorSkuContainer);
 
         // reset table width
-        var sensorTabCnt = $(e).parents('.container').find('.sensor_sku_container:last').index();
+        var sensorTabCnt = $(e).parents('.container').find('.sensor_sku_container .horizon_scroll_box').index('.horizon_scroll_box');
         SetSensorComTabWid(sensorTabCnt);
 }
