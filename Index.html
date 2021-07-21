@@ -21,7 +21,7 @@
     <div id="mainDiv">
 
     <!-- cover -->
-    <div class="index_cover_container ">
+    <div class="index_cover_container hidden">
         <div class="index_cover_btn_box">
             <div class="index_cover_title">
                 <h1 class="h1_tag">Thermal table Converter</h1>
@@ -244,8 +244,12 @@
 
     <!-- Fan description -->
     <section>
-        <div class="container">
+        <div id="FanContainer" class="container">
             <h2 class="h2_tag float_L">FAN DESCRIPTION</h2>
+
+            <div class="function_btn_box float_L">
+                <div id="Fan_AddSku_Btn" class="add_module_btn float_L"><span>Add sku</span></div>
+            </div>
 
             <div class="switch_container float_L">
                 <input class="hidden switch_checkbox" id="twofans_switch" type="checkbox">
@@ -259,288 +263,161 @@
             </div>
             <div class="clear"></div>
 
-            <!-- fan init -->
-            <div class="horizon_scroll_box margin_top_8">
-                <table class="fan_init_tab">
-                    <tr class="fan_init_tr">
-                        <th>name</th>
-                        <th>address</th>
-                        <th>initfn</th>
-                        <th>minfanfn</th>
-                        <th>rpmreadfn</th>
-                        <th>setcpfn</th>
-                        <th>optionalfan</th>
-                    </tr>
-                    <tr class="fan_init_tr">
-                        <td><input type="text" placeholder="GFAN1CTRL"></td>
-                        <td><input type="text" placeholder="GFAN1ADDR"></td>
-                        <td><input type="text" placeholder="MecGuardianInit"></td>
-                        <td><input type="text" placeholder="MecGuardianGetMinRpm"></td>
-                        <td><input type="text" placeholder="MecGuardianRpmRead"></td>
-                        <td><input type="text" placeholder="MecGuardianSetFanPwm"></td>
-                        <td><input type="text" placeholder="NULL"></td>
-                    </tr>
-                </table>
-            </div>
+            <div class="sensor_sku_container">
+                <h4 class="float_L"><input class="sku_title" type="text" placeholder="(Sensor Name)" value="Common"></h4>
 
-            <!-- fan list -->
-            <div class="horizon_scroll_box margin_top_8">
-                <table class="fan_desc_tab">
-                    <tr class="fan_desc_tr">
-                        <th class="" colspan="8"></th>
-                        <th class="bcc_deep_blue"   colspan="2">125ms</th>
-                        <th class="bcc_oliva_green" colspan="2">250ms</th>
-                        <th class="bcc_deep_blue"   colspan="2">500ms</th>
-                        <th class="bcc_oliva_green" colspan="2">1s</th>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th class="bcc_blue">Fan Description</th>
-                        <th class="bcc_blue">Address</th>
-                        <th class="bcc_blue">KSStart</th>
-                        <th class="bcc_blue">KSWait</th>
-                        <th class="bcc_blue">KSPass</th>
-                        <th class="bcc_blue">KSFail</th>
-                        <th class="bcc_blue">KSBump</th>
-                        <th class="bcc_blue">Mincont0time</th>
-                        <th class=" bcc_deep_blue"  >Esec Up</th>
-                        <th class=" bcc_deep_blue"  >Esec Down</th>
-                        <th class=" bcc_oliva_green">Qsec Up</th>
-                        <th class=" bcc_oliva_green">Qsec Down</th>
-                        <th class=" bcc_deep_blue"  >Hsec Up</th>
-                        <th class=" bcc_deep_blue"  >Hsec Down</th>
-                        <th class=" bcc_oliva_green">Sec up</th>
-                        <th class=" bcc_oliva_green">Sec Down</th>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <td><input type="text" placeholder="Fan1"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr hidden">
-                        <td><input type="text" placeholder="Fan2"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
-            </div>
+                <div class="function_btn_box float_R">
+                    <div class="delete_module_btn" onclick="removeSku(this);"><span>delete sku</span></div>
+                </div>
+                <div class="clear"></div>
 
-            <!-- fan list (more into) -->
+                <span class="table_describe float_L">Fan initial</span>
+                <div class="test function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
+                </div>
+                <div class="horizon_scroll_box">
+                    <table class="sensor_tab">
+                        <tr class="sensor_tr">
+                            <td><span class="transparet">btn</span></td>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <th><span class="transparet">btn</span></th>
+                            <th>name</th>
+                            <th><input type="text" placeholder="address"       value="address"></th>
+                            <th><input type="text" placeholder="initfn"        value="initfn"></th>
+                            <th><input type="text" placeholder="minfanfn"      value="minfanfn"></th>
+                            <th><input type="text" placeholder="rpmreadfn"     value="rpmreadfn"></th>
+                            <th><input type="text" placeholder="setcpfn"       value="setcpfn"></th>
+                            <th><input type="text" placeholder="optionalfan"   value="optionalfan"></th>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete"><STRIKE><span>Delete</span></STRIKE></div>
+                            </td>
+                            <td><input type="text" placeholder="GFAN1CTRL"></td>
+                            <td><input type="text" placeholder="GFAN1ADDR"></td>
+                            <td><input type="text" placeholder="MecGuardianInit"></td>
+                            <td><input type="text" placeholder="MecGuardianGetMinRpm"></td>
+                            <td><input type="text" placeholder="MecGuardianRpmRead"></td>
+                            <td><input type="text" placeholder="MecGuardianSetFanPwm"></td>
+                            <td><input type="text" placeholder="NULL"></td>
+                        </tr>
+                    </table>
+                </div>
 
-            <!--
-            <div class="horizon_scroll_box margin_top_8">
-                <table class="fan_desc_tab_rpm">
-                    <tr class="fan_desc_tr">
-                        <th>minrpm</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>maxrpm</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagfanlowspec</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagfanhighspec</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagfanmaxspec</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>mfgmoderpm</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>fanfailuretime</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>fanfailurecode</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagfanerrorpercent</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagsfanvalidsamples</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagsfansampleinterval</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>diagclass</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_desc_tr">
-                        <th>powerfn</th>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
-            </div>
-        -->
-
-            <!-- previous -->
-            <div class="horizon_scroll_box hidden">
-
-                <table class="fan_des_tab hidden">
-                    <tr class="fan_des_tr">
-                        <th class="w_7pes">name</th>
-                        <th class="w_7pes">address</th>
-                        <th class="w_7pes">initfn</th>
-                        <th class="w_7pes">minfanfn</th>
-                        <th class="w_7pes">rpmreadfn</th>
-                        <th class="w_7pes">setcpfn</th>
-                        <th class="w_7pes">optionalfan</th>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <td class="w_7pes">GFAN1CTRL</td>
-                        <td class="w_7pes">GFAN1ADDR</td>
-                        <td class="w_7pes">MecGuardianInit</td>
-                        <td class="w_7pes">MecGuardianGetMinRpm</td>
-                        <td class="w_7pes">MecGuardianRpmRead</td>
-                        <td class="w_7pes">MecGuardianSetFanPwm</td>
-                        <td class="w_7pes">NULL</td>
-                    </tr>
-                </table>
-
-                <table class="fan_des_tab margin_top_8">
-                    <tr class="fan_des_tr">
-                        <th class="w_8pes">Fan Description</th>
-                        <th class="w_8pes">Address</th>
-                        <th class="w_8pes">KSStart</th>
-                        <th class="w_8pes">KSWait</th>
-                        <th class="w_8pes">KSPass</th>
-                        <th class="w_8pes">KSFail</th>
-                        <th class="w_8pes">KSBump</th>
-                        <th class="w_8pes">Mincont0time</th>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                        <td class="w_8pes"><input type="text"></td>
-                    </tr>
-                </table>
-
-                <table class="fan_des_tab margin_top_8">
-                    <tr class="fan_des_tr">
-                        <th class="w_4pes bcc_deep_blue" colspan="2">125ms</th>
-                        <th class="w_4pes bcc_oliva_green" colspan="2">250ms</th>
-                        <th class="w_4pes bcc_deep_blue" colspan="2">500ms</th>
-                        <th class="w_4pes bcc_oliva_green" colspan="2">1s</th>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th class="w_8pes bcc_deep_blue">Esec Up</th>
-                        <th class="w_8pes bcc_deep_blue">Esec Down</th>
-                        <th class="w_8pes bcc_oliva_green">Qsec Up</th>
-                        <th class="w_8pes bcc_oliva_green">Qsec Down</th>
-                        <th class="w_8pes bcc_deep_blue">Hsec Up</th>
-                        <th class="w_8pes bcc_deep_blue">Hsec Down</th>
-                        <th class="w_8pes bcc_oliva_green">Sec up</th>
-                        <th class="w_8pes bcc_oliva_green">Sec Down</th>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
-
-                <table class="fan_des_tab margin_top_8">
-                    <tr class="fan_des_tr">
-                        <th>minrpm</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>maxrpm</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>diagfanlowspec</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>diagfanhighspec</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>diagfanmaxspec</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>mfgmoderpm</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>fanfailuretime</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>fanfailurecode</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>diagfanerrorpercent</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>diagsfanvalidsamples</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr class="fan_des_tr">
-                        <th>diagsfansampleinterval</th>
-                        <td><input type="text"></td>
-                    </tr>
-					<tr class="fan_des_tr hidden">
-                        <th>diagclass</th>
-                        <td><input type="text"></td>
-                    </tr>
-					<tr class="fan_des_tr hidden">
-                        <th>powerfn</th>
-                        <td><input type="text"></td>
-                    </tr>
-                </table>
+                <span class="table_describe float_L">Fan lists</span>
+                <div class="test function_btn_box float_L">
+                    <div class="add_sensor_btn" onclick="AddSensorColumn(this);"><span>Add type</span></div>
+                </div>
+                <div class="horizon_scroll_box">
+                    <table class="sensor_tab">
+                        <tr class="sensor_tr">
+                            <td><span class="transparet">btn</span></td>
+                            <td><span class="transparet">btn</span></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div></td>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <th><span class="transparet">btn</span></th>
+                            <th>name</th>
+                            <th><input type="text" placeholder="address"       value="address"></th>
+                            <th><input type="text" placeholder="minrpm"     value="minrpm"></th>
+                            <th><input type="text" placeholder="maxrpm"       value="maxrpm"></th>
+                            <th><input type="text" placeholder="diagclass"     value="diagclass"></th>
+                            <th><input type="text" placeholder="diagfanlowspec"       value="diagfanlowspec"></th>
+                            <th><input type="text" placeholder="diagfanhighspec"     value="diagfanhighspec"></th>
+                            <th><input type="text" placeholder="diagfanmaxspec"       value="diagfanmaxspec"></th>
+                            <th><input type="text" placeholder="fanfailuretime"     value="fanfailuretime"></th>
+                            <th><input type="text" placeholder="fanfailurecode"       value="fanfailurecode"></th>
+                            <th><input type="text" placeholder="mfgmoderpm"     value="mfgmoderpm"></th>
+                            <th><input type="text" placeholder="mincont0time"       value="mincont0time"></th>
+                            <th><input type="text" placeholder="ksstart"     value="ksstart"></th>
+                            <th><input type="text" placeholder="kswait"     value="kswait"></th>
+                            <th><input type="text" placeholder="kspass"     value="kspass"></th>
+                            <th><input type="text" placeholder="ksfail"     value="ksfail"></th>
+                            <th><input type="text" placeholder="ksbump"     value="ksbump"></th>
+                            <th><input type="text" placeholder="esecup"     value="esecup"></th>
+                            <th><input type="text" placeholder="esecdown"     value="esecdown"></th>
+                            <th><input type="text" placeholder="qsecup"     value="qsecup"></th>
+                            <th><input type="text" placeholder="qsecdown"     value="qsecdown"></th>
+                            <th><input type="text" placeholder="hsecup"     value="hsecup"></th>
+                            <th><input type="text" placeholder="hsecdown"     value="hsecdown"></th>
+                            <th><input type="text" placeholder="secup"     value="secup"></th>
+                            <th><input type="text" placeholder="secdown"     value="secdown"></th>
+                            <th><input type="text" placeholder="powerfn"     value="powerfn"></th>
+                            <th><input type="text" placeholder="diagfanerrorpercent"     value="diagfanerrorpercent"></th>
+                            <th><input type="text" placeholder="diagsfanvalidsamples"     value="diagsfanvalidsamples"></th>
+                            <th><input type="text" placeholder="diagsfansampleinterval"     value="diagsfansampleinterval"></th>
+                        </tr>
+                        <tr class="sensor_tr">
+                            <td>
+                                <div class="sensorDelete"><STRIKE><span>Delete</span></STRIKE></div>
+                            </td>
+                            <td><input type="text" placeholder="FAN1" value="FAN1"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -561,8 +438,9 @@
             </div>
             <div class="clear"></div>
 
+            <p>working on it...</p>
             <!-- sku one -->
-            <div class="module_container">
+            <div class="module_container hidden">
 
                 <!-- module sku name input -->
                 <table class="sku_name_tab">
@@ -1251,6 +1129,7 @@
     <!-- button control -->
     <script src="js/btnControl.js"></script>
     <script src="js/btnControl_SensorNode.js"></script>
+    <script src="js/btnControl_FanList.js"></script>
     <script src="js/btnControl_FanTable.js"></script>
     <script src="js/btnControl_PlxThrottle.js"></script>
     <script src="js/btnControl_GfxThrottle.js"></script>

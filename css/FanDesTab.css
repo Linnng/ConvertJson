@@ -25,3 +25,14 @@
 .fan_desc_tab_rpm .fan_desc_tr th{
     width: 200px;
 }
+
+.table_describe{
+    width: 80px;
+    font-size: 18px;
+    padding: 7px 0;
+    color: #333;
+}
+
+.test{
+    /* outline: red 1px solid; */
+}

@@ -206,7 +206,8 @@ function AddSensorRow(e){
 // "add type" button: add table column
 function  AddSensorColumn(e){
 
-    var ThisSensorTab = $(e).parents('.sensor_sku_container').find('.sensor_tab');            // Get this table.sensor_tab
+    // Get this table.sensor_tab
+    var ThisSensorTab = $(e).parents('.function_btn_box').nextAll('.horizon_scroll_box').first().find('.sensor_tab');
 
     ThisSensorTab.find('tr').each(function(index){
 
@@ -231,7 +232,7 @@ function  AddSensorColumn(e){
     });
 
     // reset table width
-    var sensorTabCnt = $(e).parents('.sensor_sku_container').index('.sensor_sku_container');
+    var sensorTabCnt = $('.sensor_tab').index(ThisSensorTab);
     SetSensorComTabWid(sensorTabCnt);
 }
 
@@ -246,10 +247,10 @@ function removeRow(e){
 
 // sensor delete button - column
 function removeColumn(e){
-    // $(e).parents('.sensor_sku_container').css( "outline", "3px solid red" ); // okay
 
+    // Get this table.sensor_tab
+    var ThisSensorTab = $(e).parents('.horizon_scroll_box').first().find('.sensor_tab');
     var deleteIndex  = $(e).parents().index();
-    var sensorTabCnt = $(e).parents('.sensor_sku_container').index('.sensor_sku_container');
 
     $(e).parents('table').find('tr').each(function(){
 
@@ -260,5 +261,6 @@ function removeColumn(e){
     });
 
     // reset table width
+    var sensorTabCnt = $('.sensor_tab').index(ThisSensorTab);
     SetSensorComTabWid(sensorTabCnt);
 }
