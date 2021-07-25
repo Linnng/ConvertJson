@@ -1,62 +1,73 @@
 
 function testFunc(jsonFile){
 	
-	autoProcMix($('#sensorContainer'), jsonFile.sensorlists[0]);
+	autoProdMix($('#sensorContainer'), jsonFile.sensorlists[0]);
+	autoProdMix($('#plxContainer'), jsonFile.plxthrottletables[0]);
+	autoProdMix($('#gfxContainer'), jsonFile.gfxthrottletables[0]);
 	
 } 
 
-function autoProcMix(containerName, jsonObj){
+
+// =====================for sensorlists、plxthrottletables、gfxthrottletables========================
+function autoProdMix(containerName, jsonObj){
 	$(containerName).find('.sensor_sku_container').remove();
-	Object.keys(jsonObj).forEach(function(key, keyIndex) {
-		addSku($(containerName).find('.add_module_btn').first(), key);
-		autoProc($(containerName).find('.sensor_tab:eq(' + keyIndex + ')'), jsonObj[key], 'sensor_tr')
-	});
+	if(jsonObj != undefined){
+		Object.keys(jsonObj).forEach(function(key, keyIndex) {
+		addSkuProd($(containerName), key);
+		autoProd($(containerName).find('.sensor_tab:eq(' + keyIndex + ')'), jsonObj[key], 'sensor_tr')
+		});
+	}
 }
 
-function autoProc(jqSelectorDesc, jsonObjArr, trClassName){
+function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
 	
 	// reset
 	$(jqSelectorDesc).html('');
-
+	
+	//collect keyArr
+	let keyArr = [];
 	jsonObjArr.forEach(function(val,index){
-		// thead
-		if(index == 0){
-			let delTr = $("<tr/>", {"class": trClassName});
-			let tr = $("<tr/>", {"class": trClassName});
-			$(jqSelectorDesc).append(delTr);
-			$(jqSelectorDesc).append(tr);
-		    Object.keys(val).forEach(function(key, keyIndex) {
-		        // first col
-		        if(keyIndex == 0){
-					tr.append(`<th><span class="transparet">btn</span></th>`); 
-					delTr.append(`<td><span class="transparet">btn</span></td>`); 
-				}
-				//delCol
-				if(key.indexOf('name') > -1){
-					delTr.append(`<td><span class="transparet">btn</span></td>`); 
-				}else{
-					let delTd = $("<td/>");
-					delTd.append(`<div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div>`);
-					delTr.append(delTd); 
-				}
-                // th thead
-                let th = $("<th/>");
-		        th.append(key);
-		        tr.append(th);
-		    });
-		}
+		 Object.keys(val).forEach(function(key, keyIndex) {
+			if(!keyArr.includes(key))
+				keyArr.push(key);
+		 });
+	});
 
-		// tbody
+	// ------------------thead------------------
+	let delTr = $("<tr/>", {"class": trClassName});
+	let tr = $("<tr/>", {"class": trClassName});
+	$(jqSelectorDesc).append(delTr);
+	$(jqSelectorDesc).append(tr);
+	// first col
+	tr.append(`<th><span class="transparet">btn</span></th>`); 
+	delTr.append(`<td><span class="transparet">btn</span></td>`); 
+	keyArr.forEach(function(key, index) {
+		//delCol
+		if(key.indexOf('name') > -1){
+			delTr.append(`<td><span class="transparet">btn</span></td>`); 
+		}else{
+			let delTd = $("<td/>");
+			delTd.append(`<div class="sensorDelete" onclick="removeColumn(this);"><span>Delete</span></div>`);
+			delTr.append(delTd); 
+		}
+        // th thead
+        let th = $("<th/>");
+		th.append(key);
+		tr.append(th);
+	});	
+	// ------------------thead------------------
+
+	// ------------------tbody------------------
+	jsonObjArr.forEach(function(val,index){
 		let tr = $("<tr/>", {"class": trClassName});
 		$(jqSelectorDesc).append(tr);
-		Object.keys(val).forEach(function(key, keyIndex) {
-		    // first col
-		    if(keyIndex == 0)
-                tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`); 
-		    // td setVal
+		// first col
+		tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`); 
+		keyArr.forEach(function(key, index) {
+			// td setVal
 		    let td = $("<td/>");
 		    tr.append(td);
-		    if(key !== 'pollingrate'){
+			if(key !== 'pollingrate'){
 		    	let input = $("<input/>");
 		        td.append(input);
 		        input.val(val[key]);
@@ -71,21 +82,19 @@ function autoProc(jqSelectorDesc, jsonObjArr, trClassName){
                 }
                 td.append(sel);
 		    }
-		});
-
+		});	
     });
+	// ------------------tbody------------------
+	
 	SetSensorComTabWid(-1);
-
 }
 
-function addSku(e, titleName){
+function addSkuProd(e, titleName){
 
         var sensorSkuContainer = $("<div/>", {"class": "sensor_sku_container"});
 
         // <input> title
         var sensorInputTitle = $("<input/>", {"class": "sku_title", "type": "text", "placeholder": "(please type sku name)"});
-
-        var CurrentSkuCnt = $(e).parents('.container').find('.sensor_sku_container').length;
 
 		// set Title Andy
 		sensorInputTitle.val(titleName);
@@ -177,7 +186,7 @@ function addSku(e, titleName){
         scrollBoxDiv.append(sensorTab);
         sensorSkuContainer.append(scrollBoxDiv);
 
-        $('#sensorContainer').append(sensorSkuContainer);
+        $(e).append(sensorSkuContainer);
     }
 	
 var sensorTitPlaceholder =
