@@ -46,6 +46,22 @@ $(function(){
     });
 });
 
-function removeModule(e){
-    $(e).parents('.module_container').remove();
+// function removeModule(e){
+//     $(e).parents('.module_container').remove();
+// }
+
+function showFan2_FanLTable(){
+    console.log('show');
+
+    $('#fanTableContainer').find('.node_type_box:eq(0)').css("outline", "red 1px solid");
+    $('#fanTableContainer').find('.node_type_box:eq(0)').after(("<div/>", {"class": "ling"}));
+    // $('#fanTableContainer').find('.node_type_box_2').each(function(){
+    //     $(this).remove();
+    // });
+}
+
+function removeFan2_FanLTable(){
+    $('#fanTableContainer').find('.node_type_box_2').each(function(){
+        $(this).remove();
+    });
 }

@@ -23,12 +23,14 @@ $(function(){
         {
             TwoFanCheck = 1;
             showFan2_FanList();
+            showFan2_FanLTable();
             showFan2_MsThermals();  // MsThermals
         }
         else
         {
             TwoFanCheck = 0;
             removeFan2_FanList();
+            removeFan2_FanLTable();   // Fan Table
             removeFan2_MsThermals();  // MsThermals
         }
     });
