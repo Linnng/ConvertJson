@@ -1,9 +1,9 @@
 
 function testFunc(jsonFile){
 	
-	autoProdMix($('#sensorContainer'), jsonFile.sensorlists[0]);
-	autoProdMix($('#plxContainer'), jsonFile.plxthrottletables[0]);
-	autoProdMix($('#gfxContainer'), jsonFile.gfxthrottletables[0]);
+	autoProdMix($('#sensorContainer'), jsonFile.sensorlists);
+	autoProdMix($('#plxContainer'), jsonFile.plxthrottletables);
+	autoProdMix($('#gfxContainer'), jsonFile.gfxthrottletables);
 	
 } 
 
@@ -11,12 +11,15 @@ function testFunc(jsonFile){
 // =====================for sensorlists、plxthrottletables、gfxthrottletables========================
 function autoProdMix(containerName, jsonObj){
 	$(containerName).find('.sensor_sku_container').remove();
-	if(jsonObj != undefined){
-		Object.keys(jsonObj).forEach(function(key, keyIndex) {
-		addSkuProd($(containerName), key);
-		autoProd($(containerName).find('.sensor_tab:eq(' + keyIndex + ')'), jsonObj[key], 'sensor_tr')
-		});
-	}
+	jsonObj.forEach(function(val,index){
+		if(val != undefined){
+			Object.keys(val).forEach(function(key, keyIndex) {
+				addSkuProd($(containerName), key);
+				autoProd($(containerName).find('.sensor_tab:eq(' + index + ')'), val[key], 'sensor_tr')
+			});
+		}
+	});
+	
 }
 
 function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
