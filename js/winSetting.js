@@ -53,35 +53,37 @@ function SetSensorComTabWid(index)
 }
 
 // Fan table width setting
-function SetFanTabWid(){
-    // Fan 1
-    $('.node_type_box').each(function(){
-        $(this).find('th').each(function(index_wid){
-            if(index_wid <= 1)
+function SetFanTabWid(index)
+{
+    if(index == -1)
+    {
+        $('.node_type_box').each(function(){
+            $(this).find('th').each(function(index_wid){
+                if(index_wid < 2)
+                    $(this).width('80px');
+                else if(index_wid == 2)
+                    $(this).width('100px');
+                else
+                    $(this).width('182.5px');
+            });
+        });
+    }
+    else
+    {
+        $('.node_type_box:eq(' + index + ')').find('th').each(function(index_wid){
+            if(index_wid < 2)
                 $(this).width('80px');
             else if(index_wid == 2)
                 $(this).width('100px');
             else
                 $(this).width('182.5px');
         });
-    });
-
-    // Fan 2
-    $('.node_type_box_2').each(function(){
-        $(this).find('th').each(function(index_wid){
-            if(index_wid <= 1)
-                $(this).width('80px');
-            else if(index_wid == 2)
-                $(this).width('100px');
-            else
-                $(this).width('182.5px');
-        });
-    });
+    }
 }
 
 
 function HandleTableWid()
 {
     SetSensorComTabWid(-1);
-    SetFanTabWid();
+    SetFanTabWid(-1);
 }

@@ -23,7 +23,7 @@ $(function(){
         {
             TwoFanCheck = 1;
             showFan2_FanList();
-            showFan2_FanLTable();
+            showFan2_FanLTable(-1);
             showFan2_MsThermals();  // MsThermals
         }
         else

@@ -29,15 +29,9 @@
     background-color: rgba(216, 228, 188, 1);
 }
 
-.node_type_box{
+.node_type_box_1{
     margin-bottom: 8px;
 }
 .node_type_box_2{
     margin-bottom: 32px;
-}
-.ling{
-    width: 100%;
-    height: 50px;
-    background-color: pink;
-    margin: 8px 0;
 }
