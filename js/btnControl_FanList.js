@@ -276,7 +276,6 @@ function showFan2_FanList()
 
 function removeFan2_FanList()
 {
-    console.log('disable');
     $('#FanContainer').find('.sensor_tab').each(function(){
         $(this).find('.sensor_tr:last').remove();
     });
