@@ -4,9 +4,20 @@ function testFunc(jsonFile){
 	autoProdMix($('#sensorContainer'), jsonFile.sensorlists);
 	autoProdMix($('#plxContainer'), jsonFile.plxthrottletables);
 	autoProdMix($('#gfxContainer'), jsonFile.gfxthrottletables);
+	autoProdMixChg($('#chgContainer'), jsonFile.chargerthrottletables);
 	
 } 
 
+// =====================for chargerthrottletables========================
+function autoProdMixChg(containerName, jsonObj){
+	if(jsonObj != undefined){
+		$('#chgThrottle_switch').click();
+		$(containerName).find('.sensor_sku_container').remove();
+		addSkuProd($(containerName), jsonObj['sensorname']);
+		autoProd($(containerName).find('.sensor_tab:eq(0)'), jsonObj['zones'], 'sensor_tr')
+		$(containerName).find('.sensor_sku_container .delete_module_btn').remove();
+	}
+}
 
 // =====================for sensorlists、plxthrottletables、gfxthrottletables========================
 function autoProdMix(containerName, jsonObj){
@@ -19,7 +30,6 @@ function autoProdMix(containerName, jsonObj){
 			});
 		}
 	});
-	
 }
 
 function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
