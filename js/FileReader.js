@@ -51,7 +51,7 @@ $(function(){
 
             try {
                 let sensorlistsJsonObj        = jsonObj.sensorlists[0].common;
-                let fancontrollerlistsJsonObj = jsonObj.fancontrollerlists[0].common[0].fanlist[0];
+                let fancontrollerlistsJsonObj = undefined;
                 let thermaltablesJsonObj      = jsonObj.thermaltables;
                 let throttleJsonObj           = jsonObj.plxthrottletables[0].common
 
