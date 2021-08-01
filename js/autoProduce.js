@@ -6,8 +6,31 @@ function testFunc(jsonFile){
 	autoProdMix($('#gfxContainer'), jsonFile.gfxthrottletables);
 	autoProdMixChg($('#chgContainer'), jsonFile.chargerthrottletables);
 	autoProdMixFan($('#FanContainer'), jsonFile.fancontrollerlists);
+	autoProdMixMs($('#MsContainer'), jsonFile.msthermals);
+	console.log(errArr);
 	
-} 
+}
+
+// =====================for errMsg========================
+var errArr = [];
+function errAdd(jqSelectorDesc){
+	let errMsg = $(jqSelectorDesc).parents('.container').attr('id') + ' -> 資料異常';
+	if(!errArr.includes(errMsg))
+		errArr.push(errMsg);
+}
+
+// =====================for msthermals(fan2主控權在fancontrollerlists)========================
+function autoProdMixMs(containerName, jsonObj){
+	if(jsonObj != undefined){
+		// reset
+		$(containerName).find('.sensor_sku_container').remove();
+		// prod
+		jsonObj['configs'].forEach(function(val,index){
+			addMsSkuProd($(containerName), val['name'], val['sensor']);
+			autoProd($(containerName).find('.sensor_tab:eq(' + index + ')'), val['nodes'], 'sensor_tr');
+		});
+	}
+}
 
 // =====================for fancontrollerlists========================
 function autoProdMixFan(containerName, jsonObj){
@@ -94,7 +117,7 @@ function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
 	delTr.append(`<td><span class="transparet">btn</span></td>`); 
 	keyArr.forEach(function(key, index) {
 		//delCol
-		if(key.indexOf('name') > -1){
+		if(key.indexOf('name') > -1 || (jqSelectorDesc.parents('.container').attr('id') == 'MsContainer' && key.indexOf('fan') > -1)){
 			delTr.append(`<td><span class="transparet">btn</span></td>`); 
 		}else{
 			let delTd = $("<td/>");
@@ -108,37 +131,61 @@ function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
 	});	
 	// ------------------thead------------------
 
+
 	// ------------------tbody------------------
-	jsonObjArr.forEach(function(val,index){
-		let tr = $("<tr/>", {"class": trClassName});
-		$(jqSelectorDesc).append(tr);
-		// first col
-		if(jqSelectorDesc.parents('.container').attr('id') == 'FanContainer'){
-			tr.append(`<td><div class="sensorDelete"><strike><span>Delete</span></strike></div></td>`); 
-		}else{
-			tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`); 
-		}		
-		keyArr.forEach(function(key, index) {
-			// td setVal
-		    let td = $("<td/>");
-		    tr.append(td);
-			if(key !== 'pollingrate'){
-		    	let input = $("<input/>");
-		        td.append(input);
-		        input.val(val[key]);
-		    }else{
-		    	let sel = $("<select/>", {"name": "pollingrate", "class": "selects"});
-                for(var j=0; j<cusOpt.length ;j++){
-                	let opt = $("<option/>", {"value": cusOpt[j].value});
-                	opt.append(cusOpt[j].text);
-                	if(val[key] == cusOpt[j].value)
-                		opt.prop("selected", true);
-                    sel.append(opt);
-                }
-                td.append(sel);
-		    }
-		});	
-    });
+	if(jqSelectorDesc.parents('.container').attr('id') == 'FanContainer' || jqSelectorDesc.parents('.container').attr('id') == 'MsContainer'){
+		let fanNum = 1;
+		if($('#twofans_switch').prop('checked'))
+			fanNum++;
+		for(let i = 0; i < fanNum; i++){
+			let tr = $("<tr/>", {"class": trClassName});
+			$(jqSelectorDesc).append(tr);
+			// first col
+			tr.append(`<td><div class="sensorDelete"><strike><span>Delete</span></strike></div></td>`); 	
+			keyArr.forEach(function(key, index) {
+				// td setVal
+				let td = $("<td/>");
+				tr.append(td);
+				let input = $("<input/>");
+				td.append(input);
+				try{
+					input.val(jsonObjArr[i][key]);
+				}catch(err) {
+					errAdd(jqSelectorDesc);
+				}
+			});	
+		}
+		// fan、ms資料大於2為異常，添加異常訊息
+		if(jsonObjArr.length > 2)
+			errAdd(jqSelectorDesc);
+	}else{
+		jsonObjArr.forEach(function(val,index){
+			let tr = $("<tr/>", {"class": trClassName});
+			$(jqSelectorDesc).append(tr);
+			// first col
+			tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`); 	
+			keyArr.forEach(function(key, index) {
+				// td setVal
+				let td = $("<td/>");
+				tr.append(td);
+				if(key !== 'pollingrate'){
+					let input = $("<input/>");
+					td.append(input);
+					input.val(val[key]);
+				}else{
+					let sel = $("<select/>", {"name": "pollingrate", "class": "selects"});
+					for(var j=0; j<cusOpt.length ;j++){
+						let opt = $("<option/>", {"value": cusOpt[j].value});
+						opt.append(cusOpt[j].text);
+						if(val[key] == cusOpt[j].value)
+							opt.prop("selected", true);
+						sel.append(opt);
+					}
+					td.append(sel);
+				}
+			});	
+		});
+	}
 	// ------------------tbody------------------
 	
 	SetSensorComTabWid(-1);
@@ -305,6 +352,45 @@ function addFanSkuProd(e, titleName){
         $(e).append(sensorSkuContainer);
     }
 	
+function addMsSkuProd(e, titleName, sensorName){
+
+        var sensorSkuContainer = $("<div/>", {"class": "sensor_sku_container"});
+
+        // <input> title
+        var sensorInputTitle = $("<input/>", {"class": "sku_title", "type": "text", "placeholder": "(Config)"});
+		sensorInputTitle.val(titleName);
+        var sensorH4 = $("<h4/>").append(sensorInputTitle);
+        sensorSkuContainer.append(sensorH4);
+
+        var sensorInputTitle = $("<input/>", {"class": "sku_title", "type": "text", "placeholder": "(Sensor Name)"});
+		sensorInputTitle.val(sensorName);
+        var sensorH4 = $("<h4/>", {"class": "float_L"}).append(sensorInputTitle);
+        sensorSkuContainer.append(sensorH4);
+
+        // "Add sensor", "Add type" buttons
+
+        for(var i=0; i<sensorMsFuncBtns.length ;i++)
+        {
+            var funcBtnSpan= $("<span/>").text(sensorMsFuncBtns[i].span);
+            var funcBtn    = $("<div/>", {"class": sensorMsFuncBtns[i].div, "onclick": sensorMsFuncBtns[i].onclick}).append(funcBtnSpan);
+            var funcBtnBox = $("<div/>", {"class": sensorMsFuncBtns[i].box}).append(funcBtn);
+
+            sensorSkuContainer.append(funcBtnBox);
+        }
+        sensorSkuContainer.append( $("<div/>", {"class": "clear"}) );
+
+
+        // show sensor description
+        var scrollBoxDiv = $("<div/>", {"class": "horizon_scroll_box"});
+        var sensorTab    = $("<table/>", {"class": "sensor_tab"});
+        
+
+        scrollBoxDiv.append(sensorTab);
+        sensorSkuContainer.append(scrollBoxDiv);;
+
+        $(e).append(sensorSkuContainer);
+}
+	
  var fanInitTit =
         [
             {'title': 'name'       , 'fan1':'GFAN1CTRL'            },
@@ -362,6 +448,12 @@ var sensorTitPlaceholder =
                 'SmoothingData',
                 'CriticalTemp',
                 'crittime'
+            ];
+
+var sensorMsFuncBtns =
+            [
+                {'box': 'function_btn_box float_L', 'div':'add_sensor_btn',    'onclick':'AddSensorColumn(this)', "span":'Add type'},
+                {'box': 'function_btn_box float_R', 'div':'delete_module_btn', 'onclick':'removeSku(this)',       "span":'delete Config'  }
             ];
 			
  var sensorFuncBtns =
