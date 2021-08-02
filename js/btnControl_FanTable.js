@@ -139,7 +139,12 @@ $(function(){
 
 
         // Fan 2------------------------------------------------------------
-
+        if(TwoFanCheck)
+        {
+            // fins the .sensor_sku_container index of fan table.
+            var nodeTypeBoxIndex = $('#fanTableContainer').find('.sensor_sku_container:last').index('#fanTableContainer .sensor_sku_container');
+            showFan2_FanLTable(nodeTypeBoxIndex);
+        }
 
 
     });
@@ -244,7 +249,90 @@ function showFan2_FanLTable(index)
     }
     else
     {
+        console.log(index);
+        $('#fanTableContainer').find('.sensor_sku_container:eq(' + index +')').css("outline", "red 1px solid");
+        $('#fanTableContainer').find('.sensor_sku_container:eq(' + index +') .node_type_box_1').each(function(){
 
+            // ----- count sensor
+            var nodeTag  = $(this).find(".node_type_tag").text();   // BAL, COOL, QUIET, PERF
+            var nodeSensor = [];    // array for store each table's sensor node
+            $(this).find('.nodes_tab .nodes_tr').each(function(){
+                if( $(this).find('td:eq(2) input').val() != undefined)
+                    nodeSensor.push($(this).find('td:eq(2) input').val());
+            });
+
+            var nodeTypeBox2 = $("<div/>", {"class": "node_type_box node_type_box_2"});
+            // ----- fan info
+            var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(nodeTag);
+            var nodeType     = $("<span/>", {"class": "node_type float_L"});
+            var fanId        = $("<span/>", {"class": "fan_id float_L", "text": "FAN2"});
+            var clear        = $("<div/>",  {"class": "clear"});
+            nodeTypeBox2.append(nodeTypeTag).append(nodeType).append(fanId).append(clear);
+
+            // ----- fan table
+            var nodeTab = $("<table/>", {"class": "nodes_tab"});
+            for(var i=0; i<nodeSensor.length +1; i++)
+            {
+                var nodeTr = $("<tr/>", {"class": "nodes_tr"});
+                for(var j=0; j<nodeThArr.length; j++)
+                {
+                    if(i == 0)      // th
+                    {
+                        if(j<2)
+                        {
+                            var span = $("<span/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
+                            var sensorTd = $("<th/>").append(span);
+                        }
+                        else
+                        {
+                            var sensorTd = $("<th/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
+                        }
+                    }
+                    else            // td
+                    {
+                        if(j<2)
+                        {
+                            var btnSpan = $("<span/>").text(nodeFuncBtns[j].span);
+                            var btnDiv  = $("<div/>", {"class": nodeFuncBtns[j].div, "onclick": nodeFuncBtns[j].onclick}).append(btnSpan);
+                            var sensorTd = $("<td/>").append(btnDiv);
+                        }
+                        else
+                        {
+                            if(j == 2)
+                            {
+                                var nodeInput = $("<input/>", {"type": "text", "placeholder": nodeSensor[i-1], "value": nodeSensor[i-1]});
+                                var sensorTd = $("<td/>").append(nodeInput);
+                            }
+                            else if(j == nodeThArr.length -2)
+                            {
+                                var nodeInput = $("<input/>", {"type": "text", "value": 255});
+                                var sensorTd = $("<td/>", {"class": "hidden"}).append(nodeInput);
+                            }
+                            else if(j == nodeThArr.length -1)
+                            {
+                                var nodeInput = $("<input/>", {"type": "text", "value": 0});
+                                var sensorTd = $("<td/>", {"class": "hidden"}).append(nodeInput);
+                            }
+                            else
+                            {
+                                var nodeInput = $("<input/>", {"type": "text"});
+                                var sensorTd = $("<td/>").append(nodeInput);
+                            }
+
+                        }
+                    }
+                    nodeTr.append(sensorTd);
+                }
+                nodeTab.append(nodeTr);
+            }
+            nodeTypeBox2.append(nodeTab);
+
+            $(this).after(nodeTypeBox2);
+
+            // reset the width
+            var thisIndex = $(this).parents('#fanTableContainer').find('.node_type_box').index($(this).next('.node_type_box'));
+            SetFanTabWid(thisIndex);
+        });
     }
 }
 
