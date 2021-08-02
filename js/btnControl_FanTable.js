@@ -1,54 +1,149 @@
 
+var nodeThArr =
+[
+    {'class': 'transparet', 'text': 'btn'},
+    {'class': 'transparet', 'text': 'btn'},
+    {'class': '',           'text': 'Sensor Name'},
+    {'class': '',           'text': 'Low Temp'},
+    {'class': '',           'text': 'Low Rpm'},
+    {'class': '',           'text': 'High Temp'},
+    {'class': '',           'text': 'High Rpm'},
+    {'class': 'hidden',     'text': 'ttrip'},
+    {'class': 'hidden',     'text': 'ttriphys'}
+];
+
+var nodeFuncBtns =
+[
+    {'div':'sensorDelete', 'onclick':'', "span":'Add'},
+    {'div':'sensorDelete', 'onclick':'', "span":'Delete'}
+];
+
+
+
 $(function(){
 
-    $('#addModuleBtn').click(function(){
+    $('#addModuleBtn').click(function(e){
 
-        var containerDiv = $("<div/>", {"class": "module_container"});
+        var nodeSkuContainer = $("<div/>", {"class": "sensor_sku_container"});
 
-        // add "delete this module" button
-        var skuNameTable = $("<table/>", {"class": "sku_name_tab"});
-        var skuNameTr    = $("<tr/>",    {"class": "sku_name_tr"});
+        // title
+        var skuInputTitle = $("<input/>", {"class": "sku_title", "type": "text", "placeholder": "(please type sku name)"});
+        var skuH3 = $("<h3/>", {"class": "float_L"}).append(skuInputTitle);
+        nodeSkuContainer.append(skuH3);
 
-        for(var i=0; i<3; i++){
-            var skuNameTh = $("<th/>");
-            if(i == 0)
+        var sensorFuncBtns =
+        [
+            {'box': 'function_btn_box float_R', 'div':'delete_module_btn', 'onclick':'removeSku(this)',       "span":'delete sku'}
+        ];
+        for(var i=0; i<sensorFuncBtns.length ;i++)
+        {
+            var funcBtnSpan= $("<span/>").text(sensorFuncBtns[i].span);
+            var funcBtn    = $("<div/>", {"class": sensorFuncBtns[i].div, "onclick": sensorFuncBtns[i].onclick}).append(funcBtnSpan);
+            var funcBtnBox = $("<div/>", {"class": sensorFuncBtns[i].box}).append(funcBtn);
+
+            nodeSkuContainer.append(funcBtnBox);
+        }
+        nodeSkuContainer.append( $("<div/>", {"class": "clear"}) );
+
+
+        // fan table
+        var Ustt =
+        [
+            {"Ustt": '"Balance" MODE [Defalut Mode]', "tag": "BAL"},
+            {"Ustt": '"Cool" MODE',                   "tag": "COOL"},
+            {"Ustt": '"Quiet" MODE',                  "tag": "QUIET"},
+            {"Ustt": '"Performance" MODE',            "tag": "PERF"}
+        ];
+        var nodeSensor = ['CPU_PECI', 'SKIN', 'MEM', 'NGFF', 'BATTERY'];
+
+        for(var k=0; k<Ustt.length; k++)
+        {
+            var nodeTypeBox1 = $("<div/>", {"class": "node_type_box node_type_box_1"});
+
+            // ----- fan info
+            var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(Ustt[k].tag);
+            var nodeType     = $("<span/>", {"class": "node_type float_L"}).text(Ustt[k].Ustt);
+            var fanId        = $("<span/>", {"class": "fan_id float_L"}).text("FAN1");
+            var clear        = $("<div/>",  {"class": "clear"});
+            nodeTypeBox1.append(nodeTypeTag).append(nodeType).append(fanId).append(clear);
+
+            // ----- fan table
+            var nodeTab = $("<table/>", {"class": "nodes_tab"});
+
+            for(var i=0; i<nodeSensor.length +1; i++)
             {
-                var moduleDeleteSpan = $("<span/>").text("Delete This Module");
-                var moduleDeleteDiv  = $("<div/>", {"class": "moduleDelete", "onclick": "removeModule(this)"}).append(moduleDeleteSpan);
-                skuNameTh.append(moduleDeleteDiv);
+                var nodeTr = $("<tr/>", {"class": "nodes_tr"});
+                for(var j=0; j<nodeThArr.length; j++)
+                {
+                    if(i == 0)      // th
+                    {
+                        if(j<2)
+                        {
+                            var span = $("<span/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
+                            var sensorTd = $("<th/>").append(span);
+                        }
+                        else
+                        {
+                            var sensorTd = $("<th/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
+                        }
+                    }
+                    else            // td
+                    {
+                        if(j<2)
+                        {
+                            var btnSpan = $("<span/>").text(nodeFuncBtns[j].span);
+                            var btnDiv  = $("<div/>", {"class": nodeFuncBtns[j].div, "onclick": nodeFuncBtns[j].onclick}).append(btnSpan);
+                            var sensorTd = $("<td/>").append(btnDiv);
+                        }
+                        else
+                        {
+                            if(j == 2)
+                            {
+                                var nodeInput = $("<input/>", {"type": "text", "placeholder": nodeSensor[i-1], "value": nodeSensor[i-1]});
+                                var sensorTd = $("<td/>").append(nodeInput);
+                            }
+                            else if(j == nodeThArr.length -2)
+                            {
+                                var nodeInput = $("<input/>", {"type": "text", "value": 255});
+                                var sensorTd = $("<td/>", {"class": "hidden"}).append(nodeInput);
+                            }
+                            else if(j == nodeThArr.length -1)
+                            {
+                                var nodeInput = $("<input/>", {"type": "text", "value": 0});
+                                var sensorTd = $("<td/>", {"class": "hidden"}).append(nodeInput);
+                            }
+                            else
+                            {
+                                var nodeInput = $("<input/>", {"type": "text"});
+                                var sensorTd = $("<td/>").append(nodeInput);
+                            }
+                        }
+                    }
+                    nodeTr.append(sensorTd);
+                }
+                nodeTab.append(nodeTr);
             }
-            else if(i == 1)
-            {
-                skuNameTh.text("Sku name");
-            }
-            else
-            {
-                var skuNameInput = $("<input/>", {"type": "text", "placeholder": "(Please input sku name)"})
-                var skuNameH3 = $("<h3/>", {"class": "sku_name"}).append(skuNameInput);
-                skuNameTh.append(skuNameH3);
-            }
-            skuNameTr.append(skuNameTh);
+            nodeTypeBox1.append(nodeTab);
+            nodeSkuContainer.append(nodeTypeBox1);
         }
 
-        skuNameTable.append(skuNameTr);
-        containerDiv.append(skuNameTable);
+        $('#fanTableContainer').append(nodeSkuContainer);
 
-        $('#fanTableContainer').append(containerDiv);
+        // reset the node_type_box_1 width
+        $('#fanTableContainer').find('.sensor_sku_container:last .node_type_box').each(function(){
+
+            var nodeTypeBoxIndex = $(this).index('.node_type_box');
+            // console.log(nodeTypeBoxIndex);
+            SetFanTabWid(nodeTypeBoxIndex);
+        });
 
 
-        // add "nodes tables"
-        for(var i=0; i<4; i++){
-            // var nodeBoxDiv = $("<div/>", {"class": "node_type_box"});
+        // Fan 2------------------------------------------------------------
 
-        }
 
 
     });
 });
-
-// function removeModule(e){
-//     $(e).parents('.module_container').remove();
-// }
 
 function showFan2_FanLTable(index)
 {
@@ -63,24 +158,6 @@ function showFan2_FanLTable(index)
         // });
         // console.log(nodeSensor.length);
 
-        var nodeThArr =
-            [
-                {'class': 'transparet', 'text': 'btn'},
-                {'class': 'transparet', 'text': 'btn'},
-                {'class': '',           'text': 'Sensor Name'},
-                {'class': '',           'text': 'Low Temp'},
-                {'class': '',           'text': 'Low Rpm'},
-                {'class': '',           'text': 'High Temp'},
-                {'class': '',           'text': 'High Rpm'},
-                {'class': 'hidden',     'text': 'ttrip'},
-                {'class': 'hidden',     'text': 'ttriphys'}
-            ];
-        var nodeFuncBtns =
-        [
-            {'div':'sensorDelete', 'onclick':'', "span":'Add'},
-            {'div':'sensorDelete', 'onclick':'', "span":'Delete'}
-        ];
-
         // --------------------------------------------------------------------------
         $('#fanTableContainer').find('.node_type_box_1').each(function(){
 
@@ -94,7 +171,7 @@ function showFan2_FanLTable(index)
 
             var nodeTypeBox2 = $("<div/>", {"class": "node_type_box node_type_box_2"});
             // ----- fan info
-            var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag", "text": nodeTag});
+            var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(nodeTag);
             var nodeType     = $("<span/>", {"class": "node_type float_L"});
             var fanId        = $("<span/>", {"class": "fan_id float_L", "text": "FAN2"});
             var clear        = $("<div/>",  {"class": "clear"});
