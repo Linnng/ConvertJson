@@ -152,18 +152,25 @@ $(function(){
 
 function showFan2_FanLTable(index)
 {
+
+    // -------------------------------------------------------------------------
+    // if (index == -1)
+    // {
+    //     var showFan2_index = $('.node_type_box_1');
+    //     console.log(showFan2_index);
+    // }
+    // else
+    // {
+    //     $('sensor_sku_container:eq(' + index +') .node_type_box_1').css("outline", "red 1px solid");
+    //     var showFan2_index = $('sensor_sku_container:eq(' + index +') .node_type_box_1');
+    // }
+
+    // $('#fanTableContainer').find(showFan2_index).each(function(){
+
+    // -------------------------------------------------------------------------
+
     if(index == -1)
     {
-        // var firstBox = $('#fanTableContainer').find('.node_type_box:eq(0)');
-        // var nodeSensor = [];
-        // var nodeTab = firstBox.find('.nodes_tab');
-        // nodeTab.find('.nodes_tr').each(function(){
-        //     if( $(this).find('td:eq(2) input').val() != undefined)
-        //         nodeSensor.push($(this).find('td:eq(2) input').val());
-        // });
-        // console.log(nodeSensor.length);
-
-        // --------------------------------------------------------------------------
         $('#fanTableContainer').find('.node_type_box_1').each(function(){
 
             // ----- count sensor
@@ -249,8 +256,6 @@ function showFan2_FanLTable(index)
     }
     else
     {
-        console.log(index);
-        $('#fanTableContainer').find('.sensor_sku_container:eq(' + index +')').css("outline", "red 1px solid");
         $('#fanTableContainer').find('.sensor_sku_container:eq(' + index +') .node_type_box_1').each(function(){
 
             // ----- count sensor
