@@ -14,8 +14,8 @@ var nodeThArr =
 
 var nodeFuncBtns =
 [
-    {'div':'sensorDelete', 'onclick':'', "span":'Add'},
-    {'div':'sensorDelete', 'onclick':'', "span":'Delete'}
+    {'div':'sensorDelete', 'onclick':'AddFanRow(this)', "span":'Add'},
+    {'div':'sensorDelete', 'onclick':'removeRow(this)', "span":'Delete'}
 ];
 
 
@@ -77,7 +77,13 @@ $(function(){
                 {
                     if(i == 0)      // th
                     {
-                        if(j<2)
+                        if(j == 0)
+                        {
+                            var btnSpan = $("<span/>").text(nodeFuncBtns[0].span);
+                            var btnDiv  = $("<div/>", {"class": nodeFuncBtns[0].div, "onclick": nodeFuncBtns[0].onclick}).append(btnSpan);
+                            var sensorTd = $("<th/>").append(btnDiv);
+                        }
+                        else if(j == 1)
                         {
                             var span = $("<span/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
                             var sensorTd = $("<th/>").append(span);
@@ -152,23 +158,6 @@ $(function(){
 
 function showFan2_FanLTable(index)
 {
-
-    // -------------------------------------------------------------------------
-    // if (index == -1)
-    // {
-    //     var showFan2_index = $('.node_type_box_1');
-    //     console.log(showFan2_index);
-    // }
-    // else
-    // {
-    //     $('sensor_sku_container:eq(' + index +') .node_type_box_1').css("outline", "red 1px solid");
-    //     var showFan2_index = $('sensor_sku_container:eq(' + index +') .node_type_box_1');
-    // }
-
-    // $('#fanTableContainer').find(showFan2_index).each(function(){
-
-    // -------------------------------------------------------------------------
-
     if(index == -1)
     {
         $('#fanTableContainer').find('.node_type_box_1').each(function(){
@@ -198,7 +187,13 @@ function showFan2_FanLTable(index)
                 {
                     if(i == 0)      // th
                     {
-                        if(j<2)
+                        if(j == 0)
+                        {
+                            var btnSpan = $("<span/>").text(nodeFuncBtns[0].span);
+                            var btnDiv  = $("<div/>", {"class": nodeFuncBtns[0].div, "onclick": nodeFuncBtns[0].onclick}).append(btnSpan);
+                            var sensorTd = $("<th/>").append(btnDiv);
+                        }
+                        else if(j == 1)
                         {
                             var span = $("<span/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
                             var sensorTd = $("<th/>").append(span);
@@ -254,6 +249,7 @@ function showFan2_FanLTable(index)
             SetFanTabWid(thisIndex);
         });
     }
+
     else
     {
         $('#fanTableContainer').find('.sensor_sku_container:eq(' + index +') .node_type_box_1').each(function(){
@@ -283,7 +279,13 @@ function showFan2_FanLTable(index)
                 {
                     if(i == 0)      // th
                     {
-                        if(j<2)
+                        if(j == 0)
+                        {
+                            var btnSpan = $("<span/>").text(nodeFuncBtns[0].span);
+                            var btnDiv  = $("<div/>", {"class": nodeFuncBtns[0].div, "onclick": nodeFuncBtns[0].onclick}).append(btnSpan);
+                            var sensorTd = $("<th/>").append(btnDiv);
+                        }
+                        else if(j == 1)
                         {
                             var span = $("<span/>", {"class": nodeThArr[j].class}).text(nodeThArr[j].text);
                             var sensorTd = $("<th/>").append(span);
