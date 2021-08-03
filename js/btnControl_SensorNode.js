@@ -150,7 +150,50 @@ function removeSku(e){
     $(e).parents('.sensor_sku_container').remove();
 }
 
+// "add" fan table: add fan table row
+function AddFanRow(e){
+    var sensorVal = $(e).parents('.nodes_tr').find('td:eq(2) input').val();
 
+    // create a Tr/Td row
+    var nodeTr  = $("<tr/>", {"class": "nodes_tr"});
+
+    for(var j=0; j<nodeThArr.length; j++)
+    {
+        if(j<2)
+        {
+            var btnSpan = $("<span/>").text(nodeFuncBtns[j].span);
+            var btnDiv  = $("<div/>", {"class": nodeFuncBtns[j].div, "onclick": nodeFuncBtns[j].onclick}).append(btnSpan);
+            var sensorTd = $("<td/>").append(btnDiv);
+        }
+        else
+        {
+            if(j == 2 && sensorVal != undefined)
+            {
+                var nodeInput = $("<input/>", {"type": "text", "placeholder": sensorVal, "value": sensorVal});
+                var sensorTd = $("<td/>").append(nodeInput);
+            }
+            else if(j == nodeThArr.length -2)
+            {
+                var nodeInput = $("<input/>", {"type": "text", "value": 255});
+                var sensorTd = $("<td/>", {"class": "hidden"}).append(nodeInput);
+            }
+            else if(j == nodeThArr.length -1)
+            {
+                var nodeInput = $("<input/>", {"type": "text", "value": 0});
+                var sensorTd = $("<td/>", {"class": "hidden"}).append(nodeInput);
+            }
+            else
+            {
+                var nodeInput = $("<input/>", {"type": "text"});
+                var sensorTd = $("<td/>").append(nodeInput);
+            }
+        }
+        nodeTr.append(sensorTd);
+    }
+
+    // store new create <tr> to next
+    nodeTr.insertAfter( $(e).parents('.nodes_tr') );
+}
 
 // "add sensor" button: add table row
 function AddSensorRow(e){
@@ -239,8 +282,14 @@ function  AddSensorColumn(e){
 
 
 // sensor delete button - row
-function removeRow(e){
-    $(e).parents('.sensor_tr').remove();
+function removeRow(e)
+{
+    var trName = $(e).parents('tr').attr('class');
+
+    if(trName == 'sensor_tr')
+        $(e).parents('.sensor_tr').remove();
+    else if(trName == 'nodes_tr')
+        $(e).parents('.nodes_tr').remove();
 }
 
 

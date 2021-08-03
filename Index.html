@@ -442,8 +442,6 @@
             </div>
             <div class="clear"></div>
 
-            <p>working on it...</p>
-
             <!-- sku one -->
             <div class="sensor_sku_container">
 
@@ -461,7 +459,7 @@
 
                     <table class="nodes_tab">
                         <tr class="nodes_tr">
-                            <th><span class="transparet">btn</span></th>
+                            <th><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
                             <th><span class="transparet">btn</span></th>
                             <th>Sensor Name</th>
                             <th>Low Temp</th>
@@ -472,8 +470,8 @@
                             <th  class="hidden">ttriphys</th>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="CPU_PECI" value="CPU_PECI"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -483,8 +481,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="SKIN" value="SKIN"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -494,8 +492,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="MEM" value="MEM"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -505,8 +503,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="NGFF" value="NGFF"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -516,8 +514,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="BATTERY" value="BATTERY"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -537,7 +535,7 @@
 
                     <table class="nodes_tab">
                         <tr class="nodes_tr">
-                            <th><span class="transparet">btn</span></th>
+                            <th><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
                             <th><span class="transparet">btn</span></th>
                             <th>Sensor Name</th>
                             <th>Low Temp</th>
@@ -548,8 +546,8 @@
                             <th  class="hidden">ttriphys</th>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="CPU_PECI" value="CPU_PECI"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -559,8 +557,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="SKIN" value="SKIN"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -570,8 +568,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="MEM" value="MEM"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -581,8 +579,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="NGFF" value="NGFF"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -592,8 +590,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="BATTERY" value="BATTERY"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -613,7 +611,7 @@
 
                     <table class="nodes_tab">
                         <tr class="nodes_tr">
-                            <th><span class="transparet">btn</span></th>
+                            <th><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
                             <th><span class="transparet">btn</span></th>
                             <th>Sensor Name</th>
                             <th>Low Temp</th>
@@ -624,8 +622,8 @@
                             <th  class="hidden">ttriphys</th>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="CPU_PECI" value="CPU_PECI"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -635,8 +633,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="SKIN" value="SKIN"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -646,8 +644,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="MEM" value="MEM"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -657,8 +655,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="NGFF" value="NGFF"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -668,8 +666,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="BATTERY" value="BATTERY"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -681,7 +679,6 @@
                     </table>
                 </div>  <!-- END .node_type_box -->
 
-
                 <div class="node_type_box node_type_box_1">
                     <p class="hidden node_type_tag">PERF</p>
                     <span class="node_type float_L">"Performance" MODE</span>
@@ -690,7 +687,7 @@
 
                     <table class="nodes_tab">
                         <tr class="nodes_tr">
-                            <th><span class="transparet">btn</span></th>
+                            <th><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
                             <th><span class="transparet">btn</span></th>
                             <th>Sensor Name</th>
                             <th>Low Temp</th>
@@ -701,8 +698,8 @@
                             <th  class="hidden">ttriphys</th>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="CPU_PECI" value="CPU_PECI"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -712,8 +709,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="SKIN" value="SKIN"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -723,8 +720,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="MEM" value="MEM"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -734,8 +731,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="NGFF" value="NGFF"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
@@ -745,8 +742,8 @@
                             <td class="hidden"><input type="text" value="0"></td>
                         </tr>
                         <tr class="nodes_tr">
-                            <td><div class="sensorDelete" onclick=""><span>Add</span></div></td>
-                            <td><div class="sensorDelete" onclick=""><span>Delete</span></div></td>
+                            <td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>
+                            <td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>
                             <td>             <input type="text" placeholder="BATTERY" value="BATTERY"></td>
                             <td>             <input type="text"></td>
                             <td>             <input type="text"></td>
