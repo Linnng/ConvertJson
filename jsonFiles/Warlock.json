@@ -1,0 +1,308 @@
+// <~> --------------------------------------------------------------------------------
+//   Dell confidential, proprietary information covered under NDA/SLA agreements
+//   (c) Copyright 2000-2020 Dell Inc. No source code distribution allowed without prior consent from Dell
+// <~> --------------------------------------------------------------------------------
+
+// Warlock TGL UMA, TGL DSC, ICL UMA thermal tables version 0.1
+{
+  "sensorlists":
+  [
+    // The common sensor list should contain sensors that are common to all configurations of the platform.
+    {"common":
+      [
+        {"name":"CPU_PECI", "type":"PECI_CPU", "address":"PECI_ADDR_CPU",             "diagclass":"T_CLASS_CPU",       "pollingrate":"ONESEC_POLLING", "ReadFn":"PeciCpuTempRead",   "MaxErrors":10, "SmoothingFn":"TemperatureAverage", "SmoothingData":"(void*)&CpuTempAverage", "CriticalTemp":127, "crittime":3},
+        {"name":"CPU_VR",   "type":"EC_DIODE", "address":"NCT7718W_REG_LOCAL_TEMP",    "diagclass":"T_CLASS_SKIN",      "pollingrate":"ONESEC_POLLING", "ReadFn":"Nct7718wTempRead",   "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127, "crittime":3},
+        {"name":"GPU_VR",   "type":"EC_DIODE", "address":"NCT7718W_REG_REMOTE_TEMP",  "diagclass":"T_CLASS_DIMM_A",      "pollingrate":"ONESEC_POLLING", "ReadFn":"Nct7718wTempRead",   "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127, "crittime":3}
+      ]
+    },
+    // On this platform every discrete graphics configuration has these 1 sensor.
+    {"discrete":
+      [
+        {"name":"GPU",      "type":"NVIDIA",   "address":"NV_SMB_REG",                "diagclass":"T_CLASS_VIDEO",     "pollingrate":"ONESEC_POLLING", "ReadFn":"NvidiaTempRead",    "MaxErrors":3,  "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 127, "crittime":3}
+      ]
+    }
+  ],
+  "fancontrollerlists":
+  [
+    {"TGL_UMA":
+      [
+        {"name":"FAN1CTRL", "address":"DACFAN1ADDR", "initfn":"MecFanInit", "minfanfn":"MecFanGetMinRpm", "rpmreadfn":"MecFanRpmRead", "setcpfn":"MecFanSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN1", "address":"DACFAN1ADDR", "minrpm":0, "maxrpm":5000, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":1600, "diagfanhighspec":3600, "diagfanmaxspec":5000,  "mfgmoderpm":5000, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mincont0time":30, "ksstart":50, "kswait":3, "kspass":1000, "ksfail":200, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        }
+      ]
+    },
+    {"TGL_DIS":
+      [
+        {"name":"FAN1CTRL", "address":"DACFAN1ADDR", "initfn":"MecFanInit", "minfanfn":"MecFanGetMinRpm", "rpmreadfn":"MecFanRpmRead", "setcpfn":"MecFanSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN1_DIS", "address":"DACFAN1ADDR", "minrpm":0, "maxrpm":5000, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":1600, "diagfanhighspec":3600, "diagfanmaxspec":5000,  "mfgmoderpm":5000, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mincont0time":30, "ksstart":50, "kswait":3, "kspass":1000, "ksfail":200, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        }
+      ]
+    }
+  ],
+  "thermaltables":
+  [
+    {
+      "name":"WARLOCKTGLGFX0BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":98,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":5500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX0 UMA, Performance USTT
+      "name":"WARLOCKTGLGFX0PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":98,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":5500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX0 UMA, Cool USTT
+      "name":"WARLOCKTGLGFX0COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":98,  "highrpm":4900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":4900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":4900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX0 QUIET, Cool USTT
+      "name":"WARLOCKTGLGFX0QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":2000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":2000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX0 LID, Lid USTT
+      "name":"WARLOCKTGLGFX0LID",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":98,  "highrpm":5800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":5800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":44, "lowrpm":0,  "hightemp":49,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":49, "lowrpm":0,  "hightemp":55,  "highrpm":5800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX1 DSC, Balanced USTT
+      "name":"WARLOCKTGLGFX1BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_DIS",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":95,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":50, "lowrpm":0,  "hightemp":60,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":65,  "highrpm":5500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX1 DSC, Performance USTT
+      "name":"WARLOCKTGLGFX1PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_DIS",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":95,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":5500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":50, "lowrpm":0,  "hightemp":60,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":65,  "highrpm":5500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX1 DSC, Cool USTT
+      "name":"WARLOCKTGLGFX1COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_DIS",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":95,  "highrpm":4900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":4900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":4900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":50, "lowrpm":0,  "hightemp":60,  "highrpm":2500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":65,  "highrpm":4900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX1 DSC, Quiet USTT
+      "name":"WARLOCKTGLGFX1QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_DIS",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":95,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":2000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":2000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":50, "lowrpm":0,  "hightemp":60,  "highrpm":2000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":65,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Warlock TGL GFX1 LID, lid USTT
+      "name":"WARLOCKTGLGFX1LID",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_DIS",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":71, "lowrpm":0,  "hightemp":95,  "highrpm":5800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":5800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":48, "lowrpm":0,  "hightemp":62,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":62, "lowrpm":0,  "hightemp":70,  "highrpm":5800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":50, "lowrpm":0,  "hightemp":60,  "highrpm":3000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":65,  "highrpm":5800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    }
+  ],
+  "plxthrottletables":
+  [
+    // The common plx throttling list should contain entries that are common to all configurations of the platform.
+    {"common":
+      [
+        {"sensorname":"CPU_PECI",  "throttlepoint":104},
+        {"sensorname":"CPU_VR",    "throttlepoint": 99},
+        {"sensorname":"GPU_VR",    "throttlepoint": 99}
+      ]
+    },
+    // On this platform every discrete graphics configuration shares these plx throttling values.
+    {"discrete":
+      [
+        {"sensorname":"GPU",      "throttlepoint": 87}
+      ]
+    }
+  ],
+  "gfxthrottletables":
+  [
+    {"common":
+      [
+      ]
+    },
+    // On this platform every discrete graphics configuration shares these plx throttling values.
+    {"DiscreteBAL":
+      [
+        {"sensorname":"GPU",       "z0min":0, "z0max":1, "z0dec":70, "z0inc":90, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    },
+    {"DiscreteCOOL":
+      [
+        {"sensorname":"GPU",       "z0min":0, "z0max":1, "z0dec":20, "z0inc":30, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    },
+    {"DiscreteQUIET":
+      [
+        {"sensorname":"GPU",       "z0min":0, "z0max":1, "z0dec":20, "z0inc":30, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    },
+    {"DiscretePERF":
+      [
+        {"sensorname":"GPU",       "z0min":0, "z0max":1, "z0dec":70, "z0inc":90, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    }
+  ],
+  "msthermals":
+ {
+    "configs":
+    [
+      {
+        "name":"UMA",
+        "sensor":"CPU_VR",
+        "nodes":
+        [
+          {"fan":"FAN1", "ontemp":70, "crittemp":80, "onhys":5, "crithys":5, "onrpm":4100, "rampdownrate":25, "crittime":10000}
+        ]
+      },
+      {
+        "name":"DIS",
+        "sensor":"CPU_VR",
+        "nodes":
+        [
+          {"fan":"FAN1_DIS", "ontemp":73, "crittemp":85, "onhys":3, "crithys":3, "onrpm":4100, "rampdownrate":25, "crittime":10000}
+        ]
+      }
+    ]
+  }
+}
+

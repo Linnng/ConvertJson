@@ -1,0 +1,253 @@
+// <~> --------------------------------------------------------------------------------
+//   Dell confidential, proprietary information covered under NDA/SLA agreements
+//   (c) Copyright 2000-2020 Dell Inc. No source code distribution allowed without prior consent from Dell
+// <~> --------------------------------------------------------------------------------
+
+// Broadmoor 14" 5200 TGL thermal tables version test, not formal version
+{
+  "sensorlists":
+  [
+    //TCPU                   = "CPU_PECI"
+    //TSKN(QE6=QE9)=CPU-VR   = "SKIN"
+    //TA(QE10)=DDR=TMEM      = "MEM"
+    //TM.2(QE11)=M2-2280     = "NGFF"
+    //TVGA = VGA             = "GPU"
+    {"common":
+      [
+        {"name":"CPU_PECI", "type":"PECI_CPU", "address":"PECI_ADDR_CPU",     "diagclass":"T_CLASS_CPU",       "pollingrate":"ONESEC_POLLING", "ReadFn":"PeciCpuTempRead",   "MaxErrors":10, "SmoothingFn":"TemperatureAverage", "SmoothingData":"(void*)&CpuTempAverage",  "CriticalTemp":127, "crittime":3},
+        {"name":"SKIN",     "type":"EC_DIODE", "address":"GUARDIAN_DIODE4",   "diagclass":"T_CLASS_SKIN",      "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                    "CriticalTemp":127, "crittime":3},
+        {"name":"MEM",      "type":"EC_DIODE", "address":"GUARDIAN_DIODE2a",  "diagclass":"T_CLASS_MEMORY",    "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                    "CriticalTemp":127, "crittime":3},
+        {"name":"NGFF",     "type":"EC_DIODE", "address":"GUARDIAN_DIODE2",   "diagclass":"T_CLASS_OTHER",     "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                    "CriticalTemp":127, "crittime":3}
+      ]
+    },
+    {"discrete":
+      [
+        {"name":"GPU",      "type":"NVIDIA",   "address":"NV_SMB_REG",       "diagclass":"T_CLASS_VIDEO",     "pollingrate":"ONESEC_POLLING", "ReadFn":"NvidiaTempRead",    "MaxErrors":10,  "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127, "crittime":3}
+      ]
+    }
+  ],
+  "fancontrollerlists":
+  [
+    // The common sensor list should contain sensors that are common to all configurations of the platform.
+    {"common":
+      [
+        {"name":"GFAN1CTRL", "address":"GFAN1ADDR", "initfn":"MecGuardianInit", "minfanfn":"MecGuardianGetMinRpm", "rpmreadfn":"MecGuardianRpmRead", "setcpfn":"MecGuardianSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN1", "address":"GFAN1ADDR", "minrpm":0, "maxrpm":4400, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":2700, "diagfanhighspec":4100, "diagfanmaxspec":4400, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mfgmoderpm":4400, "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1000, "ksfail":100, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}            ]
+        }
+      ]
+    }
+  ],
+  "thermaltables":
+  [
+    {
+      // Configuration : Balanced USTT
+      "name":"BM14UMA_BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":87, "lowrpm":0,     "hightemp":100,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":98,   "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":40, "lowrpm":0,     "hightemp":75,   "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":53, "lowrpm":0,     "hightemp":70,   "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":37, "lowrpm":0,     "hightemp":44,   "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":39, "lowrpm":0,     "hightemp":59,   "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":49, "lowrpm":0,     "hightemp":56,   "highrpm":4050, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Cool Bottom USTT
+      "name":"BM14UMA_COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":96,  "highrpm":3800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":50, "lowrpm":0,     "hightemp":64,  "highrpm":3800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":46, "lowrpm":0,     "hightemp":60,  "highrpm":3800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":50, "lowrpm":0,     "hightemp":60,  "highrpm":3300, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Quiet USTT
+      "name":"BM14UMA_QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":96,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":55, "lowrpm":0,     "hightemp":70,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":46, "lowrpm":0,     "hightemp":60,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":50, "lowrpm":0,     "hightemp":60,  "highrpm":3000, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Performance USTT
+      "name":"BM14UMA_PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":93, "lowrpm":0,     "hightemp":97,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":55, "lowrpm":0,     "hightemp":67,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":32, "lowrpm":0,     "hightemp":43,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":45, "lowrpm":0,     "hightemp":55,  "highrpm":4400, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+{
+      // Configuration : Balanced USTT
+      "name":"BM14DSC_BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":87, "lowrpm":0,     "hightemp":100,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp": 98,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":40, "lowrpm":0,     "hightemp": 75,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":58, "lowrpm":0,     "hightemp": 69,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":35, "lowrpm":0,     "hightemp": 43,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":40, "lowrpm":0,     "hightemp": 59,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":44, "lowrpm":0,     "hightemp": 56,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":69, "lowrpm":0,     "hightemp": 82,  "highrpm":4050, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":72, "lowrpm":0,     "hightemp": 77,  "highrpm":4050, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Cool Bottom USTT
+      "name":"BM14DSC_COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":96,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":62, "lowrpm":0,     "hightemp":70,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":36, "lowrpm":0,     "hightemp":43,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":50, "lowrpm":0,     "hightemp":60,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0,     "hightemp":83,  "highrpm":3700, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Quiet USTT
+      "name":"BM14DSC_QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":96,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":59, "lowrpm":0,     "hightemp":68,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":36, "lowrpm":0,     "hightemp":43,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":48, "lowrpm":0,     "hightemp":56,  "highrpm":3400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0,     "hightemp":78,  "highrpm":3400, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : Performance USTT
+      "name":"BM14DSC_PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0,     "hightemp":96,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0,     "hightemp":70,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":36, "lowrpm":0,     "hightemp":40,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":42, "lowrpm":0,     "hightemp":56,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0,     "hightemp":76,  "highrpm":4400, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    }
+  ],
+  "plxthrottletables":
+  [
+    {"common":
+      [
+        {"sensorname":"CPU_PECI", "throttlepoint":100},
+        {"sensorname":"SKIN",     "throttlepoint":85},
+        {"sensorname":"MEM",      "throttlepoint":75},
+        {"sensorname":"NGFF",     "throttlepoint":50}
+      ]
+    },
+    {"discrete":
+      [
+       {"sensorname":"GPU",      "throttlepoint":85}
+      ]
+    }
+  ],
+  "gfxthrottletables":
+  [
+    {"common":
+      [
+      ]
+    },
+    // On this platform every discrete graphics configuration shares these gfx throttling values.
+    {"discreteLidOpen":
+      [
+        {"sensorname":"MEM",       "z0min":0, "z0max":1, "z0dec":33, "z0inc":33, "z1min":1, "z1max":4, "z1dec":40, "z1inc":43 },
+        {"sensorname":"GPU",       "z0min":0, "z0max":1, "z0dec":78, "z0inc":80, "z1min":1, "z1max":4, "z1dec":66, "z1inc":78 }
+      ]
+    },
+    {"discreteLidClose":
+      [
+        {"sensorname":"MEM",       "z0min":0, "z0max":1, "z0dec":30, "z0inc":30, "z1min":1, "z1max":4, "z1dec":43, "z1inc":46 },
+        {"sensorname":"GPU",       "z0min":0, "z0max":1, "z0dec":74, "z0inc":77, "z1min":1, "z1max":4, "z1dec":64, "z1inc":78 }
+      ]
+    }
+  ],
+  "msthermals":
+  {
+    "configs":
+    [
+      {
+        "name":"All",
+        "sensor":"SKIN",
+        "nodes":
+        [
+          {"fan":"FAN1", "ontemp":67, "crittemp":127, "onhys":9, "crithys":5, "onrpm":3500, "rampdownrate":100, "crittime":10}
+        ]
+      }
+    ]
+  },
+  "chargerthrottletables":
+  {
+    "sensorname":"MEM",
+    "zones":
+    [
+      {"name":"zone0", "overtemp":44,  "hysteresistemp":0},
+      {"name":"zone1", "overtemp":127, "hysteresistemp":41}
+    ]
+  }
+}
+
+
