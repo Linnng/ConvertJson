@@ -4,28 +4,30 @@ function jsonProduce(){
 
     let jsonResultDiv = $('#jsonResult');
 
-// ========================= 1.SENSOR DESCRIPTION =========================
-    result['sensorlists'] = [{'common':[]}];
-    $('.sensor_tab tr').not(':eq(0)').each(function(){
-        let area = {};
-        for(var i = 0; i < $(".sensor_tr th").length; i++){
-
-            // key
-            let key = $('.sensor_tr th:eq(' + i + ')').text().replaceAll(' ','');
-
-            // value
-            let valTd = $(this).find('td:eq(' + i + ')');
-            let value = valTd.find('input').val();      // for input data
-            if(value == undefined){
-                value = valTd.find('select').val();     // for select data
-            }
-
-            area[key] = cusParseInt(value);
-
-        }
-        result.sensorlists[0].common.push(area);
-    });
-
+// ========================= 1.SENSOR DESCRIPTION =========================	
+	result['sensorlists'] = [];
+	$('#sensorContainer .sensor_sku_container').each(function(i, e){
+		let sku_title = $(e).find('.sku_title:eq(0)').val();
+		let tArea = {};
+		tArea[sku_title] = [];
+		result['sensorlists'].push(tArea);
+		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+			let area = {};
+			$(e).find('th').not(':eq(0)').each(function(i2, e2){
+				// key
+				let key = $(e2).text().replaceAll(' ','');
+				// value
+				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+				let value = valTd.find('input').val();      // for input data
+				if(value == undefined){
+					value = valTd.find('select').val();     // for select data
+				}
+				area[key] = cusParseInt(value);
+			});
+			result.sensorlists[i][sku_title].push(area);
+		});
+	});
+	
 
 // ========================= 2.FAN DESCRIPTION ============================
     result['fancontrollerlists'] = [{'common':[]}];
