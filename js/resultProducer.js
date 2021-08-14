@@ -5,12 +5,97 @@ function jsonProduce(){
     let jsonResultDiv = $('#jsonResult');
 
 // ========================= 1.SENSOR DESCRIPTION =========================	
-	result['sensorlists'] = [];
-	$('#sensorContainer .sensor_sku_container').each(function(i, e){
+	prodJsonResult(result, 'sensorContainer', 'sensorlists');
+	
+
+// ========================= 2.FAN DESCRIPTION ============================
+    $('#FanContainer .sensor_sku_container').each(function(i, e){
+		if(i == 0)
+			result['fancontrollerlists'] = [];
 		let sku_title = $(e).find('.sku_title:eq(0)').val();
 		let tArea = {};
 		tArea[sku_title] = [];
-		result['sensorlists'].push(tArea);
+		result.fancontrollerlists.push(tArea);
+		$(e).find('.sensor_tab:eq(0) tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+			// Fan initial
+			let area = {};
+			$(e).find('.sensor_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
+				// key
+				let key = $(e2).text().replaceAll(' ','');
+				// value
+				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+				let value = valTd.find('input').val();      // for input data
+				if(value == undefined){
+					value = valTd.find('select').val();     // for select data
+				}
+				area[key] = cusParseInt(value);
+			});
+			// Fan lists
+			area['fanlist'] = [{}];
+			$(e).find('.sensor_tab:eq(1)').find('th').not(':eq(0)').each(function(i2, e2){
+				// key
+				let key = $(e2).text().replaceAll(' ','');
+				// value
+				let valTd = $(e).find('.sensor_tab:eq(1) tr:eq(' + (i1 + 2) + ')').find('td:eq(' + (i2 + 1) + ')');
+				let value = valTd.find('input').val();      // for input data
+				if(value == undefined){
+					value = valTd.find('select').val();     // for select data
+				}
+				area.fanlist[0][key] = cusParseInt(value);
+			});
+			result.fancontrollerlists[i][sku_title].push(area);
+		});
+	});
+
+
+// ========================= 3.SENSOR NODES ===============================
+    // result['thermaltables'] = [];
+    // $('.node_type_box').each(function(){
+        // let area = {};
+        // area['name'] = 'SP14_' + $(this).find('p').text();
+        // area['fans'] = [{"fanname": $(this).find('span').text() ,"nodes":[]}];
+
+        // for(var i = 1; i < $(this).find('.nodes_tr').length; i++){
+            // check how many <th> in the first <tr> in node_type_box DOM
+            // let thQuan = $(this).find('.nodes_tr:eq(0) th').length;
+
+            // let node = {};
+            // for(var k = 0; k < thQuan; k++){
+                // key
+                // let key = $(this).find('.nodes_tr:eq(0) th:eq(' + k + ')').text().replaceAll(' ','').toLowerCase();
+
+                // value
+                // let valTd = $(this).find('.nodes_tr:eq(' + i + ') td:eq(' + k + ')');
+                // let value = valTd.text();
+                // if(value == ''){
+                    // value = valTd.find('input').val();
+                // }
+
+                // if(key != 'no'){
+                    // node[key] = cusParseInt(value);
+                // }
+            // }
+            // area.fans[0].nodes.push(node);
+        // }
+        // result.thermaltables.push(area);
+    // });
+
+
+// ========================= 4.plxthrottletables =========================	
+	prodJsonResult(result, 'plxContainer', 'plxthrottletables');
+	
+
+// ========================= 5.gfxthrottletables ==========================
+	prodJsonResult(result, 'gfxContainer', 'gfxthrottletables');
+	
+	
+// ========================= 6.chargerthrottletables ==========================
+	$('#chgContainer .sensor_sku_container').each(function(i, e){
+		if(i == 0)
+			result['chargerthrottletables'] = {};
+		let sku_title = $(e).find('.sku_title:eq(0)').val();
+		result.chargerthrottletables['sensorname'] = sku_title;
+		result.chargerthrottletables['zones'] = [];
 		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
 			let area = {};
 			$(e).find('th').not(':eq(0)').each(function(i2, e2){
@@ -24,97 +109,42 @@ function jsonProduce(){
 				}
 				area[key] = cusParseInt(value);
 			});
-			result.sensorlists[i][sku_title].push(area);
+			result.chargerthrottletables['zones'].push(area);
 		});
 	});
 	
 
-// ========================= 2.FAN DESCRIPTION ============================
-    result['fancontrollerlists'] = [{'common':[]}];
-    let fanConArea = {'fanlist':[{}]};
-    $('.fan_des_tab').each(function(){
-        if($(this).css('display') == 'none'){
-            $(this).find('td').each(function(hideI, hideTD){
-                // key
-                let key = $(hideTD).parent().prev().find('th:eq(' + hideI + ')').text();
-                // value
-                let value = $(hideTD).text();
-
-                fanConArea[key] = value;
-            });
-        }else{
-            $(this).find('td').each(function(index, td){
-                // key
-                let key = $(td).parent().prev().find('th:eq(' + index + ')').text().replaceAll(' ','').toLowerCase();
-                if(key == ''){
-                    key = $(this).prev('th').text().replaceAll(' ','').toLowerCase();
-                }
-                // value
-                let value = cusParseInt($(td).find('input').val());
-
-                if(key == 'fandescription'){
-                    fanConArea.fanlist[0]['name'] = value;
-                }else{
-                    fanConArea.fanlist[0][key] = value;
-                }
-            });
-        }
-    });
-    result.fancontrollerlists[0].common.push(fanConArea);
-
-
-// ========================= 3.SENSOR NODES ===============================
-    result['thermaltables'] = [];
-    $('.node_type_box').each(function(){
-        let area = {};
-        area['name'] = 'SP14_' + $(this).find('p').text();
-        area['fans'] = [{"fanname": $(this).find('span').text() ,"nodes":[]}];
-
-        for(var i = 1; i < $(this).find('.nodes_tr').length; i++){
-            // check how many <th> in the first <tr> in node_type_box DOM
-            let thQuan = $(this).find('.nodes_tr:eq(0) th').length;
-
-            let node = {};
-            for(var k = 0; k < thQuan; k++){
-                // key
-                let key = $(this).find('.nodes_tr:eq(0) th:eq(' + k + ')').text().replaceAll(' ','').toLowerCase();
-
-                // value
-                let valTd = $(this).find('.nodes_tr:eq(' + i + ') td:eq(' + k + ')');
-                let value = valTd.text();
-                if(value == ''){
-                    value = valTd.find('input').val();
-                }
-
-                if(key != 'no'){
-                    node[key] = cusParseInt(value);
-                }
-            }
-            area.fans[0].nodes.push(node);
-        }
-        result.thermaltables.push(area);
-    });
-
-
-// ========================= 4.Throttle ===================================
-    result['plxthrottletables'] = [{'common':[]}];
-    $('.throttle_tab tr').not(':eq(0)').each(function(){
-        let throttleArea = {};
-        $(this).find('td').each(function(index, td){
-            // key
-            let key = $(td).parent('tr').siblings('tr:eq(0)').find('th:eq(' + index + ')').text().replaceAll(' ','').toLowerCase();
-            // value
-            let value = cusParseInt($(td).find('input').val());
-
-            throttleArea[key] = value;
-        });
-        result.plxthrottletables[0].common.push(throttleArea);
-    });
-
-
-// ========================= 5.gfxthrottletables ==========================
-    result['gfxthrottletables'] = [];
-
+// ========================= 7.msthermals ==========================
+	$('#MsContainer .sensor_sku_container').each(function(i, e){
+		if(i == 0)
+			result['msthermals'] = {'configs':[]};
+		let tArea = {};
+		result.msthermals.configs.push(tArea);
+		let sku_title1 = $(e).find('.sku_title:eq(0)').val();
+		let sku_title2 = $(e).find('.sku_title:eq(1)').val();
+		tArea['name'] = sku_title1;
+		tArea['sensor'] = sku_title2;
+		tArea['nodes'] = [];
+		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+			let area = {};
+			$(e).find('th').not(':eq(0)').each(function(i2, e2){
+				// key
+				let key = $(e2).text().replaceAll(' ','');
+				// value
+				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+				let value = valTd.find('input').val();      // for input data
+				if(value == undefined){
+					value = valTd.find('select').val();     // for select data
+				}
+				area[key] = cusParseInt(value);
+			});
+			tArea['nodes'].push(area);
+		});
+	});
+	
+	
+	
+	
     console.log('Export jsonObj:');
     console.log(result);
     jsonResultDiv.html(JSON.stringify(result));
@@ -122,6 +152,33 @@ function jsonProduce(){
 
     // Export .json
     save();
+}
+
+// produceJsonResultFunc
+function prodJsonResult(resultObj, containerName, jsonAreaName){
+	$('#' + containerName + ' .sensor_sku_container').each(function(i, e){
+		if(i == 0)
+			result[jsonAreaName] = [];
+		let sku_title = $(e).find('.sku_title:eq(0)').val();
+		let tArea = {};
+		tArea[sku_title] = [];
+		result[jsonAreaName].push(tArea);
+		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+			let area = {};
+			$(e).find('th').not(':eq(0)').each(function(i2, e2){
+				// key
+				let key = $(e2).text().replaceAll(' ','');
+				// value
+				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+				let value = valTd.find('input').val();      // for input data
+				if(value == undefined){
+					value = valTd.find('select').val();     // for select data
+				}
+				area[key] = cusParseInt(value);
+			});
+			result[jsonAreaName][i][sku_title].push(area);
+		});
+	});
 }
 
 // value convert to Int
