@@ -4,14 +4,14 @@ $(function(){
         location.reload();
     }, false);
     document.getElementById('hintBtn').addEventListener("click", function(e){
-        $('.hint_container').removeClass('hidden');
+        $('#coverHint').removeClass('hidden');
         $(window).scrollTop(0);     // reset to top
 
         $('#mainDiv').hide();
 
     }, false);
     document.getElementById('closeHint').addEventListener("click", function(e){
-        $('.hint_container').addClass('hidden');
+        $('#coverHint').addClass('hidden');
         $(window).scrollTop(0);     // reset to top
 
         $('#mainDiv').show();

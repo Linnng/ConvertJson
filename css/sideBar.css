@@ -4,6 +4,7 @@
     position: fixed;
     bottom: 16px;
     right: 16px;
+    z-index: 100;
 }
 
 .side_bar_button{

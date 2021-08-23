@@ -31,10 +31,10 @@
                 <input type="file" id="importJSON" class="hidden" accept=".json"/>
             </div>
             <div>
-                <input type="button" id="createNew" class="cover_button" value="Create new table">
+                <input type="button" id="fakeImportBtn" class="cover_button" value="Import JSON file">
             </div>
             <div>
-                <input type="button" id="fakeImportBtn" class="cover_button" value="Import JSON file">
+                <input type="button" id="createNew" class="cover_button" value="Create new table">
             </div>
         </div>
     </div>
@@ -454,7 +454,7 @@
                 <div class="node_type_box node_type_box_1">
                     <p class="hidden node_type_tag">BAL</p>
                     <span class="node_type float_L">"Balance" MODE [Defalut Mode]</span>
-                    <span class="fan_id float_L">FAN1</span>
+                    <span class="fan_id float_L"><input type="text" placeholder="(Input Fan)" value="FAN1"></span>
                     <div class="clear"></div>
 
                     <table class="nodes_tab">
@@ -530,7 +530,7 @@
                 <div class="node_type_box node_type_box_1">
                     <p class="hidden node_type_tag">COOL</p>
                     <span class="node_type float_L">"Cool" MODE</span>
-                    <span class="fan_id float_L">FAN1</span>
+                    <span class="fan_id float_L"><input type="text" placeholder="(Input Fan)" value="FAN1"></span>
                     <div class="clear"></div>
 
                     <table class="nodes_tab">
@@ -606,7 +606,7 @@
                 <div class="node_type_box node_type_box_1">
                     <p class="hidden node_type_tag">QUIET</p>
                     <span class="node_type float_L">"Quiet" MODE</span>
-                    <span class="fan_id float_L">FAN1</span>
+                    <span class="fan_id float_L"><input type="text" placeholder="(Input Fan)" value="FAN1"></span>
                     <div class="clear"></div>
 
                     <table class="nodes_tab">
@@ -682,7 +682,7 @@
                 <div class="node_type_box node_type_box_1">
                     <p class="hidden node_type_tag">PERF</p>
                     <span class="node_type float_L">"Performance" MODE</span>
-                    <span class="fan_id float_L">FAN1</span>
+                    <span class="fan_id float_L"><input type="text" placeholder="(Input Fan)" value="FAN1"></span>
                     <div class="clear"></div>
 
                     <table class="nodes_tab">
@@ -1077,20 +1077,69 @@
 
 
     <!-- Cover Hint -->
-    <div id="coverHint" class="hint_container hidden">
-        <h1 class="h1_tag">User Guide</h1>
-        <h1 class="h1_tag" style="color: rgb(245, 111, 230);">Working on it ~ ~ ~ ~ ~ ~</h1>
-        <section>
-            <h2>What's new?</h2>
-        </section>
-        <section>
-            <h2>Quick start - SOP</h2>
-        </section>
-        <section>
-            <h2>Error messages</h2>
-        </section>e
+<section id="coverHint" class="hidden">
+    <div class="container" style="outline: red 1px solid;">
+        <h1 class="hint_h1">Working on it ~ ~ ~</h1>
+        <!-- <h1 class="hint_h1">User Guide</h1> -->
+
+        <div class="hint_box">
+            <h2 class="hint_h2">
+                <div class="hint_icon">
+                    <img src="img/angle_double_right.png" alt="icon">
+                </div>
+                What's new?
+            </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ab sint sequi vel ipsam. Commodi autem, alias nostrum eum cum, iusto enim vero deserunt tenetur beatae, tempora dolorem. Est, cupiditate.
+            Beatae, eligendi sit nisi, corporis laudantium eum repellendus iusto consequuntur animi eveniet magni tenetur suscipit quibusdam voluptas sequi, cumque rem officiis vero dicta cum quo molestias unde aspernatur? Ea, aliquid.
+            Blanditiis aut molestias quibusdam, dolor beatae quae consequatur ipsam odio ipsa eaque. Soluta inventore molestiae aliquam in expedita. Eum perferendis esse ducimus a molestias maxime ut neque, adipisci earum aliquid.
+            Corporis ipsam nulla doloribus, voluptate quaerat sint ex. At corrupti facilis consequuntur magnam aliquam molestias facere deserunt quos quia possimus iste vel in aspernatur quibusdam non exercitationem praesentium, iusto similique!
+            Dicta alias hic aspernatur voluptatum esse accusantium laboriosam incidunt doloribus dignissimos earum quas officiis nesciunt aperiam inventore autem, sint, tenetur provident asperiores, ullam ab eveniet ipsum sequi? Eveniet, dignissimos repellat!
+            Commodi ducimus fugiat ex inventore fugit molestiae facere quisquam totam iusto hic nisi nemo asperiores accusamus ipsa corporis, iure ipsam minima ad nam adipisci ratione deleniti, illum est? Itaque, eum.
+            Dolore quod ullam dolorum provident sequi, iusto in quibusdam mollitia totam! At recusandae ipsam numquam, rem error velit deserunt veniam eius dolorum quia ducimus facilis explicabo voluptas pariatur accusamus. Hic.
+            Ab autem quisquam velit sunt sit possimus dolorum perferendis non corporis libero architecto, culpa eligendi saepe similique tempore laboriosam praesentium, esse maxime eaque. Officia maxime tempore expedita aliquam molestiae sed.
+            Quaerat tempore voluptas ducimus vero corrupti reprehenderit qui consectetur blanditiis nulla animi repudiandae pariatur esse, beatae aliquam veniam laboriosam cumque debitis aperiam nisi quisquam? Nisi omnis voluptatem accusantium ab asperiores!
+            Magni voluptatem expedita adipisci voluptatum est rerum nesciunt eum minima facilis cumque eveniet ipsa, voluptate voluptatibus odio neque delectus assumenda totam vero tempora reprehenderit cum? Iure libero porro adipisci corporis!</p>
+        </div>
+        <div class="hint_box">
+            <h2 class="hint_h2">
+                <div class="hint_icon">
+                    <img src="img/angle_double_right.png" alt="icon">
+                </div>
+                Quick start - SOP
+            </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ab sint sequi vel ipsam. Commodi autem, alias nostrum eum cum, iusto enim vero deserunt tenetur beatae, tempora dolorem. Est, cupiditate.
+            Beatae, eligendi sit nisi, corporis laudantium eum repellendus iusto consequuntur animi eveniet magni tenetur suscipit quibusdam voluptas sequi, cumque rem officiis vero dicta cum quo molestias unde aspernatur? Ea, aliquid.
+            Blanditiis aut molestias quibusdam, dolor beatae quae consequatur ipsam odio ipsa eaque. Soluta inventore molestiae aliquam in expedita. Eum perferendis esse ducimus a molestias maxime ut neque, adipisci earum aliquid.
+            Corporis ipsam nulla doloribus, voluptate quaerat sint ex. At corrupti facilis consequuntur magnam aliquam molestias facere deserunt quos quia possimus iste vel in aspernatur quibusdam non exercitationem praesentium, iusto similique!
+            Dicta alias hic aspernatur voluptatum esse accusantium laboriosam incidunt doloribus dignissimos earum quas officiis nesciunt aperiam inventore autem, sint, tenetur provident asperiores, ullam ab eveniet ipsum sequi? Eveniet, dignissimos repellat!
+            Commodi ducimus fugiat ex inventore fugit molestiae facere quisquam totam iusto hic nisi nemo asperiores accusamus ipsa corporis, iure ipsam minima ad nam adipisci ratione deleniti, illum est? Itaque, eum.
+            Dolore quod ullam dolorum provident sequi, iusto in quibusdam mollitia totam! At recusandae ipsam numquam, rem error velit deserunt veniam eius dolorum quia ducimus facilis explicabo voluptas pariatur accusamus. Hic.
+            Ab autem quisquam velit sunt sit possimus dolorum perferendis non corporis libero architecto, culpa eligendi saepe similique tempore laboriosam praesentium, esse maxime eaque. Officia maxime tempore expedita aliquam molestiae sed.
+            Quaerat tempore voluptas ducimus vero corrupti reprehenderit qui consectetur blanditiis nulla animi repudiandae pariatur esse, beatae aliquam veniam laboriosam cumque debitis aperiam nisi quisquam? Nisi omnis voluptatem accusantium ab asperiores!
+            Magni voluptatem expedita adipisci voluptatum est rerum nesciunt eum minima facilis cumque eveniet ipsa, voluptate voluptatibus odio neque delectus assumenda totam vero tempora reprehenderit cum? Iure libero porro adipisci corporis!</p>
+        </div>
+        <div class="hint_box">
+            <h2 class="hint_h2">
+                <div class="hint_icon">
+                    <img src="img/angle_double_right.png" alt="icon">
+                </div>
+                Error messages
+            </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ab sint sequi vel ipsam. Commodi autem, alias nostrum eum cum, iusto enim vero deserunt tenetur beatae, tempora dolorem. Est, cupiditate.
+            Beatae, eligendi sit nisi, corporis laudantium eum repellendus iusto consequuntur animi eveniet magni tenetur suscipit quibusdam voluptas sequi, cumque rem officiis vero dicta cum quo molestias unde aspernatur? Ea, aliquid.
+            Blanditiis aut molestias quibusdam, dolor beatae quae consequatur ipsam odio ipsa eaque. Soluta inventore molestiae aliquam in expedita. Eum perferendis esse ducimus a molestias maxime ut neque, adipisci earum aliquid.
+            Corporis ipsam nulla doloribus, voluptate quaerat sint ex. At corrupti facilis consequuntur magnam aliquam molestias facere deserunt quos quia possimus iste vel in aspernatur quibusdam non exercitationem praesentium, iusto similique!
+            Dicta alias hic aspernatur voluptatum esse accusantium laboriosam incidunt doloribus dignissimos earum quas officiis nesciunt aperiam inventore autem, sint, tenetur provident asperiores, ullam ab eveniet ipsum sequi? Eveniet, dignissimos repellat!
+            Commodi ducimus fugiat ex inventore fugit molestiae facere quisquam totam iusto hic nisi nemo asperiores accusamus ipsa corporis, iure ipsam minima ad nam adipisci ratione deleniti, illum est? Itaque, eum.
+            Dolore quod ullam dolorum provident sequi, iusto in quibusdam mollitia totam! At recusandae ipsam numquam, rem error velit deserunt veniam eius dolorum quia ducimus facilis explicabo voluptas pariatur accusamus. Hic.
+            Ab autem quisquam velit sunt sit possimus dolorum perferendis non corporis libero architecto, culpa eligendi saepe similique tempore laboriosam praesentium, esse maxime eaque. Officia maxime tempore expedita aliquam molestiae sed.
+            Quaerat tempore voluptas ducimus vero corrupti reprehenderit qui consectetur blanditiis nulla animi repudiandae pariatur esse, beatae aliquam veniam laboriosam cumque debitis aperiam nisi quisquam? Nisi omnis voluptatem accusantium ab asperiores!
+            Magni voluptatem expedita adipisci voluptatum est rerum nesciunt eum minima facilis cumque eveniet ipsa, voluptate voluptatibus odio neque delectus assumenda totam vero tempora reprehenderit cum? Iure libero porro adipisci corporis!</p>
+        </div>
+
         <input type="button" id="closeHint" class="cover_button" value="Close">
     </div>
+</section>
 
 
     <!-- autoProduce -->

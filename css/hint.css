@@ -1,10 +1,29 @@
 .hint_container{
-    /* height: 650px; */
-    /* height: 100vh; */
     background-color: rgb(255, 255, 255);
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 200px 0;
+}
+.hint_box{
+    outline: tomato 1px solid;
+    margin: 16px 0;
+}
+.hint_icon{
+    display: inline-block;
+    width: 33px;
+}
+.hint_icon img{
+    width: 100%;
+}
+.hint_h1{
+    color: rgba(112, 172, 40, 1);
+    border-bottom: 5px rgba(112, 172, 40, 1) solid;
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 0;
+    margin-bottom: 16px;
+}
+.hint_h2{
+    font-size: 32px;
+    font-weight: 700;
+    padding: 4px 0;
+    display: inline-block;
 }
