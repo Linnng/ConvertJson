@@ -63,7 +63,7 @@ $(function(){
             // ----- fan info
             var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(Ustt[k].tag);
             var nodeType     = $("<span/>", {"class": "node_type float_L"}).text(Ustt[k].Ustt);
-            var fanId        = $("<span/>", {"class": "fan_id float_L"}).text("FAN1");
+            var fanId        = $("<span/>", {"class": "fan_id float_L"}).append($("<input/>", {"type": "text", "placeholder": "(Input Fan)", "value": "FAN1"}));
             var clear        = $("<div/>",  {"class": "clear"});
             nodeTypeBox1.append(nodeTypeTag).append(nodeType).append(fanId).append(clear);
 
@@ -159,7 +159,7 @@ $(function(){
 function showFan2_FanLTable(index)
 {
     let target;
-	
+
     if(index == -1)
         target = $('#fanTableContainer').find('.node_type_box_1');
     else
@@ -181,7 +181,7 @@ function showFan2_FanLTable(index)
             // ----- fan info
             var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(nodeTag);
             var nodeType     = $("<span/>", {"class": "node_type float_L"});
-            var fanId        = $("<span/>", {"class": "fan_id float_L", "text": "FAN2"});
+            var fanId        = $("<span/>", {"class": "fan_id float_L"}).append($("<input/>", {"type": "text", "placeholder": "(Input Fan)", "value": "FAN2"}));
             var clear        = $("<div/>",  {"class": "clear"});
             nodeTypeBox2.append(nodeTypeTag).append(nodeType).append(fanId).append(clear);
 
@@ -255,7 +255,7 @@ function showFan2_FanLTable(index)
             var thisIndex = $(this).parents('#fanTableContainer').find('.node_type_box').index($(this).next('.node_type_box'));
             SetFanTabWid(thisIndex);
         });
-  
+
 }
 
 function removeFan2_FanLTable(){

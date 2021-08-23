@@ -12,9 +12,14 @@
 .fan_id{
     background-color: rgb(255, 252, 89);
     font-size: 18px;
-    padding: 8px 15px;
+    padding: 3px 15px;
     text-align: center;
     box-sizing: border-box;
+}
+.fan_id input{
+    background-color: rgb(255, 252, 89);
+    font-size: 18px;
+    width: 130px;
 }
 
 
