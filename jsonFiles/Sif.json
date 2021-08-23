@@ -1,0 +1,387 @@
+// <~> --------------------------------------------------------------------------------
+//   Dell confidential, proprietary information covered under NDA/SLA agreements
+//   (c) Copyright 2000-2020 Dell Inc. No source code distribution allowed without prior consent from Dell
+// <~> --------------------------------------------------------------------------------
+
+// Sif TGL thermal tables version 0.1
+{
+  "sensorlists":
+  [
+    // The common sensor list should contain sensors that are common to all configurations of the platform.
+    {"common":
+      [
+        {"name":"CPU_PECI", "type":"PECI_CPU", "address":"PECI_ADDR_CPU",             "diagclass":"T_CLASS_CPU",       "pollingrate":"ONESEC_POLLING", "ReadFn":"PeciCpuTempRead",   "MaxErrors":10, "SmoothingFn":"TemperatureAverage", "SmoothingData":"(void*)&CpuTempAverage", "CriticalTemp":127},
+        {"name":"CPU_VR",   "type":"EC_DIODE", "address":"F75303M_REG_LOCAL_TEMP",    "diagclass":"T_CLASS_SKIN",      "pollingrate":"ONESEC_POLLING", "ReadFn":"F75303mTempRead",   "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127},
+        {"name":"GPU_VR",   "type":"EC_DIODE", "address":"F75303M_REG_REMOTE_TEMP1",  "diagclass":"T_CLASS_SKIN",      "pollingrate":"ONESEC_POLLING", "ReadFn":"F75303mTempRead",   "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127},
+        {"name":"GPU_VRAM", "type":"EC_DIODE", "address":"NCT7718W_REG_REMOTE_TEMP",  "diagclass":"T_CLASS_SKIN ",     "pollingrate":"ONESEC_POLLING", "ReadFn":"Nct7718wTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127},
+        {"name":"BATTERY",  "type":"BATTERY",  "address":"(uint32_t)&batA",           "diagclass":"T_CLASS_NOT_EXIST", "pollingrate":"TWOSEC_POLLING", "ReadFn":"BatteryTempRead",   "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":100}
+      ]
+    },
+    // On this platform every discrete graphics configuration has these 1 sensor.
+    {"discrete":
+      [
+        {"name":"GPU",      "type":"NVIDIA",   "address":"NV_SMB_REG",                "diagclass":"T_CLASS_VIDEO",     "pollingrate":"ONESEC_POLLING", "ReadFn":"NvidiaTempRead",    "MaxErrors":3,  "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 127}
+      ]
+    }
+  ],
+  // This platform contains 2 fans. Each fan is connected up to one of the DAC based pwm and tach controller internal
+  // to the MEC1515.
+  "fancontrollerlists":
+  [
+    {"common":
+      [
+        {"name":"FAN1CTRL", "address":"DACFAN1ADDR", "initfn":"MecFanInit", "minfanfn":"MecFanGetMinRpm", "rpmreadfn":"MecFanRpmRead", "setcpfn":"MecFanSetFanPwm",
+          "fanlist":
+            [
+              {"name":"FAN1", "address":"DACFAN1ADDR", "minrpm":0, "maxrpm":5000, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":1600, "diagfanhighspec":3600, "diagfanmaxspec":5000,  "mfgmoderpm":5000, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1000, "ksfail":200, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        },
+        {"name":"FAN2CTRL", "address":"DACFAN2ADDR", "initfn":"MecFanInit", "minfanfn":"MecFanGetMinRpm", "rpmreadfn":"MecFanRpmRead", "setcpfn":"MecFanSetFanPwm",
+          "fanlist":
+            [
+              {"name":"FAN2", "address":"DACFAN2ADDR", "minrpm":0, "maxrpm":5000, "diagclass":"T_FAN_CLASS_VIDEO", "diagfanlowspec":1900, "diagfanhighspec":3900, "diagfanmaxspec":5000,  "mfgmoderpm":5000, "fanfailuretime":30, "fanfailurecode":"TF_FAN2_STOP", "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1000, "ksfail":200, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        }
+      ]
+    },
+    {"N18P":
+      [
+        {"name":"FAN1CTRL", "address":"DACFAN1ADDR", "initfn":"MecFanInit", "minfanfn":"MecFanGetMinRpm", "rpmreadfn":"MecFanRpmRead", "setcpfn":"MecFanSetFanPwm",
+          "fanlist":
+            [
+              {"name":"FAN1_N18P", "address":"DACFAN1ADDR", "minrpm":0, "maxrpm":5000, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":1600, "diagfanhighspec":3600, "diagfanmaxspec":5000,  "mfgmoderpm":5000, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1000, "ksfail":200, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        },
+        {"name":"FAN2CTRL", "address":"DACFAN2ADDR", "initfn":"MecFanInit", "minfanfn":"MecFanGetMinRpm", "rpmreadfn":"MecFanRpmRead", "setcpfn":"MecFanSetFanPwm",
+          "fanlist":
+            [
+              {"name":"FAN2_N18P", "address":"DACFAN2ADDR", "minrpm":0, "maxrpm":5000, "diagclass":"T_FAN_CLASS_VIDEO", "diagfanlowspec":1900, "diagfanhighspec":3900, "diagfanmaxspec":5000,  "mfgmoderpm":5000, "fanfailuretime":30, "fanfailurecode":"TF_FAN2_STOP", "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1000, "ksfail":200, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        }
+      ]
+    }
+  ],
+  "thermaltables":
+  [
+    {
+      // Configuration : 15" Screen, GFX0/GFX2 Discrete graphics, Balanced USTT
+      "name":"G15GFX0BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX0/GFX2 Discrete graphics, Cool Bottom USTT
+      "name":"G15GFX0COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX0/GFX2 Discrete graphics, Quiet USTT
+      "name":"G15GFX0QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX0/GFX2 Discrete graphics, Performance USTT
+      "name":"G15GFX0PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX1 Discrete graphics, Balanced USTT (N18P)
+      "name":"G15GFX1BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX1 Discrete graphics, Cool Bottom USTT
+      "name":"G15GFX1COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX1 Discrete graphics, Quiet USTT
+      "name":"G15GFX1QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      // Configuration : 15" Screen, GFX1 Discrete graphics, Performance USTT
+      "name":"G15GFX1PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_N18P",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":60, "lowrpm":0,  "hightemp":80,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"CPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VR",   "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":70, "lowrpm":0,  "hightemp":80,  "highrpm":1900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU_VRAM", "lowtemp":72, "lowrpm":0,  "hightemp":90,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":60, "lowrpm":0,  "hightemp":75,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    }
+  ],
+  "plxthrottletables":
+  [
+    // The common plx throttling list should contain entries that are common to all configurations of the platform.
+    {"common":
+      [
+        {"sensorname":"CPU_PECI",  "throttlepoint":100},
+        {"sensorname":"CPU_VR",    "throttlepoint": 99},
+        {"sensorname":"GPU_VR",    "throttlepoint": 99},
+        {"sensorname":"GPU_VRAM",  "throttlepoint": 99},
+        {"sensorname":"BATTERY",   "throttlepoint": 55}
+      ]
+    },
+    // On this platform every discrete graphics configuration shares these plx throttling values.
+    {"discrete":
+      [
+        {"sensorname":"GPU",      "throttlepoint": 87}
+      ]
+    }
+  ],
+  "gfxthrottletables":
+  [
+    // Currently this platform contains no gfx throttling tables.
+  ],
+  // Sif CML is using dominator that allows fans to be set to max.  This requires 1 zone
+  // that contains all of the fans to be turned on to max when the game shift mode is enabled.
+  "fangains":
+  {
+    "configs":
+    [
+      {
+        "name":"ALL",
+        "zones":
+        [
+          {"zone0":["FAN1"]},
+          {"zone1":["FAN2"]}
+        ]
+      }
+    ]
+  }
+}
+

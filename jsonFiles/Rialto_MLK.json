@@ -1,0 +1,1167 @@
+{
+  "sensorlists":
+  [
+    {"common":
+      [
+        {"name":"CPU_PECI", "type":"PECI_CPU", "address":"PECI_ADDR_CPU",    "diagclass":"T_CLASS_CPU",       "pollingrate":"ONESEC_POLLING", "ReadFn":"PeciCpuTempRead",   "MaxErrors":10, "SmoothingFn":"TemperatureAverage", "SmoothingData":"(void*)&CpuTempAverage", "CriticalTemp":127, "crittime":3},
+        {"name":"SKIN",     "type":"EC_DIODE", "address":"GUARDIAN_DIODE1a", "diagclass":"T_CLASS_SKIN",      "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 98, "crittime":3},
+        {"name":"PCH",      "type":"PCH_OOB",  "address":"0x00",             "diagclass":"T_CLASS_SKIN",      "pollingrate":"ONESEC_POLLING", "ReadFn":"PchOobTempRead",    "MaxErrors":10, "SmoothingFn":"TemperatureAverage", "SmoothingData":"(void*)&PchTempAverage", "CriticalTemp":115, "crittime":3},
+        {"name":"MEM",      "type":"EC_DIODE", "address":"GUARDIAN_DIODE3",  "diagclass":"T_CLASS_MEMORY",    "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 98, "crittime":3},
+        {"name":"SSD",      "type":"EC_DIODE", "address":"GUARDIAN_DIODE2a", "diagclass":"T_CLASS_OTHER",     "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 98, "crittime":3},
+        {"name":"NGFF",     "type":"EC_DIODE", "address":"GUARDIAN_DIODE4",  "diagclass":"T_CLASS_OTHER",     "pollingrate":"ONESEC_POLLING", "ReadFn":"MecDiodeTempRead",  "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 98, "crittime":3},
+        {"name":"BATTERY",  "type":"BATTERY",  "address":"(uint32_t)&batA",  "diagclass":"T_CLASS_NOT_EXIST", "pollingrate":"TWOSEC_POLLING", "ReadFn":"BatteryTempRead",   "MaxErrors":10, "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp":127, "crittime":3}
+      ]
+    },
+    {"discrete":
+      [
+        {"name":"GPU",      "type":"NVIDIA",   "address":"NV_SMB_REG",       "diagclass":"T_CLASS_VIDEO",     "pollingrate":"ONESEC_POLLING", "ReadFn":"NvidiaTempRead",    "MaxErrors":3,  "SmoothingFn":"NoSmoothing",        "SmoothingData":"NULL",                   "CriticalTemp": 99, "crittime":3}
+      ]
+    }
+  ],
+  "fancontrollerlists":
+  [
+    {"RTMLK15":
+      [
+        {"name":"GFAN1CTRL", "address":"GFAN1ADDR", "initfn":"MecGuardianInit", "minfanfn":"MecGuardianGetMinRpm", "rpmreadfn":"MecGuardianRpmRead", "setcpfn":"MecGuardianSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN1", "address":"GFAN1ADDR", "minrpm":0, "maxrpm":5200, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":2900, "diagfanhighspec":4800, "diagfanmaxspec":4800, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mfgmoderpm":4000, "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1200, "ksfail":100, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        },
+        {"name":"GFAN2CTRL", "address":"GFAN2ADDR", "initfn":"MecGuardianInit", "minfanfn":"MecGuardianGetMinRpm", "rpmreadfn":"MecGuardianRpmRead", "setcpfn":"MecGuardianSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN2", "address":"GFAN2ADDR", "minrpm":0, "maxrpm":5200, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":2900, "diagfanhighspec":4800, "diagfanmaxspec":4800, "fanfailuretime":30, "fanfailurecode":"TF_FAN2_STOP", "mfgmoderpm":4000, "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1200, "ksfail":100, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        }
+      ]
+    },
+    {"RTMLK17":
+      [
+        {"name":"GFAN1CTRL", "address":"GFAN1ADDR", "initfn":"MecGuardianInit", "minfanfn":"MecGuardianGetMinRpm", "rpmreadfn":"MecGuardianRpmRead", "setcpfn":"MecGuardianSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN1_17", "address":"GFAN1ADDR", "minrpm":0, "maxrpm":4300, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":2000, "diagfanhighspec":4000, "diagfanmaxspec":4000, "fanfailuretime":30, "fanfailurecode":"TF_FAN1_STOP", "mfgmoderpm":4000, "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1200, "ksfail":100, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        },
+        {"name":"GFAN2CTRL", "address":"GFAN2ADDR", "initfn":"MecGuardianInit", "minfanfn":"MecGuardianGetMinRpm", "rpmreadfn":"MecGuardianRpmRead", "setcpfn":"MecGuardianSetFanPwm", "optionalfan":"NULL",
+          "fanlist":
+            [
+              {"name":"FAN2_17", "address":"GFAN2ADDR", "minrpm":0, "maxrpm":4300, "diagclass":"T_FAN_CLASS_CPU", "diagfanlowspec":2000, "diagfanhighspec":4000, "diagfanmaxspec":4000, "fanfailuretime":30, "fanfailurecode":"TF_FAN2_STOP", "mfgmoderpm":4000, "mincont0time":30, "ksstart":30, "kswait":3, "kspass":1200, "ksfail":100, "ksbump":5, "esecup":500, "esecdown":1000, "qsecup":250, "qsecdown":500, "hsecup":100, "hsecdown":200, "secup":50, "secdown":100, "powerfn":"NULL", "diagfanerrorpercent": 40, "diagsfanvalidsamples": 1, "diagsfansampleinterval": 90}
+            ]
+        }
+      ]
+    }
+  ],
+  "thermaltables":
+  [
+    {
+      "name":"RTMLK15UMABAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4700, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4400, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15UMACOOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4700, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4400, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4400, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15UMAQUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15UMAPERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15UMANOFAN1",
+      "fans":
+      [
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15UMANOFAN2",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX1BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX1COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX1QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX1PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX1NOFAN1",
+      "fans":
+      [
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX1NOFAN2",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX2BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX2COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4500, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX2QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX2PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX2NOFAN1",
+      "fans":
+      [
+        {
+          "fanname":"FAN2",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK15GFX2NOFAN2",
+      "fans":
+      [
+        {
+          "fanname":"FAN1",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":52, "lowrpm":0, "hightemp":72,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":55, "lowrpm":0, "hightemp":80,  "highrpm":4800, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":65, "lowrpm":0, "hightemp":78,  "highrpm":4800, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17UMABAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17UMACOOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17UMAQUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3200, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3300, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17UMAPERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17UMANOFAN1",
+      "fans":
+      [
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17UMANOFAN2",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX1BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX1COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3500, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3500, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3600, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3600, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX1QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3200, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3200, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3300, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX1PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX1NOFAN1",
+      "fans":
+      [
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX1NOFAN2",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX2BAL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4100, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX2COOL",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4000, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4000, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4100, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4100, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX2QUIET",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3700, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3700, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":3900, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":3900, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX2PERF",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4300, "ttrip":255, "ttriphys":0}
+          ]
+        },
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4300, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX2NOFAN1",
+      "fans":
+      [
+        {
+          "fanname":"FAN2_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4300, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    },
+    {
+      "name":"RTMLK17GFX2NOFAN2",
+      "fans":
+      [
+        {
+          "fanname":"FAN1_17",
+          "nodes":
+          [
+            {"sensorname":"CPU_PECI", "lowtemp":90, "lowrpm":0, "hightemp":98,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":42, "lowrpm":0, "hightemp":66,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SKIN",     "lowtemp":48, "lowrpm":0, "hightemp":65,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"PCH",      "lowtemp":70, "lowrpm":0, "hightemp":78,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"MEM",      "lowtemp":73, "lowrpm":0, "hightemp":83,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"SSD",      "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"NGFF",     "lowtemp":67, "lowrpm":0, "hightemp":77,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":66, "lowrpm":0, "hightemp":81,  "highrpm":4300, "ttrip":255, "ttriphys":0},
+            {"sensorname":"GPU",      "lowtemp":70, "lowrpm":0, "hightemp":76,  "highrpm":4300, "ttrip":255, "ttriphys":0}
+          ]
+        }
+      ]
+    }
+  ],
+  "plxthrottletables":
+  [
+    {"common":
+      [
+        {"sensorname":"CPU_PECI", "throttlepoint":100},
+        {"sensorname":"SKIN",     "throttlepoint": 95},
+        {"sensorname":"PCH",      "throttlepoint":108},
+        {"sensorname":"MEM",      "throttlepoint": 95},
+        {"sensorname":"SSD",      "throttlepoint": 95},
+        {"sensorname":"NGFF",     "throttlepoint": 95},
+        {"sensorname":"BATTERY",  "throttlepoint":127}
+      ]
+    }
+  ],
+  "gfxthrottletables":
+  [
+    {"common_15":
+      [
+        {"sensorname":"SSD",       "z0min":0, "z0max":1, "z0dec":46, "z0inc":48, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    },
+    {"common_17":
+      [
+        {"sensorname":"SSD",       "z0min":0, "z0max":1, "z0dec":41, "z0inc":43, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    },
+    {"discrete_15":
+      [
+        {"sensorname":"GPU",        "z0min":0, "z0max":1, "z0dec":66, "z0inc":80, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    },
+    {"discrete_17":
+      [
+        {"sensorname":"GPU",        "z0min":0, "z0max":1, "z0dec":62, "z0inc":80, "z1min":1, "z1max":1, "z1dec":255, "z1inc":255 }
+      ]
+    }
+  ],
+  "msthermals":
+  {
+    "configs":
+    [
+      {
+        "name":"common_15",
+        "sensor":"SKIN",
+        "nodes":
+          [
+            {"fan":"FAN1", "ontemp":76, "crittemp":82, "onhys":74, "crithys":2, "onrpm":3000, "rampdownrate":3000, "crittime":10},
+            {"fan":"FAN2", "ontemp":76, "crittemp":82, "onhys":74, "crithys":2, "onrpm":3000, "rampdownrate":3000, "crittime":10}
+          ]
+      },
+      {
+        "name":"common_17",
+        "sensor":"SKIN",
+        "nodes":
+          [
+            {"fan":"FAN1_17", "ontemp":74, "crittemp":77, "onhys":72, "crithys":2, "onrpm":2500, "rampdownrate":3000, "crittime":10},
+            {"fan":"FAN2_17", "ontemp":74, "crittemp":77, "onhys":72, "crithys":2, "onrpm":2500, "rampdownrate":3000, "crittime":10}
+          ]
+      }
+    ]
+  }
+}
+
