@@ -198,7 +198,7 @@ function cusParseInt(str){
 
 // Export JSON File
 function save(){
-    var blob = new Blob([getJsonString()], {type: "text/plain;charset=utf-8"});
+    var blob = new Blob([executeContent(getJsonString())], {type: "text/plain;charset=utf-8"});
     saveAs(blob, 'LinearThermalsSys.json');
 }
 
@@ -206,3 +206,16 @@ function getJsonString(){
     let jsonString = JSON.stringify(result, null, 2);
     return jsonString;
 }
+
+function executeContent(resultStr){
+	let result = new Array();
+	let lines = resultStr.split(/[\n\r]+/);
+	lines.forEach(element =>{
+		if(element.indexOf(',') > -1 && element.indexOf('},') == -1 && element.indexOf('],') == -1)
+			result.push(element);
+		else
+			result.push(element + '\n');
+	});
+	return result.join('').replaceAll(',          ',',').replaceAll(',        ',',').replaceAll(',  ',',').replaceAll(',  ',',');
+}
+
