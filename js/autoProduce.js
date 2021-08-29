@@ -7,16 +7,53 @@ function ObjInit(jsonFile){
     autoProdMixChg($('#chgContainer'), jsonFile.chargerthrottletables);
     autoProdMixFan($('#FanContainer'), jsonFile.fancontrollerlists);
     autoProdMixMs($('#MsContainer'), jsonFile.msthermals);
-    console.log(errArr);
-
+	autoProdMixThermal($('#fanTableContainer'), jsonFile.thermaltables);
+    
+	// err
+	if(errArr.length > 0){
+		// warn級別log輸出
+		console.warn('--------------------Error Message--------------------');
+		errArr.forEach(function(val,index){
+			console.warn(val);
+		});
+	}
 }
 
 // =====================for errMsg========================
 var errArr = [];
-function errAdd(jqSelectorDesc){
-    let errMsg = $(jqSelectorDesc).parents('.container').attr('id') + ' -> 資料異常, 缺少/遺失部分資料';
+function errAdd(jqSelectorDesc, desc){
+    let errMsg = $(jqSelectorDesc).parents('.container').attr('id') + ' -> ' + desc;
     if(!errArr.includes(errMsg))
         errArr.push(errMsg);
+}
+
+// =====================for thermaltables(fan2主控權在fancontrollerlists)========================
+function autoProdMixThermal(containerName, jsonObj){
+    if(jsonObj != undefined){
+        // reset
+        $(containerName).find('.sensor_sku_container').remove();
+		
+		// prod-sku
+		let nameArr = new Array();
+		jsonObj.forEach(function(val,index){
+			if(val.name.indexOf('COOL') > -1 && !nameArr.includes(val.name)){
+				nameArr.push(val.name.substring(0, val.name.indexOf('COOL')));
+			}
+		});
+		nameArr.forEach(function(val,index){
+			addThermalSkuProd($(containerName), val);
+		});
+		
+        // prod-val
+        jsonObj.forEach(function(val,index){
+			if(val.name.indexOf('BAL') > -1 || val.name.indexOf('COOL') > -1 || val.name.indexOf('QUIET') > -1 || val.name.indexOf('PERF') > -1)
+				autoProdThermal(containerName, val.name, val['fans']);
+			else
+				errAdd($(containerName).find('#addModuleBtn'), val.name + '為非標準模式');
+        });
+		
+		SetSensorComTabWid(-1);
+    }
 }
 
 // =====================for msthermals(fan2主控權在fancontrollerlists)========================
@@ -93,6 +130,72 @@ function autoProdMix(containerName, jsonObj){
     });
 }
 
+function autoProdThermal(containerName, name, jsonObj){
+	
+	let modelName;
+	let mode;
+	
+	if(name.indexOf('BAL') > -1){
+		modelName = name.substring(0, name.indexOf('BAL'));
+		mode = 'BAL';
+	}else if(name.indexOf('COOL') > -1){
+		modelName = name.substring(0, name.indexOf('COOL'));
+		mode = 'COOL';
+	}else if(name.indexOf('QUIET') > -1){
+		modelName = name.substring(0, name.indexOf('QUIET'));
+		mode = 'QUIET';
+	}else if(name.indexOf('PERF') > -1){
+		modelName = name.substring(0, name.indexOf('PERF'));
+		mode = 'PERF';
+	}
+	
+	jsonObj.forEach(function(val,index){
+		
+		// mainElement
+		let ele;
+		if(val['fanname'].indexOf('FAN1') > -1){
+			ele = $(containerName).find('#' + modelName + ' .' + mode).find('.nodes_tab');
+		}else{
+			ele = $(containerName).find('#' + modelName + ' .' + mode).next( ".node_type_box_2").find('.nodes_tab');
+		}
+		
+		// setFanName
+		$(ele).parents('.node_type_box').find('.fan_id input').val(val['fanname']);
+		
+		// thead
+		$(ele).append(`<tr class="nodes_tr">
+                            <th style="width: 80px;"><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
+                            <th style="width: 80px;"><span class="transparet">btn</span></th>
+                            <th style="width: 100px;">Sensor Name</th>
+                            <th style="width: 182.5px;">Low Temp</th>
+                            <th style="width: 182.5px;">Low Rpm</th>
+                            <th style="width: 182.5px;">High Temp</th>
+                            <th style="width: 182.5px;">High Rpm</th>
+                            <th class="hidden" style="width: 182.5px;">ttrip</th>
+                            <th class="hidden" style="width: 182.5px;">ttriphys</th>
+                        </tr>`);
+		
+		// tbody
+		let keyArr = ['sensorname', 'lowtemp', 'lowrpm', 'hightemp', 'highrpm'];
+		val['nodes'].forEach(function(v1,i1){
+			var tr = $("<tr/>", {"class": "nodes_tr"});
+			$(ele).append(tr);
+			tr.append(`<td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>`);
+			tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`);
+            keyArr.forEach(function(key, index) {
+                // td setVal
+                let td = $("<td/>");
+                tr.append(td);
+				let input = $("<input/>");
+                td.append(input);
+                input.val(v1[key]);
+            });
+			tr.append(`<td class="hidden"><input type="text" value="255"></td>`);
+			tr.append(`<td class="hidden"><input type="text" value="0"></td>`);
+		});
+	});
+}
+
 function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
 
     // reset
@@ -151,13 +254,13 @@ function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
                 try{
                     input.val(jsonObjArr[i][key]);
                 }catch(err) {
-                    errAdd(jqSelectorDesc);
+                    errAdd(jqSelectorDesc, '資料異常');
                 }
             });
         }
         // fan、ms資料大於2為異常，添加異常訊息
         if(jsonObjArr.length > 2)
-            errAdd(jqSelectorDesc);
+            errAdd(jqSelectorDesc, '資料異常');
     }else{
         jsonObjArr.forEach(function(val,index){
             let tr = $("<tr/>", {"class": trClassName});
@@ -389,6 +492,113 @@ function addMsSkuProd(e, titleName, sensorName){
         sensorSkuContainer.append(scrollBoxDiv);;
 
         $(e).append(sensorSkuContainer);
+}
+
+function addThermalSkuProd(e, titleName){
+
+        var nodeSkuContainer = $("<div/>", {"class": "sensor_sku_container", "id": titleName});
+
+        // title
+        var skuInputTitle = $("<input/>", {"class": "sku_title", "type": "text", "placeholder": "(please type sku name)"});
+		skuInputTitle.val(titleName);
+        var skuH3 = $("<h3/>", {"class": "float_L"}).append(skuInputTitle);
+        nodeSkuContainer.append(skuH3);
+
+        var sensorFuncBtns =
+        [
+            {'box': 'function_btn_box float_R', 'div':'delete_module_btn', 'onclick':'removeSku(this)',       "span":'delete sku'}
+        ];
+        for(var i=0; i<sensorFuncBtns.length ;i++)
+        {
+            var funcBtnSpan= $("<span/>").text(sensorFuncBtns[i].span);
+            var funcBtn    = $("<div/>", {"class": sensorFuncBtns[i].div, "onclick": sensorFuncBtns[i].onclick}).append(funcBtnSpan);
+            var funcBtnBox = $("<div/>", {"class": sensorFuncBtns[i].box}).append(funcBtn);
+
+            nodeSkuContainer.append(funcBtnBox);
+        }
+        nodeSkuContainer.append( $("<div/>", {"class": "clear"}) );
+
+        // fan table
+        var Ustt =
+        [
+            {"Ustt": '"Balance" MODE [Defalut Mode]', "tag": "BAL"},
+            {"Ustt": '"Cool" MODE',                   "tag": "COOL"},
+            {"Ustt": '"Quiet" MODE',                  "tag": "QUIET"},
+            {"Ustt": '"Performance" MODE',            "tag": "PERF"}
+        ];
+
+        for(var k=0; k<Ustt.length; k++)
+        {
+            var nodeTypeBox1 = $("<div/>", {"class": "node_type_box node_type_box_1 " + Ustt[k].tag});
+
+            // ----- fan info
+            var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(Ustt[k].tag);
+            var nodeType     = $("<span/>", {"class": "node_type float_L"}).text(Ustt[k].Ustt);
+            var fanId        = $("<span/>", {"class": "fan_id float_L"}).append($("<input/>", {"type": "text", "placeholder": "(Input Fan)", "value": "FAN1"}));
+            var clear        = $("<div/>",  {"class": "clear"});
+            nodeTypeBox1.append(nodeTypeTag).append(nodeType).append(fanId).append(clear);
+
+            // ----- fan table
+            var nodeTab = $("<table/>", {"class": "nodes_tab"});
+            nodeTypeBox1.append(nodeTab);
+            nodeSkuContainer.append(nodeTypeBox1);
+        }
+
+        $(e).append(nodeSkuContainer);
+
+        // reset the node_type_box_1 width
+        $(e).find('.sensor_sku_container:last .node_type_box').each(function(){
+            var nodeTypeBoxIndex = $(this).index('.node_type_box');
+            SetFanTabWid(nodeTypeBoxIndex);
+        });
+
+        // Fan 2------------------------------------------------------------
+        if(TwoFanCheck)
+        {
+            // fins the .sensor_sku_container index of fan table.
+            var nodeTypeBoxIndex = $(e).find('.sensor_sku_container:last').index('#fanTableContainer .sensor_sku_container');
+            showFan2_thermalFanLTable(nodeTypeBoxIndex);
+        }
+}
+
+function showFan2_thermalFanLTable(index)
+{
+    let target;
+
+    if(index == -1)
+        target = $('#fanTableContainer').find('.node_type_box_1');
+    else
+        target = $('#fanTableContainer').find('.sensor_sku_container:eq(' + index +') .node_type_box_1');
+
+
+        $(target).each(function(){
+
+            // ----- count sensor
+            var nodeTag  = $(this).find(".node_type_tag").text();   // BAL, COOL, QUIET, PERF
+            var nodeSensor = [];    // array for store each table's sensor node
+            $(this).find('.nodes_tab .nodes_tr').each(function(){
+                if( $(this).find('td:eq(2) input').val() != undefined)
+                    nodeSensor.push($(this).find('td:eq(2) input').val());
+            });
+
+            var nodeTypeBox2 = $("<div/>", {"class": "node_type_box node_type_box_2"});
+            // ----- fan info
+            var nodeTypeTag  = $("<p/>", {"class": "hidden node_type_tag"}).text(nodeTag);
+            var nodeType     = $("<span/>", {"class": "node_type float_L"});
+            var fanId        = $("<span/>", {"class": "fan_id float_L"}).append($("<input/>", {"type": "text", "placeholder": "(Input Fan)", "value": "FAN2"}));
+            var clear        = $("<div/>",  {"class": "clear"});
+            nodeTypeBox2.append(nodeTypeTag).append(nodeType).append(fanId).append(clear);
+
+            // ----- fan table
+            var nodeTab = $("<table/>", {"class": "nodes_tab"});
+            nodeTypeBox2.append(nodeTab);
+
+            $(this).after(nodeTypeBox2);
+
+            // reset the width
+            var thisIndex = $(this).parents('#fanTableContainer').find('.node_type_box').index($(this).next('.node_type_box'));
+            SetFanTabWid(thisIndex);
+        });
 }
 
  var fanInitTit =
