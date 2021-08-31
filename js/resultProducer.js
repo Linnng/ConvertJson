@@ -50,36 +50,59 @@ function jsonProduce(){
 
 
 // ========================= 3.SENSOR NODES ===============================
-    // result['thermaltables'] = [];
-    // $('.node_type_box').each(function(){
-        // let area = {};
-        // area['name'] = 'SP14_' + $(this).find('p').text();
-        // area['fans'] = [{"fanname": $(this).find('span').text() ,"nodes":[]}];
-
-        // for(var i = 1; i < $(this).find('.nodes_tr').length; i++){
-            // check how many <th> in the first <tr> in node_type_box DOM
-            // let thQuan = $(this).find('.nodes_tr:eq(0) th').length;
-
-            // let node = {};
-            // for(var k = 0; k < thQuan; k++){
-                // key
-                // let key = $(this).find('.nodes_tr:eq(0) th:eq(' + k + ')').text().replaceAll(' ','').toLowerCase();
-
-                // value
-                // let valTd = $(this).find('.nodes_tr:eq(' + i + ') td:eq(' + k + ')');
-                // let value = valTd.text();
-                // if(value == ''){
-                    // value = valTd.find('input').val();
-                // }
-
-                // if(key != 'no'){
-                    // node[key] = cusParseInt(value);
-                // }
-            // }
-            // area.fans[0].nodes.push(node);
-        // }
-        // result.thermaltables.push(area);
-    // });
+	$('#fanTableContainer .sensor_sku_container').each(function(i, e){
+		if(i == 0)
+			result['thermaltables'] = [];
+		
+		$(e).find('.node_type_box_1').each(function(ii, ee){
+			
+			// SkuName + Mode
+			let tArea = {};
+			tArea['name'] = $(e).attr('id') + $(ee).find('.node_type_tag').text();
+			tArea['fans'] = [];
+			result.thermaltables.push(tArea);
+			
+			// FAN1
+			let fan1Area = {};
+			fan1Area['fanname'] = $(ee).find('.fan_id input').val();
+			fan1Area['nodes'] = [];
+			tArea.fans.push(fan1Area);
+			$(ee).find('.nodes_tab:eq(0) tr').not(':eq(0)').each(function(i1, e1){
+				let ob = {}; 
+				$(ee).find('.nodes_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
+					// key
+					let key = $(e2).text().replaceAll(' ','').toLowerCase();
+					// value
+					let valTd = $(ee).find('.nodes_tab:eq(0) tr:eq(' + (i1 + 1) + ')').find('td:eq(' + (i2 + 1) + ')');
+					let value = valTd.find('input').val();      // for input data
+					ob[key] = value;
+				});
+				fan1Area.nodes.push(ob);
+			});
+			
+			// FAN2
+			let fan2 = $(ee).next('.node_type_box_2');
+			if($(fan2).find('.node_type_tag').text() == $(ee).find('.node_type_tag').text()){
+				let fan1Area = {};
+				fan1Area['fanname'] = $(fan2).find('.fan_id input').val();
+				fan1Area['nodes'] = [];
+				tArea.fans.push(fan1Area);
+				$(fan2).find('.nodes_tab:eq(0) tr').not(':eq(0)').each(function(i1, e1){
+					let ob = {}; 
+					$(fan2).find('.nodes_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
+						// key
+						let key = $(e2).text().replaceAll(' ','').toLowerCase();
+						// value
+						let valTd = $(fan2).find('.nodes_tab:eq(0) tr:eq(' + (i1 + 1) + ')').find('td:eq(' + (i2 + 1) + ')');
+						let value = valTd.find('input').val();      // for input data
+						ob[key] = value;
+					});
+				fan1Area.nodes.push(ob);
+				});
+			}
+			
+		});
+	});
 
 
 // ========================= 4.plxthrottletables =========================	
