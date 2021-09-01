@@ -7,16 +7,16 @@ function ObjInit(jsonFile){
     autoProdMixChg($('#chgContainer'), jsonFile.chargerthrottletables);
     autoProdMixFan($('#FanContainer'), jsonFile.fancontrollerlists);
     autoProdMixMs($('#MsContainer'), jsonFile.msthermals);
-	autoProdMixThermal($('#fanTableContainer'), jsonFile.thermaltables);
-    
-	// err
-	if(errArr.length > 0){
-		// warn級別log輸出
-		console.warn('--------------------Error Message--------------------');
-		errArr.forEach(function(val,index){
-			console.warn(val);
-		});
-	}
+    autoProdMixThermal($('#fanTableContainer'), jsonFile.thermaltables);
+
+    // err
+    if(errArr.length > 0){
+        // warn級別log輸出
+        console.warn('--------------------Error Message--------------------');
+        errArr.forEach(function(val,index){
+            console.warn(val);
+        });
+    }
 }
 
 // =====================for errMsg========================
@@ -32,27 +32,27 @@ function autoProdMixThermal(containerName, jsonObj){
     if(jsonObj != undefined){
         // reset
         $(containerName).find('.sensor_sku_container').remove();
-		
-		// prod-sku
-		let nameArr = new Array();
-		jsonObj.forEach(function(val,index){
-			if(val.name.indexOf('COOL') > -1 && !nameArr.includes(val.name)){
-				nameArr.push(val.name.substring(0, val.name.indexOf('COOL')));
-			}
-		});
-		nameArr.forEach(function(val,index){
-			addThermalSkuProd($(containerName), val);
-		});
-		
+
+        // prod-sku
+        let nameArr = new Array();
+        jsonObj.forEach(function(val,index){
+            if(val.name.indexOf('COOL') > -1 && !nameArr.includes(val.name)){
+                nameArr.push(val.name.substring(0, val.name.indexOf('COOL')));
+            }
+        });
+        nameArr.forEach(function(val,index){
+            addThermalSkuProd($(containerName), val);
+        });
+
         // prod-val
         jsonObj.forEach(function(val,index){
-			if(val.name.indexOf('BAL') > -1 || val.name.indexOf('COOL') > -1 || val.name.indexOf('QUIET') > -1 || val.name.indexOf('PERF') > -1)
-				autoProdThermal(containerName, val.name, val['fans']);
-			else
-				errAdd($(containerName).find('#addModuleBtn'), val.name + '為非標準模式');
+            if(val.name.indexOf('BAL') > -1 || val.name.indexOf('COOL') > -1 || val.name.indexOf('QUIET') > -1 || val.name.indexOf('PERF') > -1)
+                autoProdThermal(containerName, val.name, val['fans']);
+            else
+                errAdd($(containerName).find('#addModuleBtn'), val.name + '為非標準模式');
         });
-		
-		SetSensorComTabWid(-1);
+
+        SetSensorComTabWid(-1);
     }
 }
 
@@ -131,39 +131,39 @@ function autoProdMix(containerName, jsonObj){
 }
 
 function autoProdThermal(containerName, name, jsonObj){
-	
-	let modelName;
-	let mode;
-	
-	if(name.indexOf('BAL') > -1){
-		modelName = name.substring(0, name.indexOf('BAL'));
-		mode = 'BAL';
-	}else if(name.indexOf('COOL') > -1){
-		modelName = name.substring(0, name.indexOf('COOL'));
-		mode = 'COOL';
-	}else if(name.indexOf('QUIET') > -1){
-		modelName = name.substring(0, name.indexOf('QUIET'));
-		mode = 'QUIET';
-	}else if(name.indexOf('PERF') > -1){
-		modelName = name.substring(0, name.indexOf('PERF'));
-		mode = 'PERF';
-	}
-	
-	jsonObj.forEach(function(val,index){
-		
-		// mainElement
-		let ele;
-		if(val['fanname'].indexOf('FAN1') > -1){
-			ele = $(containerName).find('#' + modelName + ' .' + mode).find('.nodes_tab');
-		}else{
-			ele = $(containerName).find('#' + modelName + ' .' + mode).next( ".node_type_box_2").find('.nodes_tab');
-		}
-		
-		// setFanName
-		$(ele).parents('.node_type_box').find('.fan_id input').val(val['fanname']);
-		
-		// thead
-		$(ele).append(`<tr class="nodes_tr">
+
+    let modelName;
+    let mode;
+
+    if(name.indexOf('BAL') > -1){
+        modelName = name.substring(0, name.indexOf('BAL'));
+        mode = 'BAL';
+    }else if(name.indexOf('COOL') > -1){
+        modelName = name.substring(0, name.indexOf('COOL'));
+        mode = 'COOL';
+    }else if(name.indexOf('QUIET') > -1){
+        modelName = name.substring(0, name.indexOf('QUIET'));
+        mode = 'QUIET';
+    }else if(name.indexOf('PERF') > -1){
+        modelName = name.substring(0, name.indexOf('PERF'));
+        mode = 'PERF';
+    }
+
+    jsonObj.forEach(function(val,index){
+
+        // mainElement
+        let ele;
+        if(val['fanname'].indexOf('FAN1') > -1){
+            ele = $(containerName).find('#' + modelName + ' .' + mode).find('.nodes_tab');
+        }else{
+            ele = $(containerName).find('#' + modelName + ' .' + mode).next( ".node_type_box_2").find('.nodes_tab');
+        }
+
+        // setFanName
+        $(ele).parents('.node_type_box').find('.fan_id input').val(val['fanname']);
+
+        // thead
+        $(ele).append(`<tr class="nodes_tr">
                             <th style="width: 80px;"><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
                             <th style="width: 80px;"><span class="transparet">btn</span></th>
                             <th style="width: 100px;">Sensor Name</th>
@@ -174,26 +174,26 @@ function autoProdThermal(containerName, name, jsonObj){
                             <th class="hidden" style="width: 182.5px;">ttrip</th>
                             <th class="hidden" style="width: 182.5px;">ttriphys</th>
                         </tr>`);
-		
-		// tbody
-		let keyArr = ['sensorname', 'lowtemp', 'lowrpm', 'hightemp', 'highrpm'];
-		val['nodes'].forEach(function(v1,i1){
-			var tr = $("<tr/>", {"class": "nodes_tr"});
-			$(ele).append(tr);
-			tr.append(`<td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>`);
-			tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`);
+
+        // tbody
+        let keyArr = ['sensorname', 'lowtemp', 'lowrpm', 'hightemp', 'highrpm'];
+        val['nodes'].forEach(function(v1,i1){
+            var tr = $("<tr/>", {"class": "nodes_tr"});
+            $(ele).append(tr);
+            tr.append(`<td><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></td>`);
+            tr.append(`<td><div class="sensorDelete" onclick="removeRow(this);"><span>Delete</span></div></td>`);
             keyArr.forEach(function(key, index) {
                 // td setVal
                 let td = $("<td/>");
                 tr.append(td);
-				let input = $("<input/>");
+                let input = $("<input/>");
                 td.append(input);
                 input.val(v1[key]);
             });
-			tr.append(`<td class="hidden"><input type="text" value="255"></td>`);
-			tr.append(`<td class="hidden"><input type="text" value="0"></td>`);
-		});
-	});
+            tr.append(`<td class="hidden"><input type="text" value="255"></td>`);
+            tr.append(`<td class="hidden"><input type="text" value="0"></td>`);
+        });
+    });
 }
 
 function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
@@ -500,7 +500,7 @@ function addThermalSkuProd(e, titleName){
 
         // title
         var skuInputTitle = $("<input/>", {"class": "sku_title", "type": "text", "placeholder": "(please type sku name)"});
-		skuInputTitle.val(titleName);
+        skuInputTitle.val(titleName);
         var skuH3 = $("<h3/>", {"class": "float_L"}).append(skuInputTitle);
         nodeSkuContainer.append(skuH3);
 
