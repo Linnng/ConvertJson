@@ -233,12 +233,13 @@ function getJsonString(){
 function executeContent(resultStr){
     let result = new Array();
     let lines = resultStr.split(/[\n\r]+/);
-    lines.forEach(element =>{
+    lines.forEach(element => {
         if(element.indexOf(',') > -1 && element.indexOf('},') == -1 && element.indexOf('],') == -1)
             result.push(element);
         else
             result.push(element + '\n');
     });
-    return result.join('').replaceAll(',          ',',').replaceAll(',        ',',').replaceAll(',  ',',').replaceAll(',  ',',');
+	let reg = new RegExp(/,[\s]{0,}\x22/g);
+	return result.join('').replace(reg, ',"');
 }
 
