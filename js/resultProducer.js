@@ -239,7 +239,8 @@ function executeContent(resultStr){
         else
             result.push(element + '\n');
     });
-	let reg = new RegExp(/,[\s]{0,}\x22/g);
-	return result.join('').replace(reg, ',"');
+	let reg = new RegExp(/\x22,[\s]{0,}\x22/g);
+	let reg2 = new RegExp(/,[\s]{10,14}\x22/g);
+	return result.join('').replace(reg, '","').replace(reg2, ',"');
 }
 
