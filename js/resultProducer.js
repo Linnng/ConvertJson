@@ -1,7 +1,32 @@
 var result = {};
 
+// check input data, ok return true, fail return false
+function dataCheck(){
+	let errCount = 0;
+	$('.sensor_sku_container input').each(function(i, e){
+		let val = $(e).val().trim();
+		if(val == ''){
+			errCount++;
+			$(e).css('background-color', 'yellow');
+		}else{
+			$(e).css('background-color', '');
+		}			
+	});
+	if(errCount > 0){
+		setTimeout(function() {
+			alert('Data輸入不完全');
+		}, 1);
+		return false;
+	}else{
+		return true;
+	}
+}
 
 function jsonProduce(){
+	
+	// check input data, ok return true, fail return false
+	if(!dataCheck())
+		return;
 
     let jsonResultDiv = $('#jsonResult');
 
@@ -58,7 +83,7 @@ function jsonProduce(){
 
             // SkuName + Mode
             let tArea = {};
-            tArea['name'] = $(e).attr('id') + $(ee).find('.node_type_tag').text();
+            tArea['name'] = $(e).find('.float_L .sku_title:eq(0)').val().trim() + $(ee).find('.node_type_tag').text();
             tArea['fans'] = [];
             result.thermaltables.push(tArea);
 
