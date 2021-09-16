@@ -1080,7 +1080,11 @@
 <section id="coverHint" class="hidden">
     <div class="container">
         <h1 class="hint_h1">User Guide</h1>
-        <!-- <h1 class="hint_h1">User Guide</h1> -->
+
+        <!-- Flex side bar buttons -->
+        <div class="side_bar_container">
+            <div id="closeHint" class="side_bar_button"><span>Close</span></div>
+        </div>
 
         <div class="hint_container">
             <h2 class="hint_h2">Why is there a Thermal table convert tool</h2>
@@ -1221,9 +1225,9 @@
                 <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Fan description</h3>
                 <p class="hint_p hint_mar_bot_08">
                     <strong>KSStart:</strong> Kick Start control point. This is the control point value (0 ~ 255) to initially attempt to start the fan at when going from OFF to ON.<br>
-                    <strong>KSWait:</strong> Kick Start wait ticks.  This is the number of 1/8 seconds ticks that the fan must be above the KSPass RPM value in order to consider the fan started and running correctly.<br>
-                    <strong>KSPass:</strong> Kick Start pass RPM value.  This is the RPM value the kick start algorithm must see the fan be at or above for KSWait number of ticks before we consider the fan started properly.<br>
-                    <strong>KSFail:</strong> Kick Start fail control point.  This is the control point value (0 ~ 255) that if we get above this value and the fan still hasn’t started we consider the fan failing to start.<br>
+                    <strong>KSWait:</strong> Kick Start wait ticks. This is the number of 1/8 seconds ticks that the fan must be above the KSPass RPM value in order to consider the fan started and running correctly.<br>
+                    <strong>KSPass:</strong> Kick Start pass RPM value. This is the RPM value the kick start algorithm must see the fan be at or above for KSWait number of ticks before we consider the fan started properly.<br>
+                    <strong>KSFail:</strong> Kick Start fail control point. This is the control point value (0 ~ 255) that if we get above this value and the fan still hasn’t started we consider the fan failing to start.<br>
                     <strong>KSBump:</strong> Kick Start control point bump value. This is the value we increase the control point by every 1/8 of a second when the fan is still below KSPass value.<br>
                     <strong>Mincont0time:</strong> Minimum amount of time in seconds the desired RPM for a fan must be 0 before turning OFF.<br>
                 </p>
@@ -1231,6 +1235,18 @@
 
             <div class="hint_box">
                 <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Sensor nodes (Fan table)</h3>
+                <p class="hint_p hint_mar_bot_08">
+                    <strong>"sku name" input box:</strong> Only typing sku name like Rialto15/Rialto17, after save to JSON file that each sku name of Ustt modes will stroe to Rialto15BAL/Rialto15COOL/RialtoQUIET/Rialto15PERF.
+                </p>
+                <div class="hint_img border_des hint_mar_bot_32">
+                    <img src="img/hint_22.png" alt="select file">
+                </div>
+                <p class="hint_p hint_mar_bot_08">
+                    <strong>"Fan" input box:</strong> Input control fan.
+                </p>
+                <div class="hint_img border_des">
+                    <img src="img/hint_23.png" alt="select file">
+                </div>
             </div>
 
             <div class="hint_box">
@@ -1312,6 +1328,9 @@
             <h2 class="hint_h2">Error messages</h2>
             <div class="hint_box">
                 <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Error 1</h3>
+                <p class="hint_p">
+
+                </p>
             </div>
             <div class="hint_box">
                 <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Error 2</h3>
@@ -1324,7 +1343,6 @@
             </div>
         </div>
 
-        <input type="button" id="closeHint" class="cover_button" value="Close">
     </div>
 </section>
 
