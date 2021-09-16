@@ -13,16 +13,20 @@ function ObjInit(jsonFile){
     if(errArr.length > 0){
         // warn級別log輸出
         console.warn('--------------------Error Message--------------------');
+        var errMsg = "The following Ustt mode table will miss. Due to it does not match this tool. If necessary, please fill in this table manually after storing the JSON file.\n\n";
         errArr.forEach(function(val,index){
             console.warn(val);
+            errMsg += val;
         });
+        alert(errMsg);
     }
 }
 
 // =====================for errMsg========================
 var errArr = [];
 function errAdd(jqSelectorDesc, desc){
-    let errMsg = $(jqSelectorDesc).parents('.container').attr('id') + ' -> ' + desc;
+    // let errMsg = $(jqSelectorDesc).parents('.container').attr('id') + ' -> ' + desc;
+    let errMsg = desc + '\n';
     if(!errArr.includes(errMsg))
         errArr.push(errMsg);
 }
@@ -49,7 +53,7 @@ function autoProdMixThermal(containerName, jsonObj){
             if(val.name.indexOf('BAL') > -1 || val.name.indexOf('COOL') > -1 || val.name.indexOf('QUIET') > -1 || val.name.indexOf('PERF') > -1)
                 autoProdThermal(containerName, val.name, val['fans']);
             else
-                errAdd($(containerName).find('#addModuleBtn'), val.name + '為非標準模式');
+                errAdd($(containerName).find('#addModuleBtn'), val.name);
         });
 
         SetSensorComTabWid(-1);

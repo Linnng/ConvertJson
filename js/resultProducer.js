@@ -2,31 +2,31 @@ var result = {};
 
 // check input data, ok return true, fail return false
 function dataCheck(){
-	let errCount = 0;
-	$('.sensor_sku_container input').each(function(i, e){
-		let val = $(e).val().trim();
-		if(val == ''){
-			errCount++;
-			$(e).css('background-color', 'yellow');
-		}else{
-			$(e).css('background-color', '');
-		}			
-	});
-	if(errCount > 0){
-		setTimeout(function() {
-			alert('Data輸入不完全');
-		}, 1);
-		return false;
-	}else{
-		return true;
-	}
+    let errCount = 0;
+    $('.sensor_sku_container input').each(function(i, e){
+        let val = $(e).val().trim();
+        if(val == ''){
+            errCount++;
+            $(e).css('background-color', 'yellow');
+        }else{
+            $(e).css('background-color', '');
+        }
+    });
+    if(errCount > 0){
+        setTimeout(function() {
+            alert('The data input is incomplite, please check the yellow input boxes.');
+        }, 1);
+        return false;
+    }else{
+        return true;
+    }
 }
 
 function jsonProduce(){
-	
-	// check input data, ok return true, fail return false
-	if(!dataCheck())
-		return;
+
+    // check input data, ok return true, fail return false
+    if(!dataCheck())
+        return;
 
     let jsonResultDiv = $('#jsonResult');
 
@@ -264,8 +264,8 @@ function executeContent(resultStr){
         else
             result.push(element + '\n');
     });
-	let reg = new RegExp(/\x22,[\s]{0,}\x22/g);
-	let reg2 = new RegExp(/,[\s]{10,14}\x22/g);
-	return result.join('').replace(reg, '","').replace(reg2, ',"');
+    let reg = new RegExp(/\x22,[\s]{0,}\x22/g);
+    let reg2 = new RegExp(/,[\s]{10,14}\x22/g);
+    return result.join('').replace(reg, '","').replace(reg2, ',"');
 }
 

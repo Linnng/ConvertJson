@@ -58,6 +58,15 @@ $(function(){
                 'crittime'
             ];
 
+        var sensorOpt =
+        [
+            {'value':'EXEC_POLLING',   'text':'1/8 sec'},
+            {'value':'QSEC_POLLING',   'text':'1/4 sec'},
+            {'value':'HSEC_POLLING',   'text':'1/2 sec'},
+            {'value':'ONESEC_POLLING', 'text':'1 sec'  },
+            {'value':'TWOSEC_POLLING', 'text':'2 sec'  }
+        ];
+
         for(var i=0; i<3; i++)
         {
             var sensorTr = $("<tr/>", {"class": "sensor_tr"});
@@ -92,7 +101,7 @@ $(function(){
                     }
                     else
                     {
-                        var sensorTh = $("<th/>").append( $("<input/>", {"type": "text", "placeholder": sensorTitPlaceholder[j -1]}) );
+                        var sensorTh = $("<th/>").append( $("<input/>", {"type": "text", "placeholder": sensorTitPlaceholder[j -1], "value": sensorTitPlaceholder[j -1]}));
                     }
                     sensorTr.append(sensorTh);
                 }

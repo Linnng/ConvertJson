@@ -98,16 +98,16 @@
                     <tr class="sensor_tr">
                         <th><span class="transparet">btn</span></th>
                         <th> name            </th>
-                        <th><input type="text" placeholder="type">             </th>
-                        <th><input type="text" placeholder="address">          </th>
-                        <th><input type="text" placeholder="diagclass">        </th>
-                        <th><input type="text" placeholder="polling rate">     </th>
-                        <th><input type="text" placeholder="ReadFn">           </th>
-                        <th><input type="text" placeholder="MaxErrors">        </th>
-                        <th><input type="text" placeholder="SmoothingFn">      </th>
-                        <th><input type="text" placeholder="SmoothingData">    </th>
-                        <th><input type="text" placeholder="CriticalTemp">     </th>
-                        <th><input type="text" placeholder="crittime">         </th>
+                        <th><input type="text" placeholder="type"           value="type"></th>
+                        <th><input type="text" placeholder="address"        value="address"></th>
+                        <th><input type="text" placeholder="diagclass"      value="diagclass"></th>
+                        <th><input type="text" placeholder="polling rate"   value="polling rate"></th>
+                        <th><input type="text" placeholder="ReadFn"         value="ReadFn"></th>
+                        <th><input type="text" placeholder="MaxErrors"      value="MaxErrors"></th>
+                        <th><input type="text" placeholder="SmoothingFn"    value="SmoothingFn"></th>
+                        <th><input type="text" placeholder="SmoothingData"  value="SmoothingData">    </th>
+                        <th><input type="text" placeholder="CriticalTemp"   value="CriticalTemp"></th>
+                        <th><input type="text" placeholder="crittime"       value="crittime"></th>
                     </tr>
                     <tr class="sensor_tr">
                         <td>
@@ -806,7 +806,7 @@
                         <tr class="sensor_tr">
                             <th><span class="transparet">btn</span></th>
                             <th> name            </th>
-                            <th><input type="text" placeholder="Throttle Point"></th>
+                            <th><input type="text" placeholder="Throttle Point" value="Throttle Point"></th>
                         </tr>
                         <tr class="sensor_tr">
                             <td>
@@ -905,14 +905,14 @@
                         <tr class="sensor_tr">
                             <th><span class="transparet">btn</span></th>
                             <th>Sensor Name</th>
-                            <th><input type="text" placeholder="z0min"></th>
-                            <th><input type="text" placeholder="z0max"></th>
-                            <th><input type="text" placeholder="z0dec"></th>
-                            <th><input type="text" placeholder="z0inc"></th>
-                            <th><input type="text" placeholder="z1min"></th>
-                            <th><input type="text" placeholder="z1max"></th>
-                            <th><input type="text" placeholder="z1dec"></th>
-                            <th><input type="text" placeholder="z1inc"></th>
+                            <th><input type="text" placeholder="z0min" value="z0min"></th>
+                            <th><input type="text" placeholder="z0max" value="z0max"></th>
+                            <th><input type="text" placeholder="z0dec" value="z0dec"></th>
+                            <th><input type="text" placeholder="z0inc" value="z0inc"></th>
+                            <th><input type="text" placeholder="z1min" value="z1min"></th>
+                            <th><input type="text" placeholder="z1max" value="z1max"></th>
+                            <th><input type="text" placeholder="z1dec" value="z1dec"></th>
+                            <th><input type="text" placeholder="z1inc" value="z1inc"></th>
                         </tr>
                         <tr class="sensor_tr">
                             <td>
@@ -1092,6 +1092,22 @@
                 To easily convert the thermal table to JSON file to avoid the error rate of manually modifying the JSON file. <br>
                 Currently, the tool is the first edition which is designed based on the SouthPeak “14 thermal table. So, it’s not fit with another project thermal JSON files.
             </p>
+        </div>
+
+        <div class="hint_container">
+            <h2 class="hint_h2">Error messages</h2>
+            <div class="hint_box">
+                <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>The data input is incomplete, please check the yellow input boxes.</h3>
+                <p class="hint_p">
+                    In the case of incomplete data filling, the JSON file will not be stored. Please back to fill out whole data.
+                </p>
+            </div>
+            <div class="hint_box">
+                <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>The following Ustt mode table will miss. Due to it does not match this tool. If necessary, please fill in this table manually after storing the JSON file.</h3>
+                <p class="hint_p">
+                    This tool only support 4 Ustt modes in thermal table part.(balance, cool, quiet, performance) If there are tables other than these four Ustt modes in the imported JSON file, it will be lost. Please manually add the missing table after saving the JSON file.
+                </p>
+            </div>
         </div>
 
         <div class="hint_container">
@@ -1323,25 +1339,6 @@
             </div>
         </div>
 
-
-        <div class="hint_container">
-            <h2 class="hint_h2">Error messages</h2>
-            <div class="hint_box">
-                <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Error 1</h3>
-                <p class="hint_p">
-
-                </p>
-            </div>
-            <div class="hint_box">
-                <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Error 2</h3>
-            </div>
-            <div class="hint_box">
-                <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Error 3</h3>
-            </div>
-            <div class="hint_box">
-                <h3 class="hint_h3"><div class="hint_icon"><img src="img/angle_double_right.jpg" alt=">>"></div>Error 4</h3>
-            </div>
-        </div>
 
     </div>
 </section>
