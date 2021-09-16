@@ -45,11 +45,11 @@
     font-size: 20px;
     text-align: center;
     padding: 10px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 .h2_tag span{ font-size: 14px;}
 
-
+strong{font-weight: bold;}
 
 /* table setting */
 th, tr, td{

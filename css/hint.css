@@ -1,29 +1,69 @@
 .hint_container{
-    background-color: rgb(255, 255, 255);
+    margin-bottom: 48px;
 }
 .hint_box{
-    outline: tomato 1px solid;
-    margin: 16px 0;
+    /* outline: tomato 1px solid; */
+    margin-top: 32px;
 }
 .hint_icon{
     display: inline-block;
-    width: 33px;
+    width: 24px;
+    padding-right: 8px;
 }
-.hint_icon img{
+.border_des{
+    border: 3px rgb(189, 168, 145) double ;
+    box-sizing: border-box;
+}
+img{
     width: 100%;
 }
+
+
+/* text */
 .hint_h1{
     color: rgba(112, 172, 40, 1);
     border-bottom: 5px rgba(112, 172, 40, 1) solid;
-    font-size: 60px;
+    font-size: 48px;
     font-weight: 700;
     text-align: center;
     padding: 6px 0;
     margin-bottom: 16px;
 }
 .hint_h2{
-    font-size: 32px;
-    font-weight: 700;
-    padding: 4px 0;
-    display: inline-block;
+    width: 100%;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 32px;
+    padding: 6px 0 8px 0;
+    background-color: rgb(228, 214, 199);
+    border-left: 5px rgb(173, 139, 102) solid;
+    box-sizing: border-box;
+    color: rgb(133, 105, 76);
+    text-align: center;
+    margin-bottom: 8px;
+}
+.hint_h3{
+    font-size: 22px;
+    font-weight: 800;
+    color: gray;
+    line-height: 26px;
+    color: rgb(173, 139, 102);
+    margin-bottom:  8px;
+}
+.hint_p{
+    font-size: 18px;
+    color: gray;
+    line-height: 24px;
+    margin-left: 32px;
+}
+.hint_mar_bot_08{ margin-bottom:  8px;}
+.hint_mar_bot_16{ margin-bottom: 16px;}
+.hint_mar_bot_32{ margin-bottom: 32px;}
+
+
+/* padding margin design */
+.hint_mar_bt{ margin-top: 16px;}
+.hint_img{
+    width: 650px;
+    margin-left: 32px;
 }
