@@ -49,7 +49,7 @@ $(function(){
                 'type',
                 'address',
                 'diagclass',
-                'polling ratae',
+                'polling rate',
                 'ReadFn',
                 'MaxErrors',
                 'SmoothingFn',
