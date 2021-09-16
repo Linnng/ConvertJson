@@ -117,8 +117,8 @@ function AddSensorRow(e){
             sensorTd.append(deleteDiv);
         }
 
-        else if( ThisSensorTab.find('tr th:eq(' + i + ')') != undefined &&
-                 ThisSensorTab.find('tr th:eq(' + i + ')') == 'polling rate' )
+        else if( ThisSensorTab.find('tr th:eq(' + i + ') input').val() != undefined &&
+                 ThisSensorTab.find('tr th:eq(' + i + ') input').val() == 'polling rate' )
         {
             var sensorSel = $("<select/>", {"name": "pollingrate", "class": "selects"});
 
@@ -157,7 +157,7 @@ function  AddSensorColumn(e){
         }
         else if(index == 1)
         {
-            var sensorInput = $('<input/>', {"type": "text"});
+            var sensorInput = $('<input/>', {"type": "text", "placeholder": "(input type)"});
             var sensorTd = $('<th/>').append(sensorInput);  // <th>
         }
         else

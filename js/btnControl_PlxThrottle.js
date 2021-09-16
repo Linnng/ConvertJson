@@ -83,7 +83,7 @@ $(function(){
                     }
                     else
                     {
-                        var sensorTh = $("<th/>").append( $("<input/>", {"type": "text", "placeholder": sensorTitPlaceholder[j -1]}) );
+                        var sensorTh = $("<th/>").append( $("<input/>", {"type": "text", "placeholder": sensorTitPlaceholder[j -1], "value": sensorTitPlaceholder[j -1]}) );
                     }
                     sensorTr.append(sensorTh);
                 }
