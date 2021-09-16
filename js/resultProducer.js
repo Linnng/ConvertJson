@@ -1,151 +1,199 @@
 var result = {};
 
+// check input data, ok return true, fail return false
+function dataCheck(){
+	let errCount = 0;
+	$('.sensor_sku_container input').each(function(i, e){
+		let val = $(e).val().trim();
+		if(val == ''){
+			errCount++;
+			$(e).css('background-color', 'yellow');
+		}else{
+			$(e).css('background-color', '');
+		}			
+	});
+	if(errCount > 0){
+		setTimeout(function() {
+			alert('Data輸入不完全');
+		}, 1);
+		return false;
+	}else{
+		return true;
+	}
+}
 
 function jsonProduce(){
+	
+	// check input data, ok return true, fail return false
+	if(!dataCheck())
+		return;
 
     let jsonResultDiv = $('#jsonResult');
 
-// ========================= 1.SENSOR DESCRIPTION =========================	
-	prodJsonResult(result, 'sensorContainer', 'sensorlists');
-	
+// ========================= 1.SENSOR DESCRIPTION =========================
+    prodJsonResult(result, 'sensorContainer', 'sensorlists');
+
 
 // ========================= 2.FAN DESCRIPTION ============================
     $('#FanContainer .sensor_sku_container').each(function(i, e){
-		if(i == 0)
-			result['fancontrollerlists'] = [];
-		let sku_title = $(e).find('.sku_title:eq(0)').val();
-		let tArea = {};
-		tArea[sku_title] = [];
-		result.fancontrollerlists.push(tArea);
-		$(e).find('.sensor_tab:eq(0) tr').not(':eq(0),:eq(1)').each(function(i1, e1){
-			// Fan initial
-			let area = {};
-			$(e).find('.sensor_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
-				// key
-				let key = $(e2).text().replaceAll(' ','');
-				// value
-				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
-				let value = valTd.find('input').val();      // for input data
-				if(value == undefined){
-					value = valTd.find('select').val();     // for select data
-				}
-				area[key] = cusParseInt(value);
-			});
-			// Fan lists
-			area['fanlist'] = [{}];
-			$(e).find('.sensor_tab:eq(1)').find('th').not(':eq(0)').each(function(i2, e2){
-				// key
-				let key = $(e2).text().replaceAll(' ','');
-				// value
-				let valTd = $(e).find('.sensor_tab:eq(1) tr:eq(' + (i1 + 2) + ')').find('td:eq(' + (i2 + 1) + ')');
-				let value = valTd.find('input').val();      // for input data
-				if(value == undefined){
-					value = valTd.find('select').val();     // for select data
-				}
-				area.fanlist[0][key] = cusParseInt(value);
-			});
-			result.fancontrollerlists[i][sku_title].push(area);
-		});
-	});
+        if(i == 0)
+            result['fancontrollerlists'] = [];
+        let sku_title = $(e).find('.sku_title:eq(0)').val();
+        let tArea = {};
+        tArea[sku_title] = [];
+        result.fancontrollerlists.push(tArea);
+        $(e).find('.sensor_tab:eq(0) tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+            // Fan initial
+            let area = {};
+            $(e).find('.sensor_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
+                // key
+                let key = $(e2).text().replaceAll(' ','');
+                // value
+                let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+                let value = valTd.find('input').val();      // for input data
+                if(value == undefined){
+                    value = valTd.find('select').val();     // for select data
+                }
+                area[key] = cusParseInt(value);
+            });
+            // Fan lists
+            area['fanlist'] = [{}];
+            $(e).find('.sensor_tab:eq(1)').find('th').not(':eq(0)').each(function(i2, e2){
+                // key
+                let key = $(e2).text().replaceAll(' ','');
+                // value
+                let valTd = $(e).find('.sensor_tab:eq(1) tr:eq(' + (i1 + 2) + ')').find('td:eq(' + (i2 + 1) + ')');
+                let value = valTd.find('input').val();      // for input data
+                if(value == undefined){
+                    value = valTd.find('select').val();     // for select data
+                }
+                area.fanlist[0][key] = cusParseInt(value);
+            });
+            result.fancontrollerlists[i][sku_title].push(area);
+        });
+    });
 
 
 // ========================= 3.SENSOR NODES ===============================
-    // result['thermaltables'] = [];
-    // $('.node_type_box').each(function(){
-        // let area = {};
-        // area['name'] = 'SP14_' + $(this).find('p').text();
-        // area['fans'] = [{"fanname": $(this).find('span').text() ,"nodes":[]}];
+    $('#fanTableContainer .sensor_sku_container').each(function(i, e){
+        if(i == 0)
+            result['thermaltables'] = [];
 
-        // for(var i = 1; i < $(this).find('.nodes_tr').length; i++){
-            // check how many <th> in the first <tr> in node_type_box DOM
-            // let thQuan = $(this).find('.nodes_tr:eq(0) th').length;
+        $(e).find('.node_type_box_1').each(function(ii, ee){
 
-            // let node = {};
-            // for(var k = 0; k < thQuan; k++){
-                // key
-                // let key = $(this).find('.nodes_tr:eq(0) th:eq(' + k + ')').text().replaceAll(' ','').toLowerCase();
+            // SkuName + Mode
+            let tArea = {};
+            tArea['name'] = $(e).find('.float_L .sku_title:eq(0)').val().trim() + $(ee).find('.node_type_tag').text();
+            tArea['fans'] = [];
+            result.thermaltables.push(tArea);
 
-                // value
-                // let valTd = $(this).find('.nodes_tr:eq(' + i + ') td:eq(' + k + ')');
-                // let value = valTd.text();
-                // if(value == ''){
-                    // value = valTd.find('input').val();
-                // }
+            // FAN1
+            let fan1Area = {};
+            fan1Area['fanname'] = $(ee).find('.fan_id input').val();
+            fan1Area['nodes'] = [];
+            tArea.fans.push(fan1Area);
+            $(ee).find('.nodes_tab:eq(0) tr').not(':eq(0)').each(function(i1, e1){
+                let ob = {};
+                $(ee).find('.nodes_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
+                    // key
+                    let key = $(e2).text().replaceAll(' ','').toLowerCase();
+                    // value
+                    let valTd = $(ee).find('.nodes_tab:eq(0) tr:eq(' + (i1 + 1) + ')').find('td:eq(' + (i2 + 1) + ')');
+                    let value = valTd.find('input').val();      // for input data
+                    ob[key] = value;
+                });
+                fan1Area.nodes.push(ob);
+            });
 
-                // if(key != 'no'){
-                    // node[key] = cusParseInt(value);
-                // }
-            // }
-            // area.fans[0].nodes.push(node);
-        // }
-        // result.thermaltables.push(area);
-    // });
+            // FAN2
+            let fan2 = $(ee).next('.node_type_box_2');
+            if($(fan2).find('.node_type_tag').text() == $(ee).find('.node_type_tag').text()){
+                let fan1Area = {};
+                fan1Area['fanname'] = $(fan2).find('.fan_id input').val();
+                fan1Area['nodes'] = [];
+                tArea.fans.push(fan1Area);
+                $(fan2).find('.nodes_tab:eq(0) tr').not(':eq(0)').each(function(i1, e1){
+                    let ob = {};
+                    $(fan2).find('.nodes_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
+                        // key
+                        let key = $(e2).text().replaceAll(' ','').toLowerCase();
+                        // value
+                        let valTd = $(fan2).find('.nodes_tab:eq(0) tr:eq(' + (i1 + 1) + ')').find('td:eq(' + (i2 + 1) + ')');
+                        let value = valTd.find('input').val();      // for input data
+                        ob[key] = value;
+                    });
+                fan1Area.nodes.push(ob);
+                });
+            }
+
+        });
+    });
 
 
-// ========================= 4.plxthrottletables =========================	
-	prodJsonResult(result, 'plxContainer', 'plxthrottletables');
-	
+// ========================= 4.plxthrottletables =========================
+    prodJsonResult(result, 'plxContainer', 'plxthrottletables');
+
 
 // ========================= 5.gfxthrottletables ==========================
-	prodJsonResult(result, 'gfxContainer', 'gfxthrottletables');
-	
-	
+    prodJsonResult(result, 'gfxContainer', 'gfxthrottletables');
+
+
 // ========================= 6.chargerthrottletables ==========================
-	$('#chgContainer .sensor_sku_container').each(function(i, e){
-		if(i == 0)
-			result['chargerthrottletables'] = {};
-		let sku_title = $(e).find('.sku_title:eq(0)').val();
-		result.chargerthrottletables['sensorname'] = sku_title;
-		result.chargerthrottletables['zones'] = [];
-		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
-			let area = {};
-			$(e).find('th').not(':eq(0)').each(function(i2, e2){
-				// key
-				let key = $(e2).text().replaceAll(' ','');
-				// value
-				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
-				let value = valTd.find('input').val();      // for input data
-				if(value == undefined){
-					value = valTd.find('select').val();     // for select data
-				}
-				area[key] = cusParseInt(value);
-			});
-			result.chargerthrottletables['zones'].push(area);
-		});
-	});
-	
+    $('#chgContainer .sensor_sku_container').each(function(i, e){
+        if(i == 0)
+            result['chargerthrottletables'] = {};
+        let sku_title = $(e).find('.sku_title:eq(0)').val();
+        result.chargerthrottletables['sensorname'] = sku_title;
+        result.chargerthrottletables['zones'] = [];
+        $(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+            let area = {};
+            $(e).find('th').not(':eq(0)').each(function(i2, e2){
+                // key
+                let key = $(e2).text().replaceAll(' ','');
+                // value
+                let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+                let value = valTd.find('input').val();      // for input data
+                if(value == undefined){
+                    value = valTd.find('select').val();     // for select data
+                }
+                area[key] = cusParseInt(value);
+            });
+            result.chargerthrottletables['zones'].push(area);
+        });
+    });
+
 
 // ========================= 7.msthermals ==========================
-	$('#MsContainer .sensor_sku_container').each(function(i, e){
-		if(i == 0)
-			result['msthermals'] = {'configs':[]};
-		let tArea = {};
-		result.msthermals.configs.push(tArea);
-		let sku_title1 = $(e).find('.sku_title:eq(0)').val();
-		let sku_title2 = $(e).find('.sku_title:eq(1)').val();
-		tArea['name'] = sku_title1;
-		tArea['sensor'] = sku_title2;
-		tArea['nodes'] = [];
-		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
-			let area = {};
-			$(e).find('th').not(':eq(0)').each(function(i2, e2){
-				// key
-				let key = $(e2).text().replaceAll(' ','');
-				// value
-				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
-				let value = valTd.find('input').val();      // for input data
-				if(value == undefined){
-					value = valTd.find('select').val();     // for select data
-				}
-				area[key] = cusParseInt(value);
-			});
-			tArea['nodes'].push(area);
-		});
-	});
-	
-	
-	
-	
+    $('#MsContainer .sensor_sku_container').each(function(i, e){
+        if(i == 0)
+            result['msthermals'] = {'configs':[]};
+        let tArea = {};
+        result.msthermals.configs.push(tArea);
+        let sku_title1 = $(e).find('.sku_title:eq(0)').val();
+        let sku_title2 = $(e).find('.sku_title:eq(1)').val();
+        tArea['name'] = sku_title1;
+        tArea['sensor'] = sku_title2;
+        tArea['nodes'] = [];
+        $(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+            let area = {};
+            $(e).find('th').not(':eq(0)').each(function(i2, e2){
+                // key
+                let key = $(e2).text().replaceAll(' ','');
+                // value
+                let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+                let value = valTd.find('input').val();      // for input data
+                if(value == undefined){
+                    value = valTd.find('select').val();     // for select data
+                }
+                area[key] = cusParseInt(value);
+            });
+            tArea['nodes'].push(area);
+        });
+    });
+
+
+
+
     console.log('Export jsonObj:');
     console.log(result);
     jsonResultDiv.html(JSON.stringify(result));
@@ -157,29 +205,29 @@ function jsonProduce(){
 
 // produceJsonResultFunc
 function prodJsonResult(resultObj, containerName, jsonAreaName){
-	$('#' + containerName + ' .sensor_sku_container').each(function(i, e){
-		if(i == 0)
-			result[jsonAreaName] = [];
-		let sku_title = $(e).find('.sku_title:eq(0)').val();
-		let tArea = {};
-		tArea[sku_title] = [];
-		result[jsonAreaName].push(tArea);
-		$(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
-			let area = {};
-			$(e).find('th').not(':eq(0)').each(function(i2, e2){
-				// key
-				let key = $(e2).text().replaceAll(' ','');
-				// value
-				let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
-				let value = valTd.find('input').val();      // for input data
-				if(value == undefined){
-					value = valTd.find('select').val();     // for select data
-				}
-				area[key] = cusParseInt(value);
-			});
-			result[jsonAreaName][i][sku_title].push(area);
-		});
-	});
+    $('#' + containerName + ' .sensor_sku_container').each(function(i, e){
+        if(i == 0)
+            result[jsonAreaName] = [];
+        let sku_title = $(e).find('.sku_title:eq(0)').val();
+        let tArea = {};
+        tArea[sku_title] = [];
+        result[jsonAreaName].push(tArea);
+        $(e).find('.sensor_tab tr').not(':eq(0),:eq(1)').each(function(i1, e1){
+            let area = {};
+            $(e).find('th').not(':eq(0)').each(function(i2, e2){
+                // key
+                let key = $(e2).text().replaceAll(' ','');
+                // value
+                let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
+                let value = valTd.find('input').val();      // for input data
+                if(value == undefined){
+                    value = valTd.find('select').val();     // for select data
+                }
+                area[key] = cusParseInt(value);
+            });
+            result[jsonAreaName][i][sku_title].push(area);
+        });
+    });
 }
 
 // value convert to Int
@@ -198,7 +246,7 @@ function cusParseInt(str){
 
 // Export JSON File
 function save(){
-    var blob = new Blob([getJsonString()], {type: "text/plain;charset=utf-8"});
+    var blob = new Blob([executeContent(getJsonString())], {type: "text/plain;charset=utf-8"});
     saveAs(blob, 'LinearThermalsSys.json');
 }
 
@@ -206,3 +254,18 @@ function getJsonString(){
     let jsonString = JSON.stringify(result, null, 2);
     return jsonString;
 }
+
+function executeContent(resultStr){
+    let result = new Array();
+    let lines = resultStr.split(/[\n\r]+/);
+    lines.forEach(element => {
+        if(element.indexOf(',') > -1 && element.indexOf('},') == -1 && element.indexOf('],') == -1)
+            result.push(element);
+        else
+            result.push(element + '\n');
+    });
+	let reg = new RegExp(/\x22,[\s]{0,}\x22/g);
+	let reg2 = new RegExp(/,[\s]{10,14}\x22/g);
+	return result.join('').replace(reg, '","').replace(reg2, ',"');
+}
+
