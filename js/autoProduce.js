@@ -233,7 +233,11 @@ function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
         }
         // th thead
         let th = $("<th/>");
-        th.append(key);
+		// th name 不允許做修改, 他欄為input可修改
+		if(index == 0)
+			th.append(key);
+		else
+			th.append($("<input/>", {"type": "text", "placeholder": "(input type)", "value": key}));
         tr.append(th);
     });
     // ------------------thead------------------

@@ -47,7 +47,7 @@ function jsonProduce(){
             let area = {};
             $(e).find('.sensor_tab:eq(0)').find('th').not(':eq(0)').each(function(i2, e2){
                 // key
-                let key = $(e2).text().replaceAll(' ','');
+                let key = getTheadVal(e2);
                 // value
                 let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
                 let value = valTd.find('input').val();      // for input data
@@ -60,7 +60,7 @@ function jsonProduce(){
             area['fanlist'] = [{}];
             $(e).find('.sensor_tab:eq(1)').find('th').not(':eq(0)').each(function(i2, e2){
                 // key
-                let key = $(e2).text().replaceAll(' ','');
+                let key = getTheadVal(e2);
                 // value
                 let valTd = $(e).find('.sensor_tab:eq(1) tr:eq(' + (i1 + 2) + ')').find('td:eq(' + (i2 + 1) + ')');
                 let value = valTd.find('input').val();      // for input data
@@ -149,7 +149,7 @@ function jsonProduce(){
             let area = {};
             $(e).find('th').not(':eq(0)').each(function(i2, e2){
                 // key
-                let key = $(e2).text().replaceAll(' ','');
+                let key = getTheadVal(e2);
                 // value
                 let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
                 let value = valTd.find('input').val();      // for input data
@@ -178,7 +178,7 @@ function jsonProduce(){
             let area = {};
             $(e).find('th').not(':eq(0)').each(function(i2, e2){
                 // key
-                let key = $(e2).text().replaceAll(' ','');
+                let key = getTheadVal(e2);
                 // value
                 let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
                 let value = valTd.find('input').val();      // for input data
@@ -216,7 +216,7 @@ function prodJsonResult(resultObj, containerName, jsonAreaName){
             let area = {};
             $(e).find('th').not(':eq(0)').each(function(i2, e2){
                 // key
-                let key = $(e2).text().replaceAll(' ','');
+                let key = getTheadVal(e2);
                 // value
                 let valTd = $(e1).find('td:eq(' + (i2 + 1) + ')');
                 let value = valTd.find('input').val();      // for input data
@@ -228,6 +228,14 @@ function prodJsonResult(resultObj, containerName, jsonAreaName){
             result[jsonAreaName][i][sku_title].push(area);
         });
     });
+}
+
+//get thead value(text or input value)
+function getTheadVal(thEle){
+	let value = $(thEle).text().replaceAll(' ','');
+	if(value == "")
+		value = $(thEle).find("input").val().replaceAll(' ','');
+	return value;
 }
 
 // value convert to Int
