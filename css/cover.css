@@ -38,6 +38,12 @@ body
 .index_cover_title span{
     color: rgb(71, 112, 20);
     font-size: 16px;
+    display: block;
+}
+.cover_tip{
+    position: absolute;
+    bottom: 20px;
+    right: 25%;
 }
 
 /* button setting */
