@@ -232,10 +232,10 @@ function prodJsonResult(resultObj, containerName, jsonAreaName){
 
 //get thead value(text or input value)
 function getTheadVal(thEle){
-	let value = $(thEle).text().replaceAll(' ','');
-	if(value == "")
-		value = $(thEle).find("input").val().replaceAll(' ','');
-	return value;
+    let value = $(thEle).text().replaceAll(' ','');
+    if(value == "")
+        value = $(thEle).find("input").val().replaceAll(' ','');
+    return value;
 }
 
 // value convert to Int

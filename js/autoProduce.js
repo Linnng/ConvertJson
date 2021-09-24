@@ -55,11 +55,11 @@ function autoProdMixThermal(containerName, jsonObj){
             else
                 errAdd($(containerName).find('#addModuleBtn'), val.name);
         });
-		
-		// if thermaltables's data loss the basic mode, add the basic thead
-		$(containerName).find('.nodes_tab').each(function(){
-			if('' == $(this).html()){
-				$(this).append(`<tr class="nodes_tr">
+
+        // if there’s any mode has no data in basic Ustt modes, still add default thead.
+        $(containerName).find('.nodes_tab').each(function(){
+            if('' == $(this).html()){
+                $(this).append(`<tr class="nodes_tr">
                             <th style="width: 80px;"><div class="sensorDelete" onclick="AddFanRow(this);"><span>Add</span></div></th>
                             <th style="width: 80px;"><span class="transparet">btn</span></th>
                             <th style="width: 100px;">Sensor Name</th>
@@ -70,8 +70,8 @@ function autoProdMixThermal(containerName, jsonObj){
                             <th class="hidden" style="width: 182.5px;">ttrip</th>
                             <th class="hidden" style="width: 182.5px;">ttriphys</th>
                         </tr>`);
-			}
-		});
+            }
+        });
 
         SetSensorComTabWid(-1);
     }
@@ -250,13 +250,14 @@ function autoProd(jqSelectorDesc, jsonObjArr, trClassName){
         }
         // th thead
         let th = $("<th/>");
-		// th name 不允許做修改, 他欄為input可修改
-		if(index == 0)
-			th.append(key);
-		else
-			th.append($("<input/>", {"type": "text", "placeholder": "(input type)", "value": key}));
+        // th name doesn't allow to modify, but others (set to input eleaments)
+        if(index == 0)
+            th.append(key);
+        else
+            th.append($("<input/>", {"type": "text", "placeholder": "(input type)", "value": key}));
         tr.append(th);
     });
+
     // ------------------thead------------------
 
 
