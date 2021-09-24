@@ -119,6 +119,16 @@ $(function(){
                         var sensorInput = $("<input/>", {"type": "text", "placeholder": "GPU"});
                         var sensorTd = $("<td/>").append(sensorInput);
                     }
+                    else if("polling rate" == sensorTitPlaceholder[j - 1])
+                    {
+                        var sensorSel = $("<select/>", {"name": "pollingrate", "class": "selects"});
+
+                        for(var j=0; j<sensorOpt.length ;j++)
+                        {
+                            sensorSel.append("<option value='" + sensorOpt[j].value + "'>" + sensorOpt[j].text + "</option>");
+                        }
+                        var sensorTd = $("<td/>").append(sensorSel);
+                    }
                     else
                     {
                         var sensorInput = $("<input/>", {"type": "text"});
